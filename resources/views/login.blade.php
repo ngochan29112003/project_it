@@ -46,19 +46,17 @@
                                         </span>
                                     </label>
                                     <div class="input-group input-group-flat">
-                                        <input type="password" class="form-control"  placeholder="Nva@123"  autocomplete="off">
-                                        <span class="input-group-text">
-                                            <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-                                            </a>
-                                        </span>
+                                        <input type="password" id="pwd-input" class="form-control"  placeholder="Nva@123"  autocomplete="off">
                                     </div>
                                 </div>
+
                                 <div class="mb-2">
-                                    <label class="form-check">
-                                        <input type="checkbox" class="form-check-input"/>
-                                        <span class="form-check-label">Remember username</span>
-                                    </label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="showPwdCheckbox">
+                                        <label class="form-check-label" for="showPwdCheckbox">
+                                            Show password
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="form-footer">
                                     <button type="submit" class="btn btn-primary w-100">Sign in</button>
@@ -77,5 +75,17 @@
 
 <script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
 <script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const pwdInput = document.getElementById('pwd-input');
+        const showPwdCheckbox = document.getElementById('showPwdCheckbox');
+
+        if (showPwdCheckbox) {
+            showPwdCheckbox.addEventListener('change', function () {
+                pwdInput.type = this.checked ? 'text' : 'password';
+            });
+        }
+    });
+</script>
 </body>
 </html>

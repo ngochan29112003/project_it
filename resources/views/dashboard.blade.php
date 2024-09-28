@@ -631,6 +631,7 @@
         </div>
     </header>
 </div>
+
 <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -733,6 +734,8 @@
         </div>
     </div>
 </div>
+
+<div class="page-wrapper"></div>
 <!-- Libs JS -->
 <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
 <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
