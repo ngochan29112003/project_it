@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\welcome;
+use App\Http\Controllers\DashBoardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LoginController::class, 'getView'])->name('index-login');
-Route::get('/a',[welcome::class,'a']);
+Route::get('/dashboard',[DashBoardController::class,'getView'])->name('index-dasboard');
