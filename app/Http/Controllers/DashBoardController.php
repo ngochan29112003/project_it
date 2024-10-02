@@ -8,6 +8,11 @@ class DashBoardController extends Controller
 {
     function getView()
     {
-        return view('dashboard');
+        return view('admin.master');
+    }
+
+    function getViewTrangChu()
+    {
+        return view('admin.trang-chu');
     }
 }
