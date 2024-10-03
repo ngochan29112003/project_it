@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="{{asset('asset/img/icon.png')}}">
     <title>Dashboard - TeachHub</title>
     <!-- CSS files -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="{{asset('https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css')}}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="{{asset('dist/css/tabler.min.css?1692870487')}}" rel="stylesheet"/>
     <link href="{{asset('dist/css/tabler-flags.min.css?1692870487')}}" rel="stylesheet"/>

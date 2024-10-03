@@ -81,11 +81,8 @@
                 "lengthMenu": "Hiển thị _MENU_ giáo viên mỗi trang",
                 "zeroRecords": "Không tìm thấy kết quả",
                 "infoEmpty": "Không có dữ liệu"
-
             }
         });
-
     </script>
-
 @endsection
 
