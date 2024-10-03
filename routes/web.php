@@ -22,6 +22,5 @@ Route::get('/admin',[DashBoardController::class,'getView'])->name('index-dasboar
 Route::get('/admin/trang-chu',[DashBoardController::class,'getViewTrangChu'])->name('index.trang-chu');
 Route::get('/admin/qlgv',[QuanLyGiaoVien::class,'getDanhSach'])->name('index.ds-giao-vien');
 Route::get('/admin/qlhs',[QuanLyHocSinh::class,'getDSHocSinh'])->name('index.ds-hoc-sinh');
-Route::get('/admin/qlhs',[QuanTrangchuHocSinh::class,'getDSHocSinh'])->name('index.ds-hoc-sinh');
 
 
