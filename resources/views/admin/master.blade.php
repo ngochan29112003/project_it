@@ -273,7 +273,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">
+                                    <a class="nav-link" href="{{route('index.ds-bo-mon')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -308,19 +308,19 @@
                                         </span>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="" >
+                                        <a class="dropdown-item" href="{{route('index.ds-khoi-10')}}">
                                             Khối 10
                                         </a>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{route('index.ds-khoi-11')}}">
                                             Khối 11
                                         </a>
-                                        <a class="dropdown-item" href="" >
+                                        <a class="dropdown-item" href="{{route('index.ds-khoi-12')}}">
                                             Khối 12
                                         </a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="">
+                                    <a class="nav-link" href="{{route('index.ds-de-xuat')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -331,6 +331,33 @@
                                         </span>
                                         <span class="nav-link-title">Quản lý đề xuất</span>
                                     </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+                                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                              <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                              <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                              <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                          Quản lý tài khoản
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{route('index.ds-tk-hs')}}" >
+                                            Học sinh
+                                        </a>
+                                        <a class="dropdown-item" href="{{route('index.ds-tk-gv')}}">
+                                            Giáo viên
+                                        </a>
+                                        <a class="dropdown-item" href="{{route('index.ds-tk-ql')}}" >
+                                            Người quản lý
+                                        </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
