@@ -13,6 +13,8 @@ use App\Http\Controllers\QuanLyTaiKhoanGiaoVien;
 use App\Http\Controllers\QuanLyTaiKhoanHocSinh;
 use App\Http\Controllers\QuanLyTaiKhoanNguoiQuanLy;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeHocSinhController;
+use App\Http\Controllers\Lop10ConTroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +40,9 @@ Route::get('/admin/ql-de-xuat',[QuanLyDeXuat::class,'getDeXuat'])->name('index.d
 Route::get('/admin/ql-tk-gv',[QuanLytaiKhoanGiaoVien::class,'getTaiKhoanGiaoVien'])->name('index.ds-tk-gv');
 Route::get('/admin/ql-tk-hs',[QuanLytaiKhoanHocSinh::class,'getTaiKhoanHocSinh'])->name('index.ds-tk-hs');
 Route::get('/admin/ql-tk-ql',[QuanLytaiKhoanNguoiQuanLy::class,'getTaiKhoanNguoiQuanLy'])->name('index.ds-tk-ql');
-
+Route::get('/hs',[HomeHocSinhController::class,'getView'])->name('index-homehocsinh');
+Route::get('/hs/trang-chu',[HomeHocSinhController::class,'getViewTrangChu'])->name('index.trang-chu-hs');
+Route::get('/hs/lop10',[Lop10ConTroller::class,'getLop10'])->name('index.lop-10');
 
 
 
