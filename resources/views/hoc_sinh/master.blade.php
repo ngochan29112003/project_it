@@ -15,9 +15,11 @@
     <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
     <link href="{{asset('dist/css/demo.min.css')}}"/>
     <link href="{{asset('dist/css/toastr.css')}}" rel="stylesheet"/>
+    <link href="{{asset('dist/css/style10.css')}}"/>
     <link rel="stylesheet"
           href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css')}}">
-    <style>.box_class_new ._item_class_new{height: 170px !important}</style>
+    <style>.box_class_new ._item_class_new{height: auto !important}</style>
+    <link rel="stylesheet" href="https://www.luyenthi123.com/static/css/style_home.min.css?v=20211013" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -252,7 +254,7 @@
                         <div class="col">
                             <ul class="navbar-nav menu">
                                 <li class="nav-item active item-menu">
-                                    <a class="nav-link" href="./">
+                                    <a class="nav-link" href="{{route('index.homehs')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                viewBox="0 0 24 24" fill="none"
@@ -263,7 +265,7 @@
                                                   d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path
                                                   d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg>
                                         </span>
-                                        <span class="nav-link-title"> Trang chủ </span>
+                                        <span > <a class="nav-link-title" href="{{route('index.homehs')}}"></a>Trang chủ </span>
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown item-menu">
@@ -292,10 +294,10 @@
                                         <a class="dropdown-item" href="{{route('index.lop-10')}}">
                                             Lớp 10
                                         </a>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{route('index.lop-11')}}">
                                             Lớp 11
                                         </a>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{route('index.lop-12')}}">
                                             Lớp 12
                                         </a>
                                     </div>
@@ -319,36 +321,23 @@
                                             </svg>
                                         </span>
                                         <span class="nav-link-title">
-                                          Bài kiểm tra
+                                          Bài tập thêm
                                         </span>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-10')}}">
+                                        <a class="dropdown-item" href="{{route('index.baitapthem10')}}">
                                             Lớp 10
                                         </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-11')}}">
+                                        <a class="dropdown-item" href="{{route('index.baitapthem11')}}">
                                             Lớp 11
                                         </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-12')}}">
+                                        <a class="dropdown-item" href="{{route('index.baitapthem12')}}">
                                             Lớp 12
                                         </a>
                                     </div>
                                 </li>
                                 <li class="nav-item item-menu">
-                                    <a class="nav-link" href="{{route('index.ds-de-xuat')}}">
-                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
-                                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                              <path d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z" />
-                                              <path d="M19 16h-12a2 2 0 0 0 -2 2" />
-                                              <path d="M9 8h6" />
-                                            </svg>
-                                        </span>
-                                        <span class="nav-link-title">Bài tập</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item item-menu">
-                                    <a class="nav-link" href="{{route('index.ds-de-xuat')}}">
+                                    <a class="nav-link" href="{{route('index.gioithieu')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />

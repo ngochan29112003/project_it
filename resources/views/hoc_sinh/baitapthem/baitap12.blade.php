@@ -6,100 +6,90 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        TRANG LỚP 10
+                        TRANG BÀI TẬP THÊM LỚP 12
                     </h2>
                 </div>
             </div>
 <div class="body_content">
     <div class="_boxcontent">
-        <div class="navigation_tree"><a class="nav_tree_links" href="https://www.luyenthi123.com/" title="Luyện Thi 123">Home</a><a href="#" title="Lớp 10" class="nav_tree_links_ac">Lớp 10</a></div>
+        <div class="navigation_tree"><a class="nav_tree_links" href="https://www.luyenthi123.com/" title="Luyện Thi 123">Home</a><a href="#" title="Lớp 10" class="nav_tree_links_ac">Bài tập thêm lớp 12</a></div>
 
         <div class="box_section">
             <div class="box_class_new">
 
-                <h3 class="box_class_title">Môn Toán lớp 10</h3>
+                <h3 class="box_class_title">Môn Toán lớp 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10-sach-kntt" title="Bài luyện tập Toán lớp 10 - Sách Kết nối tri thức">
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A1 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Bài tập Mệnh đề</div>
                     </div>
                 </a>
                 <a href="https://www.luyenthi123.com/toan-lop-10" title="Bài luyện tập Toán lớp 10">
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A2 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Bài tập hàm số</div>
                     </div>
                 </a>
-                <a href="https://www.luyenthi123.com/toan-lop-10" title="Bài luyện tập Toán lớp 10">
-                    <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A3 : Cô Trần Thị Thúy</div>
-                    </div>
-                </a>
-
-                <h3 class="box_class_title">Môn Văn lớp 10</h3>
+            
+                <h3 class="box_class_title">Môn Văn lớp 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" >
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A1 : Cô Trần Thị Thúy</div>
-                    </div>
-                </a>
-                <a href="https://www.luyenthi123.com/toan-lop-10">
-                    <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A2 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Phân tích truyện An Dương Vương</div>
                     </div>
                 </a>
 
-                <h3 class="box_class_title">Môn Anh Văn 10</h3>
+                <h3 class="box_class_title">Môn Anh Văn 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" >
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A1 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Bài tập cấu trúc câu if</div>
                     </div>
                 </a>
 
-                <h3 class="box_class_title">Môn Vật lý 10</h3>
+                <h3 class="box_class_title">Môn Vật lý 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" >
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A2 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Bài tập động năng</div>
                     </div>
                 </a>
                
-                <h3 class="box_class_title">Môn Hóa học 10</h3>
+                <h3 class="box_class_title">Môn Hóa học 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" title="Bài luyện tập Toán lớp 10">
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A2 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Bài tập cân bằng phương trình hóa học</div>
                     </div>
                 </a>
-                <h3 class="box_class_title">Môn Địa lí lớp 10</h3>
+                <h3 class="box_class_title">Môn Địa lí lớp 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" title="Bài luyện tập Toán lớp 10">
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A2 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Trình bày tác động của nội lực đến bề mặt trái đất</div>
                     </div>
                 </a>
 
-                <h3 class="box_class_title">Môn Sinh học 10</h3>
+                <h3 class="box_class_title">Môn Sinh học 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" title="Bài luyện tập Toán lớp 10">
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A1 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Trình bày cấu trúc DNA</div>
                     </div>
                 </a>
         
-                <h3 class="box_class_title">Môn Lịch sử lớp 10</h3>
+                <h3 class="box_class_title">Môn Lịch sử lớp 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" title="Bài luyện tập Toán lớp 10">
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A1 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Trình bày lịch sử phát triển của con người từ tổ tiên</div>
                     </div>
                 </a>
                 
-                <h3 class="box_class_title">Môn Giáo dục công dân lớp 10</h3>
+                <h3 class="box_class_title">Môn Giáo dục công dân lớp 12</h3>
                 <!-- BOX LUYEN TAP -->
                 <a href="https://www.luyenthi123.com/toan-lop-10" title="Bài luyện tập Toán lớp 10">
                     <div class="_item_class_new lt">
-                        <div class="_title">Lớp 10A1 : Cô Trần Thị Thúy</div>
+                        <div class="_title">Trình bày đạo đức</div>
                     </div>
                 </a>
             </div>

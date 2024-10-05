@@ -16,6 +16,7 @@ use App\Http\Controllers\QuanLyTaiKhoanNguoiQuanLy;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeHocSinhController;
 use App\Http\Controllers\Lop10ConTroller;
+use App\Http\Controllers\hoc_sinh\HocSinhController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,8 +42,12 @@ Route::get('/admin/ql-de-xuat',[AdminController::class,'getViewDeXuat'])->name('
 Route::get('/admin/ql-tk-gv',[AdminController::class,'getViewTKGiaoVien'])->name('index.ds-tk-gv');
 Route::get('/admin/ql-tk-hs',[AdminController::class,'getViewTKHocSinh'])->name('index.ds-tk-hs');
 Route::get('/admin/ql-tk-ql',[AdminController::class,'getViewTKQuanLy'])->name('index.ds-tk-ql');
-Route::get('/hs/lop10',[Lop10ConTroller::class,'getLop10'])->name('index.lop-10');
-
-
-
+Route::get('/hs/homehs',[HocSinhController::class,'getViewTrangChu'])->name('index.homehs');
+Route::get('/hs/lop10',[HocSinhController::class,'getLop10'])->name('index.lop-10');
+Route::get('/hs/lop11',[HocSinhController::class,'getLop11'])->name('index.lop-11');
+Route::get('/hs/lop12',[HocSinhController::class,'getLop12'])->name('index.lop-12');
+Route::get('/hs/baitapthem10',[HocSinhController::class,'getBaiTapThemLop10'])->name('index.baitapthem10');
+Route::get('/hs/baitapthem11',[HocSinhController::class,'getBaiTapThemLop11'])->name('index.baitapthem11');
+Route::get('/hs/baitapthem12',[HocSinhController::class,'getBaiTapThemLop12'])->name('index.baitapthem12');
+Route::get('/hs/gioithieu',[HocSinhController::class,'getGioiThieu'])->name('index.gioithieu');
 
