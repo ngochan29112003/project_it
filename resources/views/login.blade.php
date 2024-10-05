@@ -42,7 +42,7 @@
                                 <div class="mb-2">
                                     <label class="form-label">Mật khẩu
                                         <span class="form-label-description">
-                                            <a href="{{asset('forgot-password.html')}}">Quên mật khẩu</a>
+                                            <a href="{{asset('forgot-password.html')}}">Quên mật khẩu?</a>
                                         </span>
                                     </label>
                                     <div class="input-group input-group-flat">
@@ -54,12 +54,12 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="showPwdCheckbox">
                                         <label class="form-check-label" for="showPwdCheckbox">
-                                            Show password
+                                            Hiển thị mật khẩu
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-footer">
-                                    <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                                    <button type="submit" class="btn btn-primary w-100">Login</button>
                                 </div>
                             </form>
                         </div>

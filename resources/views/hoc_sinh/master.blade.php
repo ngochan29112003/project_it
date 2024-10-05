@@ -42,7 +42,7 @@
 
 
     </style>
-    
+
 
 </head>
 <body>
@@ -292,10 +292,10 @@
                                         <a class="dropdown-item" href="{{route('index.lop-10')}}">
                                             Lớp 10
                                         </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-11')}}">
+                                        <a class="dropdown-item" href="">
                                             Lớp 11
                                         </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-11')}}">
+                                        <a class="dropdown-item" href="">
                                             Lớp 12
                                         </a>
                                     </div>
