@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        TRANG QUẢN LÝ GIÁO VIÊN
+                        TRANG QUẢN LÝ GIẢNG VIÊN
                     </h2>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                               <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
                             </svg>
                         </span>
-                        Thêm mới giáo viên
+                        Thêm mới giảng viên
                     </a>
                     <a href="#" class="btn btn-success">
                         <span>
@@ -48,15 +48,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="table-responsive p-2">
-                            <table id="tableGiaoVien" class="table table-vcenter card-table table-striped">
+                            <table id="tableGiangVien" class="table table-vcenter card-table table-striped">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
+                                    <th>Mã giảng viên</th>
                                     <th>Họ tên</th>
-                                    <th>Hình ảnh</th>
+                                    <th>Khoa</th>
                                     <th>Giới tính</th>
-                                    <th>Ngày sinh</th>
-                                    <th>Nơi sinh</th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
                                     <th class="text-center">Action</th>
@@ -74,11 +73,11 @@
 @endsection
 @section('scripts')
     <script>
-        var table = $('#tableGiaoVien').DataTable({
+        var table = $('#tableGiangVien').DataTable({
             "language": {
                 "emptyTable": "Không có dữ liệu trong bảng",
                 "search": "Tìm kiếm:",
-                "lengthMenu": "Hiển thị _MENU_ giáo viên mỗi trang",
+                "lengthMenu": "Hiển thị _MENU_ giảng viên mỗi trang",
                 "zeroRecords": "Không tìm thấy kết quả",
                 "infoEmpty": "Không có dữ liệu"
             }

@@ -177,7 +177,7 @@ CREATE TABLE `giao_vien` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hoc_sinh`
+-- Table structure for table `sinh_vien`
 --
 
 CREATE TABLE `hoc_sinh` (
@@ -355,7 +355,7 @@ ALTER TABLE `giao_vien`
   ADD PRIMARY KEY (`ma_giao_vien`);
 
 --
--- Indexes for table `hoc_sinh`
+-- Indexes for table `sinh_vien`
 --
 ALTER TABLE `hoc_sinh`
   ADD PRIMARY KEY (`ma_hoc_sinh`);
@@ -455,7 +455,7 @@ ALTER TABLE `giao_vien`
   MODIFY `ma_giao_vien` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `hoc_sinh`
+-- AUTO_INCREMENT for table `sinh_vien`
 --
 ALTER TABLE `hoc_sinh`
   MODIFY `ma_hoc_sinh` int(11) NOT NULL AUTO_INCREMENT;

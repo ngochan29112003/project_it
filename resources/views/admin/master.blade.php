@@ -29,6 +29,29 @@
         }
     </style>
 
+    <style>
+        .dropdown-item:hover {
+            background-color: #f0f0f0; /* Màu nền cho menu con khi hover */
+            color: #333; /* Màu chữ */
+        }
+
+        .nav-item.dropdown:hover{
+            background-color: rgba(240, 240, 240, 0.05); /* Thay đổi màu nền khi hover */
+        }
+
+        .hide-theme-dark:hover{
+            background-color: rgba(240, 240, 240, 0.05);
+        }
+
+        .hide-theme-light:hover{
+            background-color: rgba(240, 240, 240, 0.05);
+        }
+
+        .nav-item:hover{
+            background-color: rgba(240, 240, 240, 0.05);
+        }
+    </style>
+
 
 </head>
 <body>
@@ -47,7 +70,7 @@
                 </a>
             </h1>
             <div class="navbar-nav flex-row order-md-last">
-                <div class="nav-item d-none d-md-flex me-3">
+                <div class="d-none d-md-flex me-3">
                     <div class="btn-list">
                         <a href="https://www.facebook.com" class="btn" target="_blank" rel="noreferrer">
                             <i class="bi bi-facebook text-blue" style="font-size: 24px; margin-right: 8px;"></i>
@@ -106,98 +129,86 @@
                                 <div class="list-group list-group-flush list-group-hoverable">
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
-                                            <div class="col-auto"><span
-                                                    class="status-dot status-dot-animated bg-red d-block"></span></div>
+                                            <div class="col-auto">
+                                                <span class="status-dot status-dot-animated bg-red d-block"></span>
+                                            </div>
                                             <div class="col text-truncate">
-                                                <a href="#" class="text-body d-block">Toán 10</a>
-                                                <div class="d-block text-secondary text-truncate mt-n1">
-                                                    Chương 1: Mệnh đề và tập hợp
+                                                <a href="#" class="text-body d-block" title="Toán Cao Cấp">Toán Cao Cấp</a>
+                                                <div class="d-block text-secondary text-truncate mt-n1" title="Chương 1: Số thực và Số phức">
+                                                    Chương 1: Số thực và Số phức
                                                 </div>
                                             </div>
                                             <div class="col-auto">
                                                 <a href="#" class="list-group-item-actions">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
-                                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                         stroke="currentColor" fill="none" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                        <path
-                                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" title="Đánh dấu sao">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
                                                     </svg>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
-                                            <div class="col-auto"><span class="status-dot d-block"></span></div>
+                                            <div class="col-auto">
+                                                <span class="status-dot d-block"></span>
+                                            </div>
                                             <div class="col text-truncate">
-                                                <a href="#" class="text-body d-block">Ngữ văn 11</a>
-                                                <div class="d-block text-secondary text-truncate mt-n1">
-                                                    Bài 1: Ai đã đặt tên cho dòng sông
+                                                <a href="#" class="text-body d-block" title="Vật Lý Đại Cương A1">Vật Lý Đại Cương A1</a>
+                                                <div class="d-block text-secondary text-truncate mt-n1" title="Chương 1: Cơ Học">
+                                                    Chương 1: Cơ Học
                                                 </div>
                                             </div>
                                             <div class="col-auto">
                                                 <a href="#" class="list-group-item-actions show">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-yellow"
-                                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                         stroke="currentColor" fill="none" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                        <path
-                                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-yellow" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" title="Đánh dấu sao">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
                                                     </svg>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
-                                            <div class="col-auto"><span class="status-dot d-block"></span></div>
+                                            <div class="col-auto">
+                                                <span class="status-dot d-block"></span>
+                                            </div>
                                             <div class="col text-truncate">
-                                                <a href="#" class="text-body d-block">Vật lý 12</a>
-                                                <div class="d-block text-secondary text-truncate mt-n1">
-                                                    Bài 1: Dao động điều hòa
+                                                <a href="#" class="text-body d-block" title="Lập Trình Mạng">Lập Trình Mạng</a>
+                                                <div class="d-block text-secondary text-truncate mt-n1" title="Chương 1: Tổng quan về lập trình mạng">
+                                                    Chương 1: Tổng quan về lập trình mạng
                                                 </div>
                                             </div>
                                             <div class="col-auto">
                                                 <a href="#" class="list-group-item-actions">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
-                                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                         stroke="currentColor" fill="none" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                        <path
-                                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" title="Đánh dấu sao">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
                                                     </svg>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
-                                            <div class="col-auto"><span
-                                                    class="status-dot status-dot-animated bg-green d-block"></span>
+                                            <div class="col-auto">
+                                                <span class="status-dot status-dot-animated bg-green d-block"></span>
                                             </div>
                                             <div class="col text-truncate">
-                                                <a href="#" class="text-body d-block">Địa lý 12</a>
-                                                <div class="d-block text-secondary text-truncate mt-n1">
-                                                    Chương 1: Vị trí địa lí và phạm vi lãnh thổ
+                                                <a href="#" class="text-body d-block" title="Triển Khai Hệ Thống Mạng Văn Phòng">Triển Khai Hệ Thống Mạng Văn Phòng</a>
+                                                <div class="d-block text-secondary text-truncate mt-n1" title="Chương 1: Hệ Thống Máy Tính Cơ Bản">
+                                                    Chương 1: Hệ Thống Máy Tính Cơ Bản
                                                 </div>
                                             </div>
                                             <div class="col-auto">
                                                 <a href="#" class="list-group-item-actions">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
-                                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                         stroke="currentColor" fill="none" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                        <path
-                                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" title="Đánh dấu sao">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
                                                     </svg>
                                                 </a>
                                             </div>
@@ -253,7 +264,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('index.ds-giao-vien')}}">
+                                    <a class="nav-link" href="{{route('ds-giang-vien')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -261,19 +272,19 @@
                                               <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                             </svg>
                                         </span>
-                                        <span class="nav-link-title">Quản lý giáo viên</span>
+                                        <span class="nav-link-title">Quản lý giảng viên</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('index.ds-hoc-sinh')}}">
+                                    <a class="nav-link" href="{{route('ds-sinh-vien')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
                                         </span>
-                                        <span class="nav-link-title">Quản lý học sinh</span>
+                                        <span class="nav-link-title">Quản lý sinh viên</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('index.ds-bo-mon')}}">
+                                    <a class="nav-link" href="{{route('ds-hoc-phan')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -282,60 +293,44 @@
                                               <path d="M9 8h6" />
                                             </svg>
                                         </span>
-                                        <span class="nav-link-title">Quản lý bộ môn</span>
+                                        <span class="nav-link-title">Quản lý học phần</span>
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-buildings">
-                                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                              <path d="M4 21v-15c0 -1 1 -2 2 -2h5c1 0 2 1 2 2v15" />
-                                              <path d="M16 8h2c1 0 2 1 2 2v11" />
-                                              <path d="M3 21h18" />
-                                              <path d="M10 12v0" />
-                                              <path d="M10 16v0" />
-                                              <path d="M10 8v0" />
-                                              <path d="M7 12v0" />
-                                              <path d="M7 16v0" />
-                                              <path d="M7 8v0" />
-                                              <path d="M17 12v0" />
-                                              <path d="M17 16v0" />
-                                            </svg>
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M15 15l3.35 3.35"></path><path d="M9 15l-3.35 3.35"></path><path d="M5.65 5.65l3.35 3.35"></path><path d="M18.35 5.65l-3.35 3.35"></path></svg>
                                         </span>
                                         <span class="nav-link-title">
-                                          Quản lý khối
+                                            Khoa - Lớp
                                         </span>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-10')}}">
-                                            Khối 10
+                                        <a class="dropdown-item" href="{{route('ds-khoa')}}">
+                                            Quản lý khoa
                                         </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-11')}}">
-                                            Khối 11
-                                        </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-khoi-12')}}">
-                                            Khối 12
+                                        <a class="dropdown-item" href="{{route('ds-lop')}}">
+                                            Quản lý lớp
                                         </a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('index.ds-de-xuat')}}">
+                                    <a class="nav-link" href="{{route('ds-de-xuat')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bulb">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                              <path d="M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z" />
-                                              <path d="M19 16h-12a2 2 0 0 0 -2 2" />
-                                              <path d="M9 8h6" />
+                                              <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" />
+                                              <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" />
+                                              <path d="M9.7 17l4.6 0" />
                                             </svg>
                                         </span>
                                         <span class="nav-link-title">Quản lý đề xuất</span>
                                     </a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('ds-tai-khoan')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                               <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
                                               <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -343,21 +338,8 @@
                                               <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
                                             </svg>
                                         </span>
-                                        <span class="nav-link-title">
-                                          Quản lý tài khoản
-                                        </span>
+                                        <span class="nav-link-title">Quản lý tài khoản</span>
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('index.ds-tk-hs')}}" >
-                                            Học sinh
-                                        </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-tk-gv')}}">
-                                            Giáo viên
-                                        </a>
-                                        <a class="dropdown-item" href="{{route('index.ds-tk-ql')}}" >
-                                            Người quản lý
-                                        </a>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
