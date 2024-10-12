@@ -37,7 +37,7 @@
                             <form action="./" method="get" autocomplete="off" novalidate>
                                 <div class="mb-3">
                                     <label class="form-label">Tài khoản</label>
-                                    <input type="email" class="form-control" placeholder="nguyenvana@email.com" autocomplete="off">
+                                    <input type="email" name="ten_tai_khoan" class="form-control" placeholder="nguyenvana@email.com" autocomplete="off">
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label">Mật khẩu
@@ -46,7 +46,7 @@
                                         </span>
                                     </label>
                                     <div class="input-group input-group-flat">
-                                        <input type="password" id="pwd-input" class="form-control"  placeholder="Nva@123"  autocomplete="off">
+                                        <input type="password" name="mat_khau" id="pwd-input" class="form-control"  placeholder="Nva@123"  autocomplete="off">
                                     </div>
                                 </div>
 

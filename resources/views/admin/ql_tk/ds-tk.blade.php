@@ -24,17 +24,14 @@
             </div>
             <div class = "row mt-2">
                 <div class = "col-9">
-                    <a href = "#" class = "btn btn-primary">
-                        <span>
-                            <svg xmlns = "http://www.w3.org/2000/svg" width = "24" height = "24" viewBox = "0 0 24 24" fill = "none" stroke = "currentColor" stroke-width = "2" stroke-linecap = "round" stroke-linejoin = "round" class = "icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
-                              <path stroke = "none" d = "M0 0h24v24H0z" fill = "none" />
-                              <path d = "M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                              <path d = "M16 19h6" />
-                              <path d = "M19 16v6" />
-                              <path d = "M6 21v-2a4 4 0 0 1 4 -4h4" />
-                            </svg>
-                        </span> Thêm mới tài khoản</a>
+                    <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#themtaikhoan">
+                        <div class="d-flex align-items-center at1">
+                                <i class="bi bi-file-earmark-plus pe-2"></i>
+                                Thêm
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-3">
                     <div class="form-floating w-100">
                         <select class="form-select" id="floatingSelect" onchange="filterByRole(this.value)">
@@ -61,12 +58,8 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Họ và tên</th>
-                                    <th>Ngày sinh</th>
-                                    <th>Giới tính</th>
-                                    <th>SĐT</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Loại tài khoản</th>
-                                    <th>Trạng thái</th>
+                                    <th>Tên tài khoản</th>
+                                    <th>Quyền</th>
                                     <th class = "text-center">Action</th>
                                 </tr>
                                 </thead>
@@ -118,6 +111,46 @@
             </div>
         </div>
     </div>
+
+    <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
+    <div class="modal fade" id="themtaikhoan">
+        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm tài khoản</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formthemtaikhoan" enctype="multipart/form-data">
+                        @csrf
+                            <div class="col-md-12 mb-3">
+                                <label for="ma_nguoi_dung" class="form-label">Tên người dùng</label>
+                                <select class="form-select" name="ma_nguoi_dung" id="ma_nguoi_dung">
+                                    @foreach ($list_nguoi_dung as $item)
+                                        <option value="{{ $item->ma_nguoi_dung}}">{{ $item->ten_nguoi_dung}} - {{ $item->ten_quyen}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ten_tai_khoan" class="form-label">Tên tài khoản</label>
+                                <input type="text" class="form-control" id="ten_tai_khoan" name="ten_tai_khoan" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="mat_khau" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" id="mat_khau" name="mat_khau" required>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -132,42 +165,38 @@
 
             }
         });
+
+        $('#Formthemtaikhoan').submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route('add-tai-khoan') }}',
+                method: 'POST', // sử dụng POST để tránh lộ thông tin qua URL
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // thêm CSRF token
+                },
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message, "Thành công");
+                        setTimeout(function () {
+                           location.reload(); // Chuyển hướng người dùng
+                        }, 500);
+                    } else {
+                        toastr.error(response.message, "Lỗi");
+                    }
+                },
+                error: function (xhr) {
+                    // Sửa lỗi này bằng cách lấy thông báo chính xác từ phản hồi JSON
+                    if (xhr.status === 400) {
+                        var response = xhr.responseJSON;
+                        toastr.error(response.message, "Lỗi");
+                    } else {
+                        // Trường hợp lỗi khác (nếu có)
+                        toastr.error("An error occurred", "Lỗi");
+                    }
+                }
+            });
+        });
     </script>
-
-{{--    <script>--}}
-{{--        function filterByRole(role) {--}}
-{{--            $.ajax({--}}
-{{--                url: "{{ route('super-admin.filter-accounts') }}", // Đường dẫn đến route xử lý--}}
-{{--                type: "GET",--}}
-{{--                data: { role: role }, // Truyền giá trị VaiTro--}}
-{{--                success: function(response) {--}}
-{{--                    // Cập nhật lại bảng tài khoản--}}
-{{--                    var tbody = $('#tableTaiKhoanKhachHang tbody');--}}
-{{--                    tbody.empty(); // Xóa tất cả các dòng cũ--}}
-{{--                    $.each(response.data, function(index, taiKhoan) {--}}
-{{--                        var gioiTinh = taiKhoan.GioiTinh == 1 ? 'Nam' : 'Nữ';--}}
-{{--                        var trangThai = taiKhoan.TrangThai == 1 ? '<span class="badge bg-danger text-white">Đang bị khoá</span>' : '<span class="badge bg-success text-white">Hoạt động</span>';--}}
-{{--                        tbody.append(`--}}
-{{--                        <tr>--}}
-{{--                            <td>${index + 1}</td>--}}
-{{--                            <td>${taiKhoan.HoTen}</td>--}}
-{{--                            <td>${taiKhoan.NgaySinh}</td>--}}
-{{--                            <td>${gioiTinh}</td>--}}
-{{--                            <td>${taiKhoan.SDT}</td>--}}
-{{--                            <td>${taiKhoan.DiaChi}</td>--}}
-{{--                            <td>${taiKhoan.vaitro.ten_vai_tro}</td>--}}
-{{--                            <td>${trangThai}</td>--}}
-{{--                            <td class="text-center"></td>--}}
-{{--                        </tr>--}}
-{{--                    `);--}}
-{{--                    });--}}
-{{--                },--}}
-{{--                error: function(xhr, status, error) {--}}
-{{--                    console.error(error);--}}
-{{--                }--}}
-{{--            });--}}
-{{--        }--}}
-{{--    </script>--}}
-
-
 @endsection

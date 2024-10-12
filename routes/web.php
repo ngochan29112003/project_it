@@ -34,6 +34,7 @@ Route::get('/admin/ql-khoa',[QuanLyKhoaController::class,'getViewDsKhoa'])->name
 Route::get('/admin/ql-lop',[QuanLyLopController::class,'getViewDsLop'])->name('ds-lop');
 Route::get('/admin/ql-hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('ds-hoc-phan');
 Route::get('/admin/ds-tai-khoan',[QuanLyTaiKhoanController::class,'getViewDsTaiKhoan'])->name('ds-tai-khoan');
+Route::post('/admin/ds-tai-khoan/add',[QuanLyTaiKhoanController::class,'addTaiKhoan'])->name('add-tai-khoan');
 
 //Sinh Viên
 Route::get('/home-page',[HomePageController::class,'getViewHomePageSv'])->name('index-home-page');
