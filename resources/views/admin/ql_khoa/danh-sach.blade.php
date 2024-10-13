@@ -10,7 +10,7 @@
                 </div>
             </div>
 
-            //lấy này nè
+            <!-- lấy này nè -->
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
                     <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#themkhoa">
@@ -37,7 +37,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên Khoa</th>
-                                    <th>Trưởng</th>
+                                    <th>Trưởng Khoa</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-    <div class="modal fade" id="#themkhoa">
+    <div class="modal fade" id="themkhoa">
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,57 +64,16 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="ten_nguoi_dung" class="form-label">Họ tên</label>
-                                <input type="text" class="form-control" name="ten_nguoi_dung" id="ten_nguoi_dung" required>
+                                <label for="ten_khoa" class="form-label">Tên khoa</label>
+                                <input type="text" class="form-control" name="ten_khoa" id="ten_khoa" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="ma_quyen" class="form-label">Quyền</label>
-                                <select class="form-select" name="ma_quyen" id="ma_quyen">
-                                    <option value="" disabled selected>Chọn quyền</option>
-                                    <option value="1">Giảng viên</option>
-                                    <option value="2">Học sinh</option>
+                                <label for="truong_khoa" class="form-label">Trưởng khoa</label>
+                                <select class="form-select" name="truong_khoa" id="truong_khoa">
+                                    <option value="" disabled selected>Chọn giảng viên</option>
+                                    <option value="1">Trần Minh Dương</option>
+                                    <option value="2">Lý Hải Minh</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="ma_khoa" class="form-label">Khoa</label>
-                            <select class="form-select" name="ma_khoa" id="ma_khoa">
-                                <option value="" disabled selected>Chọn khoa</option>
-                                <option value="1">Công nghệ thông tin</option>
-                                <option value="2">Khoa học máy tính</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="ma_lop" class="form-label">Lớp</label>
-                            <select class="form-select" name="ma_lop" id="ma_lop">
-                                <option value="" disabled selected>Chọn lớp</option>
-                                <option value="1">Công nghệ thông tin - A1</option>
-                                <option value="2">Khoa học máy tính -A1</option>
-                                <option value="3">Công nghệ thực phẩm -A3</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="gioi_tinh" class="form-label">Giới tính</label>
-                                <select class="form-select" name="gioi_tinh" id="gioi_tinh">
-                                    <option value="" disabled selected>Chọn giới tính</option>
-                                    <option value="1"> Nam</option>
-                                    <option value="2">nữ</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="ngay_sinh" class="form-label">Ngày sinh</label>
-                                <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="noi_sinh" class="form-label">Nơi sinh</label>
-                                <input type="text" class="form-control" name="noi_sinh" id="noi_sinh" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">email</label>
-                                <input type="text" class="form-control" id="email" name="email" required>
                             </div>
                         </div>
                         <div class="text-end">

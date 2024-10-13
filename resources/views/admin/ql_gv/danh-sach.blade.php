@@ -108,9 +108,23 @@
                                 <input type="text" class="form-control" name="noi_sinh" id="noi_sinh" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">email</label>
-                                <input type="text" class="form-control" id="email" name="email" required>
+                                <label for="ho_khau_thuong_tru" class="form-label">Hộ khẩu thường trú</label>
+                                <input type="text" class="form-control" name="ho_khau_thuong_tru" id="ho_khau_thuong_tru" required>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cccd" class="form-label">Căn cước công dân</label>
+                                <input type="text" class="form-control" name="cccd" id="cccd" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="sdt" class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" name="sdt" id="sdt" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Thêm</button>

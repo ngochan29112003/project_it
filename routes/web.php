@@ -39,4 +39,7 @@ Route::post('/admin/ds-tai-khoan/add',[QuanLyTaiKhoanController::class,'addTaiKh
 //Sinh Viên
 Route::get('/home-page',[HomePageController::class,'getViewHomePageSv'])->name('index-home-page');
 
+//Khoa
+Route::post('/admin/ds-khoa/add',[QuanLyKhoaController::class,'addKhoa'])->name('add-khoa');
+
 

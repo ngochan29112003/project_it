@@ -9,32 +9,17 @@
                     </h2>
                 </div>
             </div>
-            <div class="row mt-2 mb-0">
-                <div class="col-auto">
-                    <a href="#" class="btn btn-primary">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
-                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                              <path d="M16 19h6" />
-                              <path d="M19 16v6" />
-                              <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
-                            </svg>
-                        </span>
-                        Thêm mới lớp
-                    </a>
-                    <a href="#" class="btn btn-success">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-table-export">
-                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                              <path d="M12.5 21h-7.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
-                              <path d="M3 10h18" />
-                              <path d="M10 3v18" />
-                              <path d="M16 19h6" />
-                              <path d="M19 16l3 3l-3 3" />
-                            </svg>
-                        </span>
-                        Xuất excel
+
+            <!-- lấy này nè -->
+            <div class="row mt-2">
+                <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#themlop">
+                        <i class="bi bi-file-earmark-plus pe-2"></i>
+                        Thêm mới
+                    </button>
+                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
+                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
+                        Xuất file Excel
                     </a>
                 </div>
             </div>
@@ -67,6 +52,50 @@
             </div>
         </div>
     </div>
+
+    <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
+    <div class="modal fade" id="themlop">
+        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm Lớp</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formthemlop" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ten_lop" class="form-label">Tên lớp</label>
+                                <input type="text" class="form-control" name="ten_lop" id="ten_lop" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="ma_khoa" class="form-label">Khoa</label>
+                                <select class="form-select" name="ma_khoa" id="ma_khoa">
+                                    <option value="" disabled selected>Chọn khoa</option>
+                                    <option value="1">Công nghệ thông tin</option>
+                                    <option value="2">Khoa học máy tính</option>
+                                </select>
+                             </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="nam_hoc" class="form-label">Năm học</label>
+                                <select class="form-select" name="nam_hoc" id="nam_hoc">
+                                    <option value="" disabled selected>Chọn năm học</option>
+                                    <option value="1">2023</option>
+                                    <option value="2">2024</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('scripts')
     <script>

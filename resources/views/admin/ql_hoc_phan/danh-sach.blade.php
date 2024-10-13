@@ -9,32 +9,17 @@
                     </h2>
                 </div>
             </div>
-            <div class="row mt-2 mb-0">
-                <div class="col-auto">
-                    <a href="#" class="btn btn-primary">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
-                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                              <path d="M16 19h6" />
-                              <path d="M19 16v6" />
-                              <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
-                            </svg>
-                        </span>
-                        Thêm mới học phần
-                    </a>
-                    <a href="#" class="btn btn-success">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-table-export">
-                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                              <path d="M12.5 21h-7.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
-                              <path d="M3 10h18" />
-                              <path d="M10 3v18" />
-                              <path d="M16 19h6" />
-                              <path d="M19 16l3 3l-3 3" />
-                            </svg>
-                        </span>
-                        Xuất excel
+            
+            <!-- lấy này nè -->
+            <div class="row mt-2">
+                <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#themlophocphan">
+                        <i class="bi bi-file-earmark-plus pe-2"></i>
+                        Thêm mới
+                    </button>
+                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
+                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
+                        Xuất file Excel
                     </a>
                 </div>
             </div>
@@ -68,6 +53,58 @@
             </div>
         </div>
     </div>
+
+        <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
+        <div class="modal fade" id="themlophocphan">
+        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm Lớp Học Phần</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formthemlophocphan" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ten_hoc_phan" class="form-label">Tên học phần</label>
+                                <input type="text" class="form-control" name="ten_hoc_phan" id="ten_hoc_phan" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="ma_giang_vien_day" class="form-label">Giảng viên dạy</label>
+                                <select class="form-select" name="ma_giang_vien_day" id="ma_giang_vien_day">
+                                    <option value="" disabled selected>Chọn khoa</option>
+                                    <option value="1">Trần Hạnh Nguyên</option>
+                                    <option value="2">Trần Minh Trung</option>
+                                </select>
+                             </div>
+                             <div class="col-md-6 mb-3">
+                                <label for="so_chi_ly_thuyet" class="form-label">Số chỉ lý thuyết</label>
+                                <input type="number" class="form-control" name="so_chi_ly_thuyet" id="so_chi_ly_thuyet" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="so_chi_thuc_hanh" class="form-label">Số chỉ thực hành</label>
+                                <input type="number" class="form-control" name="so_chi_thuc_hanh" id="so_chi_thuc_hanh" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="hoc_ky" class="form-label">Học kỳ</label>
+                                <select class="form-select" name="hoc_ky" id="hoc_ky">
+                                    <option value="" disabled selected>Chọn học kỳ</option>
+                                    <option value="1">2023-2024</option>
+                                    <option value="2">2024-2025</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('scripts')
     <script>
