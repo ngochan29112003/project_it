@@ -27,7 +27,7 @@
                     <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#themtaikhoan">
                         <div class="d-flex align-items-center at1">
                                 <i class="bi bi-file-earmark-plus pe-2"></i>
-                                Thêm
+                                Thêm mới
                         </div>
                     </div>
                 </div>
@@ -126,6 +126,7 @@
                             <div class="col-md-12 mb-3">
                                 <label for="ma_nguoi_dung" class="form-label">Tên người dùng</label>
                                 <select class="form-select" name="ma_nguoi_dung" id="ma_nguoi_dung">
+                                    <option value="" disabled selected>Chọn người dùng</option>
                                     @foreach ($list_nguoi_dung as $item)
                                         <option value="{{ $item->ma_nguoi_dung}}">{{ $item->ten_nguoi_dung}} - {{ $item->ten_quyen}} </option>
                                     @endforeach

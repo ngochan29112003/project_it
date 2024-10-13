@@ -9,37 +9,20 @@
                     </h2>
                 </div>
             </div>
-            <div class="row mt-2 mb-0">
-                <div class="col-auto">
-                    <a href="#" class="btn btn-primary">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
-                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                              <path d="M16 19h6" />
-                              <path d="M19 16v6" />
-                              <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
-                            </svg>
-                        </span>
-                        Thêm mới giảng viên
-                    </a>
-                    <a href="#" class="btn btn-success">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-table-export">
-                              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                              <path d="M12.5 21h-7.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
-                              <path d="M3 10h18" />
-                              <path d="M10 3v18" />
-                              <path d="M16 19h6" />
-                              <path d="M19 16l3 3l-3 3" />
-                            </svg>
-                        </span>
-                        Xuất excel
+
+            <div class="row mt-2">
+                <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#themgiangvien">
+                        <i class="bi bi-file-earmark-plus pe-2"></i>
+                        Thêm mới
+                    </button>
+                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
+                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
+                        Xuất file Excel
                     </a>
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="page-body">
         <div class="container-xl">
@@ -52,11 +35,12 @@
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Mã giảng viên</th>
                                     <th>Họ tên</th>
+                                    <th>Quyền</th>
                                     <th>Khoa</th>
                                     <th>Giới tính</th>
-                                    <th>Số điện thoại</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Nơi sinh</th>
                                     <th>Email</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -66,6 +50,73 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
+    <div class="modal fade" id="themgiangvien">
+        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thêm giảng viên</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formthemgiangvien" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ten_nguoi_dung" class="form-label">Họ tên</label>
+                                <input type="text" class="form-control" name="ten_nguoi_dung" id="ten_nguoi_dung" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="ma_quyen" class="form-label">Quyền</label>
+                                <select class="form-select" name="ma_quyen" id="ma_quyen">
+                                    <option value="" disabled selected>Chọn quyền</option>
+                                    <option value="1">Giảng viên</option>
+                                    <option value="2">Học sinh</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="ma_khoa" class="form-label">Khoa</label>
+                            <select class="form-select" name="ma_khoa" id="ma_khoa">
+                                <option value="" disabled selected>Chọn khoa</option>
+                                <option value="1">Công nghệ thông tin</option>
+                                <option value="2">Khoa học máy tính</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="gioi_tinh" class="form-label">Giới tính</label>
+                                <select class="form-select" name="gioi_tinh" id="gioi_tinh">
+                                    <option value="" disabled selected>Chọn giới tính</option>
+                                    <option value="1"> Nam</option>
+                                    <option value="2">nữ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="ngay_sinh" class="form-label">Ngày sinh</label>
+                                <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="noi_sinh" class="form-label">Nơi sinh</label>
+                                <input type="text" class="form-control" name="noi_sinh" id="noi_sinh" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">email</label>
+                                <input type="text" class="form-control" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

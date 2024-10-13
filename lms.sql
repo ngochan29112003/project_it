@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 12, 2024 at 02:05 AM
+-- Generation Time: Oct 14, 2024 at 12:08 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.1.25
 
@@ -20,26 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `lms`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `ma_admin` int(11) NOT NULL,
-  `ma_nguoi_dung` text,
-  `ten_admin` text,
-  `hinh_anh` text,
-  `gioi_tinh` text,
-  `ngay_sinh` text,
-  `noi_sinh` text,
-  `ho_khau_thuong_tru` text,
-  `cccd` text,
-  `email` text,
-  `so_dien_thoai` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -134,28 +114,6 @@ CREATE TABLE `ghi_danh` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `giang_vien`
---
-
-CREATE TABLE `giang_vien` (
-  `ma_giao_vien` int(11) NOT NULL,
-  `ma_hoc_phan_day` int(11) DEFAULT NULL,
-  `ma_nguoi_dung` int(11) DEFAULT NULL,
-  `ma_khoa` int(11) DEFAULT NULL,
-  `ten_giang_vien` text,
-  `hinh_anh` text,
-  `gioi_tinh` text,
-  `ngay_sinh` text,
-  `noi_sinh` text,
-  `dia_chi_thuong_tru` text,
-  `cccd` text,
-  `so_dien_thoai` text,
-  `email` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `ket_qua_kiem_tra`
 --
 
@@ -175,7 +133,8 @@ CREATE TABLE `ket_qua_kiem_tra` (
 
 CREATE TABLE `khoa` (
   `ma_khoa` int(11) NOT NULL,
-  `ten_khoa` text
+  `ten_khoa` text,
+  `truong_khoa` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -214,14 +173,30 @@ CREATE TABLE `lop_hoc_phan` (
 
 CREATE TABLE `nguoi_dung` (
   `ma_nguoi_dung` int(11) NOT NULL,
-  `ma_quyen` int(11) DEFAULT NULL,
-  `ten_tai_khoan` text,
-  `mat_khau` text,
-  `anh_dai_dien` text,
-  `ho_ten` text,
+  `ten_nguoi_dung` text,
+  `ma_khoa` int(11) DEFAULT NULL,
+  `ma_lop` int(11) DEFAULT NULL,
+  `ma_hoc_phan` int(11) DEFAULT NULL,
+  `hinh_anh` text,
+  `gioi_tinh` text,
+  `ngay_sinh` text,
+  `noi_sinh` text,
+  `ho_khau_thuong_tru` text,
+  `cccd` text,
+  `sdt` text,
   `email` text,
-  `so_dien_thoai` text
+  `ma_quyen` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `nguoi_dung`
+--
+
+INSERT INTO `nguoi_dung` (`ma_nguoi_dung`, `ten_nguoi_dung`, `ma_khoa`, `ma_lop`, `ma_hoc_phan`, `hinh_anh`, `gioi_tinh`, `ngay_sinh`, `noi_sinh`, `ho_khau_thuong_tru`, `cccd`, `sdt`, `email`, `ma_quyen`) VALUES
+(1, 'Ngọc Hân', NULL, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(2, 'Tuấn Anh', NULL, NULL, NULL, NULL, 'Nam', NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(3, 'Ngọc Ngân', NULL, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 3),
+(4, 'Huyền Trân', NULL, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -260,35 +235,19 @@ INSERT INTO `quyen` (`ma_quyen`, `ten_quyen`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sinh_vien`
+-- Table structure for table `tai_khoan`
 --
 
-CREATE TABLE `sinh_vien` (
-  `ma_sinh_vien` int(11) NOT NULL,
-  `ma_nguoi_dung` int(11) DEFAULT NULL,
-  `ma_khoa` int(11) DEFAULT NULL,
-  `ma_lop` int(11) DEFAULT NULL,
-  `ma_hoc_phan_hoc` int(11) DEFAULT NULL,
-  `ten_sinh_vien` text,
-  `hinh_anh` text,
-  `gioi_tinh` text,
-  `ngay_sinh` text,
-  `noi_sinh` text,
-  `ho_khau_thuong_tru` text,
-  `cccd` text,
-  `so_dien_thoai` text,
-  `email` text
+CREATE TABLE `tai_khoan` (
+  `ma_tai_khoan` int(11) NOT NULL,
+  `ten_tai_khoan` text,
+  `mat_khau` text,
+  `ma_nguoi_dung` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`ma_admin`);
 
 --
 -- Indexes for table `bai_giang`
@@ -325,12 +284,6 @@ ALTER TABLE `diem_danh`
 --
 ALTER TABLE `ghi_danh`
   ADD PRIMARY KEY (`ma_ghi_danh`);
-
---
--- Indexes for table `giang_vien`
---
-ALTER TABLE `giang_vien`
-  ADD PRIMARY KEY (`ma_giao_vien`);
 
 --
 -- Indexes for table `ket_qua_kiem_tra`
@@ -375,20 +328,14 @@ ALTER TABLE `quyen`
   ADD PRIMARY KEY (`ma_quyen`);
 
 --
--- Indexes for table `sinh_vien`
+-- Indexes for table `tai_khoan`
 --
-ALTER TABLE `sinh_vien`
-  ADD PRIMARY KEY (`ma_sinh_vien`);
+ALTER TABLE `tai_khoan`
+  ADD PRIMARY KEY (`ma_tai_khoan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `ma_admin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bai_giang`
@@ -427,12 +374,6 @@ ALTER TABLE `ghi_danh`
   MODIFY `ma_ghi_danh` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `giang_vien`
---
-ALTER TABLE `giang_vien`
-  MODIFY `ma_giao_vien` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `ket_qua_kiem_tra`
 --
 ALTER TABLE `ket_qua_kiem_tra`
@@ -460,7 +401,7 @@ ALTER TABLE `lop_hoc_phan`
 -- AUTO_INCREMENT for table `nguoi_dung`
 --
 ALTER TABLE `nguoi_dung`
-  MODIFY `ma_nguoi_dung` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ma_nguoi_dung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `nop_bai_tap`
@@ -475,10 +416,10 @@ ALTER TABLE `quyen`
   MODIFY `ma_quyen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `sinh_vien`
+-- AUTO_INCREMENT for table `tai_khoan`
 --
-ALTER TABLE `sinh_vien`
-  MODIFY `ma_sinh_vien` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tai_khoan`
+  MODIFY `ma_tai_khoan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
