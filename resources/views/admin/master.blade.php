@@ -15,6 +15,7 @@
     <link href="{{asset('dist/css/tabler-vendors.min.css?1692870487')}}" rel="stylesheet"/>
     <link href="{{asset('dist/css/demo.min.css')}}"/>
     <link href="{{asset('dist/css/toastr.css')}}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet"
           href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css')}}">
     <style>
@@ -364,6 +365,7 @@
 <script src="{{asset('dist/js/tabler.min.js?1692870487')}}" defer></script>
 <script src="{{asset('dist/js/demo.min.js?1692870487')}}" defer></script>
 <script src="{{asset('dist/js/toastr.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // @formatter:off
     document.addEventListener("DOMContentLoaded", function () {

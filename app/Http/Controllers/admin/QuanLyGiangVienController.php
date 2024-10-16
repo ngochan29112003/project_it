@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\NguoiDungModel;
 use Illuminate\Http\Request;
 
 class QuanLyGiangVienController extends Controller
 {
     public function getViewDsGiangVien()
     {
-        return view('admin.ql_gv.danh-sach');
+        $modelGiangVien = new NguoiDungModel();
+        $list_gv = $modelGiangVien->getGiangVien();
+//        dd($list_gv->toArray());
+        return view('admin.ql_gv.danh-sach',
+        compact('list_gv'));
     }
 }

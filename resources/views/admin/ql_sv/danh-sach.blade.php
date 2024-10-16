@@ -39,15 +39,35 @@
                                         <th>Quyền</th>
                                         <th>Khoa</th>
                                         <th>Lớp</th>
-                                        <th>Giới tính</th>
-                                        <th>Ngày sinh</th>
-                                        <th>Nơi sinh</th>
                                         <th>Email</th>
                                         <th>Số điện thoại</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php $stt = 1; @endphp <!-- Initialize the serial number -->
+                                    @foreach($list_sv as $item)
+                                        <tr>
+                                            <td>{{ $stt++ }}</td>
+                                            <td>{{ $item->ten_nguoi_dung}}</td>
+                                            <td>{{ $item->ten_quyen}}</td>
+                                            <td>{{ $item->ten_khoa}}</td>
+                                            <td>{{ $item->ten_lop}}</td>
+                                            <td>{{ $item->email}}</td>
+                                            <td>{{ $item->sdt}}</td>
+                                            <td class="text-center align-middle">
+                                                <a href="" class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                                |
+                                                <button
+                                                    class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                                    data-id="{{ $item->ma_nguoi_dung}}">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

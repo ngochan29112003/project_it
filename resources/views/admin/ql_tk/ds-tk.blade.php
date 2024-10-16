@@ -63,50 +63,31 @@
                                     <th class = "text-center">Action</th>
                                 </tr>
                                 </thead>
-{{--                                <tbody>--}}
-{{--                                @php $stt = 1; @endphp <!-- Initialize the serial number -->--}}
-{{--                                @foreach($dataTaiKhoan as $taiKhoan)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{ $stt++ }}</td>--}}
-{{--                                        <td>{{ $taiKhoan->HoTen }}</td>--}}
-{{--                                        <td>{{ $taiKhoan->NgaySinh }}</td>--}}
-{{--                                        <td>{{ $taiKhoan->GioiTinh == 1 ? 'Nam' : 'Nữ' }}</td>--}}
-{{--                                        <td>{{ $taiKhoan->SDT }}</td>--}}
-{{--                                        <td>{{ $taiKhoan->DiaChi }}</td>--}}
-{{--                                        <td>{{ $taiKhoan['vaitro']->ten_vai_tro }}</td>--}}
-{{--                                        <td>--}}
-{{--                                            @if($taiKhoan->TrangThai == 1)--}}
-{{--                                                <span class = "badge bg-danger text-white unlock-badge" data-id = "{{ $taiKhoan->MaTK }}" style = "cursor:pointer;">Đang bị khoá</span>--}}
-{{--                                            @else--}}
-{{--                                                <span class = "badge bg-success text-white">Hoạt động</span>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
-{{--                                        <td class = "text-center">--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-{{--                                </tbody>--}}
+                                <tbody>
+                                @php $stt = 1; @endphp <!-- Initialize the serial number -->
+                                @foreach($list_tai_khoan as $item)
+                                    <tr>
+                                        <td>{{ $stt++ }}</td>
+                                        <td>{{ $item->ten_nguoi_dung}}</td>
+                                        <td>{{ $item->ten_tai_khoan}}</td>
+                                        <td>{{ $item->ten_quyen}}</td>
+                                        <td class="text-center align-middle">
+                                            <a href="" class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            |
+                                            <button
+                                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                                data-id="{{ $item->ma_tai_khoan}}">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class = "modal fade" id = "unlockModal" tabindex = "-1" aria-labelledby = "unlockModalLabel" aria-hidden = "true">
-        <div class = "modal-dialog">
-            <div class = "modal-content">
-                <div class = "modal-header">
-                    <h5 class = "modal-title" id = "unlockModalLabel">Mở khóa tài khoản</h5>
-                    <button type = "button" class = "btn-close" data-bs-dismiss = "modal" aria-label = "Close"></button>
-                </div>
-                <div class = "modal-body">
-                    Bạn có chắc muốn mở khóa tài khoản này không?
-                </div>
-                <div class = "modal-footer">
-                    <button type = "button" class = "btn btn-secondary" data-bs-dismiss = "modal">Huỷ</button>
-                    <button type = "button" class = "btn btn-primary" id = "confirmUnlock">Mở khóa</button>
                 </div>
             </div>
         </div>

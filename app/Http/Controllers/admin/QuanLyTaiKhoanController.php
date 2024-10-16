@@ -13,13 +13,15 @@ class QuanLyTaiKhoanController extends Controller
 {
     public function getViewDsTaiKhoan()
     {
+        $modelTaiKhoan = new TaiKhoanModel();
+        $list_tai_khoan = $modelTaiKhoan->getTaikhoan();
         $modelNguoiDung = new NguoiDungModel();
         $list_nguoi_dung = $modelNguoiDung->getNguoiDung();
 
-//        dd( $list_nguoi_dung->toArray());
+//        dd( $list_tai_khoan->toArray());
 
         return view('admin.ql_tk.ds-tk',
-        compact( 'list_nguoi_dung'));
+        compact( 'list_nguoi_dung', 'list_tai_khoan'));
 
     }
 

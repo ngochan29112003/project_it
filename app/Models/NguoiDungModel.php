@@ -13,6 +13,7 @@ class NguoiDungModel extends Model
     protected $primaryKey = 'ma_nguoi_dung';
     public $timestamps = false;
 
+
     public function getNguoiDung()
     {
         return DB::table('nguoi_dung')
@@ -20,6 +21,27 @@ class NguoiDungModel extends Model
             ->leftJoin('tai_khoan','tai_khoan.ma_nguoi_dung','=','nguoi_dung.ma_nguoi_dung')
             ->whereNull('tai_khoan.ma_nguoi_dung')
             ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung','quyen.ten_quyen')
+            ->get();
+    }
+
+    public function getGiangVien()
+    {
+        return DB::table('nguoi_dung')
+            ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
+            ->join('khoa','khoa.ma_khoa','=','nguoi_dung.ma_khoa')
+            ->where('nguoi_dung.ma_quyen','=',2)
+            ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung','quyen.ten_quyen','khoa.ten_khoa','nguoi_dung.email')
+            ->get();
+    }
+
+    public function getSinhVien()
+    {
+        return DB::table('nguoi_dung')
+            ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
+            ->join('khoa','khoa.ma_khoa','=','nguoi_dung.ma_khoa')
+            ->join('lop','lop.ma_lop','=','nguoi_dung.ma_lop')
+            ->where('nguoi_dung.ma_quyen','=',3)
+            ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung', 'quyen.ten_quyen','lop.ten_lop','khoa.ten_khoa','nguoi_dung.email','nguoi_dung.sdt')
             ->get();
     }
 }

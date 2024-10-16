@@ -13,7 +13,7 @@
             <!-- lấy này nè -->
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
-                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#themlop">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modalthemlop">
                         <i class="bi bi-file-earmark-plus pe-2"></i>
                         Thêm mới
                     </button>
@@ -36,7 +36,6 @@
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Mã lớp</th>
                                     <th>Tên lớp</th>
                                     <th>Khoa</th>
                                     <th>Năm học</th>
@@ -44,6 +43,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @php $stt = 1; @endphp <!-- Initialize the serial number -->
+                                @foreach($list_lop as $item)
+                                    <tr>
+                                        <td>{{ $stt++ }}</td>
+                                        <td>{{ $item->ten_lop}}</td>
+                                        <td>{{ $item->ten_khoa}}</td>
+                                        <td>{{ $item->nam_hoc}}</td>
+                                        <td class="text-center align-middle">
+                                            <a href="" class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            |
+                                            <button
+                                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                                data-id="{{ $item->ma_lop}}">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -54,7 +73,7 @@
     </div>
 
     <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-    <div class="modal fade" id="themlop">
+    <div class="modal fade" id="Modalthemlop">
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -73,17 +92,19 @@
                                 <label for="ma_khoa" class="form-label">Khoa</label>
                                 <select class="form-select" name="ma_khoa" id="ma_khoa">
                                     <option value="" disabled selected>Chọn khoa</option>
-                                    <option value="1">Công nghệ thông tin</option>
-                                    <option value="2">Khoa học máy tính</option>
+                                    @foreach ($list_lop as $item)
+                                        <option value="{{ $item->ma_khoa}}">{{ $item->ten_khoa}}</option>
+                                    @endforeach
                                 </select>
                              </div>
                             <div class="col-md-12 mb-3">
                                 <label for="nam_hoc" class="form-label">Năm học</label>
-                                <select class="form-select" name="nam_hoc" id="nam_hoc">
-                                    <option value="" disabled selected>Chọn năm học</option>
-                                    <option value="1">2023</option>
-                                    <option value="2">2024</option>
-                                </select>
+                                <input type="text" class="form-control" name="nam_hoc" id="nam_hoc" required>
+{{--                                <select class="form-select" name="nam_hoc" id="nam_hoc">--}}
+{{--                                    <option value="" disabled selected>Chọn năm học</option>--}}
+{{--                                    <option value="1">2023</option>--}}
+{{--                                    <option value="2">2024</option>--}}
+{{--                                </select>--}}
                             </div>
                         </div>
                         <div class="text-end">
@@ -108,6 +129,38 @@
                 "infoEmpty": "Không có dữ liệu"
 
             }
+        });
+
+        var table = $('#tableLop').DataTable();
+
+        $('#Formthemlop').submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route('add-lop') }}',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        $('#Modalthemlop').modal('hide');
+                        toastr.success(response.message, "Successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    } else {
+                        toastr.error(response.message, "Error");
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error(response.message, "Error");
+                    if (xhr.status === 400) {
+                        var response = xhr.responseJSON;
+                        toastr.error(response.message, "Error");
+                    } else {
+                        toastr.error("An error occurred", "Error");
+                    }
+                }
+            });
         });
     </script>
 @endsection

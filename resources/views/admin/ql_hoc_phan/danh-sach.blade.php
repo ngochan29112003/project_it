@@ -9,7 +9,7 @@
                     </h2>
                 </div>
             </div>
-            
+
             <!-- lấy này nè -->
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
@@ -40,11 +40,31 @@
                                     <th>Giảng viên phụ trách</th>
                                     <th>Số TC-LT</th>
                                     <th>Số TC-TH</th>
-                                    <th>Học Kỳ</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @php $stt = 1; @endphp <!-- Initialize the serial number -->
+                                @foreach($list_hp as $item)
+                                    <tr>
+                                        <td>{{ $stt++ }}</td>
+                                        <td>{{ $item->ten_hoc_phan}}</td>
+                                        <td>{{ $item->ten_nguoi_dung}}</td>
+                                        <td>{{ $item->so_chi_ly_thuyet}}</td>
+                                        <td>{{ $item->so_chi_thuc_hanh}}</td>
+                                        <td class="text-center align-middle">
+                                            <a href="" class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            |
+                                            <button
+                                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                                data-id="{{ $item->ma_hoc_phan}}">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -41,5 +41,9 @@ Route::get('/home-page',[HomePageController::class,'getViewHomePageSv'])->name('
 
 //Khoa
 Route::post('/admin/ds-khoa/add',[QuanLyKhoaController::class,'addKhoa'])->name('add-khoa');
+Route::delete('/admin/ds-khoa/delete/{id}',[QuanLyKhoaController::class,'deleteKhoa'])->name('delete-khoa');
+
+//Lớp
+Route::post('/admin/ds-lop/add',[QuanLyLopController::class,'addLop'])->name('add-lop');
 
 
