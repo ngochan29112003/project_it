@@ -11,6 +11,21 @@ class NguoiDungModel extends Model
     use HasFactory;
     protected $table = 'nguoi_dung';
     protected $primaryKey = 'ma_nguoi_dung';
+    protected $fillable =[
+        'ten_nguoi_dung',
+        'ma_khoa',
+        'ma_lop',
+        'ma_hoc_phan',
+        'hinh_anh',
+        'gioi_tinh',
+        'ngay_sinh',
+        'noi_sinh',
+        'ho_khau_thuong_tru',
+        'cccd',
+        'sdt',
+        'email',
+        'ma_quyen'
+    ];
     public $timestamps = false;
 
 
@@ -54,4 +69,5 @@ class NguoiDungModel extends Model
     {
         return DB::table('khoa')->get();
     }
+
 }

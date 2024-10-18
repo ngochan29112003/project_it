@@ -36,6 +36,7 @@ class QuanLySinhVienController extends Controller
 
         // Thêm ma_quyen với giá trị mặc định là 3
         $validate['ma_quyen'] = 3;
+        $validate['hinh_anh'] = "user.png";
 
         // Tạo mới sinh viên với dữ liệu đã validate
         NguoiDungModel::create($validate);
