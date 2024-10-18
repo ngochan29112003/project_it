@@ -1,15 +1,17 @@
 <?php
+
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\QuanLyDeXuatController;
 use App\Http\Controllers\admin\QuanLyGiangVienController;
+use App\Http\Controllers\admin\QuanLyHocKyController;
 use App\Http\Controllers\admin\QuanLyHocPhanController;
 use App\Http\Controllers\admin\QuanLyKhoaController;
 use App\Http\Controllers\admin\QuanLyLopController;
 use App\Http\Controllers\admin\QuanLySinhVienController;
 use App\Http\Controllers\admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\sinh_vien\HomePageController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,7 @@ Route::post('/admin/ds-tai-khoan/add',[QuanLyTaiKhoanController::class,'addTaiKh
 
 //Sinh Viên
 Route::get('/home-page',[HomePageController::class,'getViewHomePageSv'])->name('index-home-page');
+Route::post('/admin/ds-sv/add',[QuanLySinhVienController::class,'addSinhVien'])->name('add-sinh-vien');
 
 //Khoa
 Route::post('/admin/ds-khoa/add',[QuanLyKhoaController::class,'addKhoa'])->name('add-khoa');
@@ -46,4 +49,10 @@ Route::delete('/admin/ds-khoa/delete/{id}',[QuanLyKhoaController::class,'deleteK
 //Lớp
 Route::post('/admin/ds-lop/add',[QuanLyLopController::class,'addLop'])->name('add-lop');
 
+//Học phần
+Route::post('/admin/ds-hoc-phan/add',[QuanLyHocPhanController::class,'addHocPhan'])->name('add-hoc-phan');
+
+//Học Kỳ
+Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
+Route::get('/admin/ds-hoc-ky',[QuanLyHocKyController::class,'getViewDsHocKy'])->name('ds-hoc-ky');
 

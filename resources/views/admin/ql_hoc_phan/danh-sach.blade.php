@@ -13,7 +13,7 @@
             <!-- lấy này nè -->
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
-                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#themlophocphan">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modalthemlophocphan">
                         <i class="bi bi-file-earmark-plus pe-2"></i>
                         Thêm mới
                     </button>
@@ -32,12 +32,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="table-responsive p-2">
-                            <table id="tableHocPhan" class="table table-vcenter card-table table-striped">
+                            <table id="table" class="table table-vcenter card-table table-striped">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên học phần</th>
-                                    <th>Giảng viên phụ trách</th>
                                     <th>Số TC-LT</th>
                                     <th>Số TC-TH</th>
                                     <th class="text-center">Action</th>
@@ -49,7 +48,6 @@
                                     <tr>
                                         <td>{{ $stt++ }}</td>
                                         <td>{{ $item->ten_hoc_phan}}</td>
-                                        <td>{{ $item->ten_nguoi_dung}}</td>
                                         <td>{{ $item->so_chi_ly_thuyet}}</td>
                                         <td>{{ $item->so_chi_thuc_hanh}}</td>
                                         <td class="text-center align-middle">
@@ -75,7 +73,7 @@
     </div>
 
         <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-        <div class="modal fade" id="themlophocphan">
+        <div class="modal fade" id="Modal">
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -83,21 +81,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="Formthemlophocphan" enctype="multipart/form-data">
+                    <form id="Form" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="ten_hoc_phan" class="form-label">Tên học phần</label>
                                 <input type="text" class="form-control" name="ten_hoc_phan" id="ten_hoc_phan" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="ma_giang_vien_day" class="form-label">Giảng viên dạy</label>
-                                <select class="form-select" name="ma_giang_vien_day" id="ma_giang_vien_day">
-                                    <option value="" disabled selected>Chọn khoa</option>
-                                    <option value="1">Trần Hạnh Nguyên</option>
-                                    <option value="2">Trần Minh Trung</option>
-                                </select>
-                             </div>
                              <div class="col-md-6 mb-3">
                                 <label for="so_chi_ly_thuyet" class="form-label">Số chỉ lý thuyết</label>
                                 <input type="number" class="form-control" name="so_chi_ly_thuyet" id="so_chi_ly_thuyet" required>
@@ -110,8 +100,8 @@
                                 <label for="hoc_ky" class="form-label">Học kỳ</label>
                                 <select class="form-select" name="hoc_ky" id="hoc_ky">
                                     <option value="" disabled selected>Chọn học kỳ</option>
-                                    <option value="1">2023-2024</option>
-                                    <option value="2">2024-2025</option>
+                                    <option value="2023-2024">2023-2024</option>
+                                    <option value="2024-2025">2024-2025</option>
                                 </select>
                             </div>
                         </div>
@@ -128,7 +118,7 @@
 @endsection
 @section('scripts')
     <script>
-        var table = $('#tableHocPhan').DataTable({
+        var table = $('#table').DataTable({
             "language": {
                 "emptyTable": "Không có dữ liệu trong bảng",
                 "search": "Tìm kiếm:",
@@ -137,6 +127,38 @@
                 "infoEmpty": "Không có dữ liệu"
 
             }
+        });
+
+        var table = $('#table').DataTable();
+
+        $('#Form').submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route('add-hoc-phan') }}',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        $('#Modal').modal('hide');
+                        toastr.success(response.message, "Successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    } else {
+                        toastr.error(response.message, "Error");
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error(response.message, "Error");
+                    if (xhr.status === 400) {
+                        var response = xhr.responseJSON;
+                        toastr.error(response.message, "Error");
+                    } else {
+                        toastr.error("An error occurred", "Error");
+                    }
+                }
+            });
         });
     </script>
 @endsection

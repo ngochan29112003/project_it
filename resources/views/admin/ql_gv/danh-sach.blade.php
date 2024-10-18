@@ -85,25 +85,18 @@
                     <form id="Formthemgiangvien" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="ten_nguoi_dung" class="form-label">Họ tên</label>
                                 <input type="text" class="form-control" name="ten_nguoi_dung" id="ten_nguoi_dung" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="ma_quyen" class="form-label">Quyền</label>
-                                <select class="form-select" name="ma_quyen" id="ma_quyen">
-                                    <option value="" disabled selected>Chọn quyền</option>
-                                    <option value="1">Giảng viên</option>
-                                    <option value="2">Học sinh</option>
-                                </select>
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="ma_khoa" class="form-label">Khoa</label>
                             <select class="form-select" name="ma_khoa" id="ma_khoa">
                                 <option value="" disabled selected>Chọn khoa</option>
-                                <option value="1">Công nghệ thông tin</option>
-                                <option value="2">Khoa học máy tính</option>
+                                @foreach ($list_khoa as $item)
+                                    <option value="{{ $item->ma_khoa}}">{{ $item->ten_khoa}} </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="row">
@@ -111,8 +104,8 @@
                                 <label for="gioi_tinh" class="form-label">Giới tính</label>
                                 <select class="form-select" name="gioi_tinh" id="gioi_tinh">
                                     <option value="" disabled selected>Chọn giới tính</option>
-                                    <option value="1"> Nam</option>
-                                    <option value="2">nữ</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">

@@ -12,8 +12,9 @@ class QuanLyGiangVienController extends Controller
     {
         $modelGiangVien = new NguoiDungModel();
         $list_gv = $modelGiangVien->getGiangVien();
+        $list_khoa = $modelGiangVien->getKhoa();
 //        dd($list_gv->toArray());
         return view('admin.ql_gv.danh-sach',
-        compact('list_gv'));
+        compact('list_gv','list_khoa'));
     }
 }

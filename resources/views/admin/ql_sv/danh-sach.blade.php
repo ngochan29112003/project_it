@@ -13,7 +13,7 @@
             <!-- //lấy này nè -->
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
-                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#themsinhvien">
+                    <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modal">
                         <i class="bi bi-file-earmark-plus pe-2"></i>
                         Thêm mới
                     </button>
@@ -31,7 +31,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="table-responsive p-2">
-                                <table id="tableSinhVien" class="table table-vcenter card-table table-striped">
+                                <table id="table" class="table table-vcenter card-table table-striped">
                                     <thead>
                                     <tr>
                                         <th>STT</th>
@@ -78,7 +78,7 @@
         </div>
 
         <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-        <div class="modal fade" id="themsinhvien">
+        <div class="modal fade" id="Modal">
             <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -86,37 +86,30 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="Formthemsinhvien" enctype="multipart/form-data">
+                        <form id="Form" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-12 mb-3">
                                     <label for="ten_nguoi_dung" class="form-label">Họ tên</label>
                                     <input type="text" class="form-control" name="ten_nguoi_dung" id="ten_nguoi_dung" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="ma_quyen" class="form-label">Quyền</label>
-                                    <select class="form-select" name="ma_quyen" id="ma_quyen">
-                                        <option value="" disabled selected>Chọn quyền</option>
-                                        <option value="1">Giảng viên</option>
-                                        <option value="2">Học sinh</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="ma_khoa" class="form-label">Khoa</label>
                                 <select class="form-select" name="ma_khoa" id="ma_khoa">
                                     <option value="" disabled selected>Chọn khoa</option>
-                                    <option value="1">Công nghệ thông tin</option>
-                                    <option value="2">Khoa học máy tính</option>
+                                    @foreach ($list_khoa as $item)
+                                        <option value="{{ $item->ma_khoa}}">{{ $item->ten_khoa}} </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="ma_lop" class="form-label">Lớp</label>
                                 <select class="form-select" name="ma_lop" id="ma_lop">
                                     <option value="" disabled selected>Chọn lớp</option>
-                                    <option value="1">Công nghệ thông tin - A1</option>
-                                    <option value="2">Khoa học máy tính -A1</option>
-                                    <option value="3">Công nghệ thực phẩm -A3</option>
+                                    @foreach ($list_lop as $item)
+                                        <option value="{{ $item->ma_lop}}">{{ $item->ten_lop}} </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="row">
@@ -169,7 +162,7 @@
 @endsection
 @section('scripts')
     <script>
-        var table = $('#tableSinhVien').DataTable({
+        var table = $('#table').DataTable({
             "language": {
                 "emptyTable": "Không có dữ liệu trong bảng",
                 "search": "Tìm kiếm:",
@@ -180,6 +173,37 @@
             }
         });
 
+        var table = $('#table').DataTable();
+
+        $('#Form').submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route('add-sinh-vien') }}',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        $('#Modal').modal('hide');
+                        toastr.success(response.message, "Successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    } else {
+                        toastr.error(response.message, "Error");
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error(response.message, "Error");
+                    if (xhr.status === 400) {
+                        var response = xhr.responseJSON;
+                        toastr.error(response.message, "Error");
+                    } else {
+                        toastr.error("An error occurred", "Error");
+                    }
+                }
+            });
+        });
     </script>
 
 @endsection

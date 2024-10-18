@@ -92,7 +92,7 @@
                                 <label for="ma_khoa" class="form-label">Khoa</label>
                                 <select class="form-select" name="ma_khoa" id="ma_khoa">
                                     <option value="" disabled selected>Chọn khoa</option>
-                                    @foreach ($list_lop as $item)
+                                    @foreach ($list_khoa as $item)
                                         <option value="{{ $item->ma_khoa}}">{{ $item->ten_khoa}}</option>
                                     @endforeach
                                 </select>

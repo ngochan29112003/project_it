@@ -44,4 +44,14 @@ class NguoiDungModel extends Model
             ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung', 'quyen.ten_quyen','lop.ten_lop','khoa.ten_khoa','nguoi_dung.email','nguoi_dung.sdt')
             ->get();
     }
+
+    public function getLop()
+    {
+        return DB::table('lop')->get();
+    }
+
+    public function getKhoa()
+    {
+        return DB::table('khoa')->get();
+    }
 }

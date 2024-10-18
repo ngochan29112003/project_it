@@ -11,12 +11,18 @@ class HocPhanModel extends Model
     use HasFactory;
     protected $table = 'lop_hoc_phan';
     protected $primaryKey = 'ma_hoc_phan';
+   //chua dung toi
+    protected $fillable =[
+        'ten_hoc_phan',
+        'so_chi_ly_thuyet',
+        'so_chi_thuc_hanh',
+        'hoc_ky'
+    ];
     public $timestamps = false;
 
     public function getHocPhan()
     {
-        return DB::table('lop_hoc_phan')
-            ->join('nguoi_dung','nguoi_dung.ma_nguoi_dung','=','lop_hoc_phan.ma_nguoi_dung')
-            ->get();
+        return DB::table('lop_hoc_phan')->get();
+
     }
 }

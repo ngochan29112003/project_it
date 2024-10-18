@@ -11,9 +11,10 @@ class QuanLyLopController extends Controller
     public function getViewDsLop()
     {
         $Lopmodel = new LopModel();
+        $list_khoa = $Lopmodel->getKhoa();
         $list_lop = $Lopmodel->getLop();
         return view('admin.ql_lop.danh-sach',
-        compact('list_lop'));
+        compact('list_khoa', 'list_lop'));
     }
 
     function addLop(Request $request)
