@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="shortcut icon" href="{{asset('asset/img/icon.png')}}">
+    <link rel="shortcut icon" href="{{asset('assets/img/icon.png')}}">
     <title>Dashboard - TeachHub</title>
     <!-- CSS files -->
     <link rel="stylesheet" href="{{asset('https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css')}}" />
@@ -67,7 +67,7 @@
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                 <a href=".">
-                    <img src="{{asset('asset/img/logo.png')}}" height="50" alt=" ">
+                    <img src="{{asset('assets/img/logo.png')}}" height="50" alt=" ">
                 </a>
             </h1>
             <div class="navbar-nav flex-row order-md-last">
@@ -225,7 +225,7 @@
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                        aria-label="Open user menu">
                         <span class="avatar avatar-sm"
-                              style="background-image: url({{asset('asset/img_user/user.jpg')}})"></span>
+                              style="background-image: url({{asset('assets/img_user/user.jpg')}})"></span>
                         <div class="d-none d-xl-block ps-2">
                             <div>User</div>
                             <div class="mt-1 small text-secondary">Admin</div>
@@ -236,7 +236,7 @@
                         <a href="{{asset('profile.html')}}" class="dropdown-item">Thông tin</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{asset('settings.html')}}" class="dropdown-item">Cài đặt</a>
-                        <a href="{{route('index-login')}}" class="dropdown-item">Đăng xuất</a>
+                        <a href="{{route('logout')}}" class="dropdown-item">Đăng xuất</a>
                     </div>
                 </div>
             </div>
@@ -265,7 +265,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('ds-giang-vien')}}">
+                                    <a class="nav-link" href="{{route('giang-vien')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -277,7 +277,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('ds-sinh-vien')}}">
+                                    <a class="nav-link" href="{{route('sinh-vien')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
                                         </span>
@@ -285,7 +285,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('ds-hoc-phan')}}">
+                                    <a class="nav-link" href="{{route('hoc-phan')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -298,7 +298,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('ds-hoc-ky')}}">
+                                    <a class="nav-link" href="{{route('hoc-ky')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book-2">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -320,16 +320,16 @@
                                         </span>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('ds-khoa')}}">
+                                        <a class="dropdown-item" href="{{route('khoa')}}">
                                             Quản lý khoa
                                         </a>
-                                        <a class="dropdown-item" href="{{route('ds-lop')}}">
+                                        <a class="dropdown-item" href="{{route('lop')}}">
                                             Quản lý lớp
                                         </a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('ds-de-xuat')}}">
+                                    <a class="nav-link" href="{{route('de-xuat')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bulb">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -342,7 +342,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('ds-tai-khoan')}}">
+                                    <a class="nav-link" href="{{route('tai-khoan')}}">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
                                               <path stroke="none" d="M0 0h24v24H0z" fill="none" />

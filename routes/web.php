@@ -24,35 +24,62 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Xử lý các route chưa đăng nhập
+Route::get('/', [LoginController::class, 'getViewLogin'])->name('index.login');
+Route::post('/login',[LoginController::class,'loginAction'])->name('login');
+Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
-//Admin
-Route::get('/', [LoginController::class, 'getViewLogin'])->name('index-login');
-Route::get('/admin',[AdminController::class,'getView'])->name('index-dasboard');
-Route::get('/admin/trang-chu',[AdminController::class,'getViewTrangChu'])->name('index.trang-chu');
-Route::get('/admin/ql-giang-vien',[QuanLyGiangVienController::class,'getViewDsGiangVien'])->name('ds-giang-vien');
-Route::get('/admin/ql-sinh-vien',[QuanLySinhVienController::class,'getViewDsSinhVien'])->name('ds-sinh-vien');
-Route::get('/admin/ql-de-xuat',[QuanLyDeXuatController::class,'getViewDsDeXuat'])->name('ds-de-xuat');
-Route::get('/admin/ql-khoa',[QuanLyKhoaController::class,'getViewDsKhoa'])->name('ds-khoa');
-Route::get('/admin/ql-lop',[QuanLyLopController::class,'getViewDsLop'])->name('ds-lop');
-Route::get('/admin/ql-hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('ds-hoc-phan');
-Route::get('/admin/ds-tai-khoan',[QuanLyTaiKhoanController::class,'getViewDsTaiKhoan'])->name('ds-tai-khoan');
-Route::post('/admin/ds-tai-khoan/add',[QuanLyTaiKhoanController::class,'addTaiKhoan'])->name('add-tai-khoan');
+//Xử lý các route đã đăng nhập
+Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
-//Sinh Viên
-Route::get('/home-page',[HomePageController::class,'getViewHomePageSv'])->name('index-home-page');
-Route::post('/admin/ds-sv/add',[QuanLySinhVienController::class,'addSinhVien'])->name('add-sinh-vien');
+    //Admin
+    Route::group(['prefix' => '/admin'], function () {
+        //Trang chủ
+        Route::get('/trang-chu',[AdminController::class,'getViewTrangChu'])->name('trang-chu-admin');
 
-//Khoa
-Route::post('/admin/ds-khoa/add',[QuanLyKhoaController::class,'addKhoa'])->name('add-khoa');
-Route::delete('/admin/ds-khoa/delete/{id}',[QuanLyKhoaController::class,'deleteKhoa'])->name('delete-khoa');
+        //QL Tài Khoản
+        Route::get('/tai-khoan',[QuanLyTaiKhoanController::class,'getViewDsTaiKhoan'])->name('tai-khoan');
+        Route::post('/tai-khoan/add',[QuanLyTaiKhoanController::class,'addTaiKhoan'])->name('add-tai-khoan');
 
-//Lớp
-Route::post('/admin/ds-lop/add',[QuanLyLopController::class,'addLop'])->name('add-lop');
+        //QL Sinh Viên
+        Route::get('/sinh-vien',[QuanLySinhVienController::class,'getViewDsSinhVien'])->name('sinh-vien');
+        Route::post('/sinh-vien/add',[QuanLySinhVienController::class,'addSinhVien'])->name('add-sinh-vien');
 
-//Học phần
-Route::post('/admin/ds-hoc-phan/add',[QuanLyHocPhanController::class,'addHocPhan'])->name('add-hoc-phan');
+        //QL Giảng Viên
+        Route::get('/giang-vien',[QuanLyGiangVienController::class,'getViewDsGiangVien'])->name('giang-vien');
 
-//Học Kỳ
-Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
-Route::get('/admin/ds-hoc-ky',[QuanLyHocKyController::class,'getViewDsHocKy'])->name('ds-hoc-ky');
+        //QL Đề xuất
+        Route::get('/de-xuat',[QuanLyDeXuatController::class,'getViewDsDeXuat'])->name('de-xuat');
 
+        //QL Học phần
+        Route::get('/hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('hoc-phan');
+        Route::post('/hoc-phan/add',[QuanLyHocPhanController::class,'addHocPhan'])->name('add-hoc-phan');
+
+        //QL Lớp
+        Route::get('/lop',[QuanLyLopController::class,'getViewDsLop'])->name('lop');
+        Route::post('/lop/add',[QuanLyLopController::class,'addLop'])->name('add-lop');
+
+        //QL Khoa
+        Route::get('/khoa',[QuanLyKhoaController::class,'getViewDsKhoa'])->name('khoa');
+        Route::post('/khoa/add',[QuanLyKhoaController::class,'addKhoa'])->name('add-khoa');
+        Route::delete('/khoa/delete/{id}',[QuanLyKhoaController::class,'deleteKhoa'])->name('delete-khoa');
+
+        //QL Học kỳ
+        Route::get('/hoc-ky',[QuanLyHocKyController::class,'getViewDsHocKy'])->name('hoc-ky');
+    });
+
+    //Sinh vien
+    Route::group(['prefix' => '/sinh-vien'], function () {
+        //Trang chủ
+        Route::get('/trang-chu',[HomePageController::class,'getViewHomePageSv'])->name('trang-chu-sinh-vien');
+
+    });
+
+    //Giang vien
+    Route::group(['prefix' => '/giang-vien'], function () {
+
+    });
+
+    //API
+    Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
+});
