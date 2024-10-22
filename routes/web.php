@@ -40,31 +40,47 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //QL Tài Khoản
         Route::get('/tai-khoan',[QuanLyTaiKhoanController::class,'getViewDsTaiKhoan'])->name('tai-khoan');
         Route::post('/tai-khoan/add',[QuanLyTaiKhoanController::class,'addTaiKhoan'])->name('add-tai-khoan');
+        Route::delete('/tai-khoan/delete/{id}',[QuanLyTaiKhoanController::class,'deleteTaiKhoan'])->name('delete-tai-khoan');
 
         //QL Sinh Viên
         Route::get('/sinh-vien',[QuanLySinhVienController::class,'getViewDsSinhVien'])->name('sinh-vien');
         Route::post('/sinh-vien/add',[QuanLySinhVienController::class,'addSinhVien'])->name('add-sinh-vien');
+        Route::delete('/sinh-vien/delete/{id}',[QuanLySinhVienController::class,'deleteSinhVien'])->name('delete-sinh-vien');
+        Route::get('/sinh-vien/edit/{id}', [QuanLySinhVienController::class, 'editSinhVien'])->name('edit-sinh-vien');
+        Route::post('/sinh-vien/update/{id}', [QuanLySinhVienController::class, 'updateSinhVien'])->name('update-sinh-vien');
 
         //QL Giảng Viên
         Route::get('/giang-vien',[QuanLyGiangVienController::class,'getViewDsGiangVien'])->name('giang-vien');
+        Route::post('/giang-vien/add',[QuanLyGiangVienController::class,'addGiangVien'])->name('add-giang-vien');
+        Route::delete('/giang-vien/delete/{id}',[QuanLyGiangVienController::class,'deleteGiangVien'])->name('delete-giang-vien');
+        Route::get('/giang-vien/edit/{id}', [QuanLyGiangVienController::class, 'editGiangVien'])->name('edit-giang-vien');
+        Route::post('/giang-vien/update/{id}', [QuanLyGiangVienController::class, 'updateGiangVien'])->name('update-giang-vien');
 
-        //QL Đề xuất
+        //QL Đề xuất (--Bàn sau--)
         Route::get('/de-xuat',[QuanLyDeXuatController::class,'getViewDsDeXuat'])->name('de-xuat');
 
         //QL Học phần
         Route::get('/hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('hoc-phan');
         Route::post('/hoc-phan/add',[QuanLyHocPhanController::class,'addHocPhan'])->name('add-hoc-phan');
+        Route::delete('/hoc-phan/delete/{id}',[QuanLyHocPhanController::class,'deleteHocPhan'])->name('delete-hoc-phan');
+        Route::get('/hoc-phan/edit/{id}', [QuanLyHocPhanController::class, 'editHocPhan'])->name('edit-hoc-phan');
+        Route::post('/hoc-phan/update/{id}', [QuanLyHocPhanController::class, 'updateHocPhan'])->name('update-hoc-phan');
 
         //QL Lớp
         Route::get('/lop',[QuanLyLopController::class,'getViewDsLop'])->name('lop');
         Route::post('/lop/add',[QuanLyLopController::class,'addLop'])->name('add-lop');
+        Route::delete('/lop/delete/{id}',[QuanLyLopController::class,'deleteLop'])->name('delete-lop');
+        Route::get('/lop/edit/{id}', [QuanLyLopController::class, 'editLop'])->name('edit-lop');
+        Route::post('/lop/update/{id}', [QuanLyLopController::class, 'updateLop'])->name('update-lop');
 
         //QL Khoa
         Route::get('/khoa',[QuanLyKhoaController::class,'getViewDsKhoa'])->name('khoa');
         Route::post('/khoa/add',[QuanLyKhoaController::class,'addKhoa'])->name('add-khoa');
         Route::delete('/khoa/delete/{id}',[QuanLyKhoaController::class,'deleteKhoa'])->name('delete-khoa');
+        Route::get('/khoa/edit/{id}', [QuanLyKhoaController::class, 'editKhoa'])->name('edit-khoa');
+        Route::post('/khoa/update/{id}', [QuanLyKhoaController::class, 'updateKhoa'])->name('update-khoa');
 
-        //QL Học kỳ
+        //QL Học kỳ (Kéo API nên không cần làm gì hết)
         Route::get('/hoc-ky',[QuanLyHocKyController::class,'getViewDsHocKy'])->name('hoc-ky');
     });
 

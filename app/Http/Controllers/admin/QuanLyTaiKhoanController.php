@@ -62,6 +62,16 @@ class QuanLyTaiKhoanController extends Controller
                 'message' => 'Có lỗi xảy ra khi tạo tài khoản',
             ]);
         }
+    }
+    function deleteTaiKhoan($id)
+    {
+        $taikhoan = TaiKhoanModel::findOrFail($id);
 
+        $taikhoan->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
     }
 }

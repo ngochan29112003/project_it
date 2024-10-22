@@ -45,7 +45,7 @@ class NguoiDungModel extends Model
             ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
             ->join('khoa','khoa.ma_khoa','=','nguoi_dung.ma_khoa')
             ->where('nguoi_dung.ma_quyen','=',2)
-            ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung','quyen.ten_quyen','khoa.ten_khoa','nguoi_dung.email')
+            ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung','quyen.ten_quyen','khoa.ten_khoa','nguoi_dung.email','nguoi_dung.ngay_sinh')
             ->get();
     }
 
@@ -56,7 +56,8 @@ class NguoiDungModel extends Model
             ->join('khoa','khoa.ma_khoa','=','nguoi_dung.ma_khoa')
             ->join('lop','lop.ma_lop','=','nguoi_dung.ma_lop')
             ->where('nguoi_dung.ma_quyen','=',3)
-            ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung', 'quyen.ten_quyen','lop.ten_lop','khoa.ten_khoa','nguoi_dung.email','nguoi_dung.sdt')
+            ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung', 'quyen.ten_quyen','lop.ten_lop','khoa.ten_khoa','nguoi_dung.email',
+                'nguoi_dung.sdt','nguoi_dung.ngay_sinh')
             ->get();
     }
 

@@ -33,4 +33,29 @@ class QuanLyLopController extends Controller
             'message' => 'Thêm thành công!',
         ]);
     }
+
+    public function editLop($id)
+    {
+        $lop = LopModel::findOrFail($id);
+        return response()->json([
+            'lop' => $lop
+        ]);
+    }
+
+    public function updateLop(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'ma_khoa'=>'int',
+            'ten_lop'=>'string',
+            'nam_hoc'=>'string'
+        ]);
+
+        $lop = LopModel::findOrFail($id);
+        $lop->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'lop' => $lop,
+        ]);
+    }
 }

@@ -49,9 +49,11 @@
                                         <td class="align-middle">{{ $item->ten_khoa }}</td>
                                         <td class="align-middle">{{ $item->truong_khoa }}</td>
                                         <td class="text-center align-middle">
-                                            <a href="" class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn">
+                                            <button
+                                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                                data-id="{{ $item->ma_khoa}}">
                                                 <i class="bi bi-pencil-square"></i>
-                                            </a>
+                                            </button>
                                             |
                                             <button
                                                 class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
@@ -93,6 +95,37 @@
                         </div>
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Modal ửa (tìm hiểu Modal này trên BS5) ======= -->
+    <div class="modal fade" id="Modaleditkhoa">
+        <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sửa Khoa</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="Formeditkhoa" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ten_khoa" class="form-label">Tên khoa</label>
+                                <input type="text" class="form-control" name="ten_khoa" id="ten_khoa_edit" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="truong_khoa" class="form-label">Trưởng khoa</label>
+                                <input type="text" class="form-control" name="truong_khoa" id="truong_khoa_edit" required>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Sửa</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         </div>
                     </form>
@@ -152,13 +185,13 @@
             var row = $(this).closest('tr');
 
             Swal.fire({
-                title: 'Bạn có chắc chăn ?',
-                text: "Bạn có muốn xóa khoa không ?",
-                icon: 'cảnh báo',
+                title: 'Bạn có chắc chắn?',
+                text: "Bạn có muốn xóa khoa này không ?",
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Vâng,xóa nó!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -169,19 +202,68 @@
                         },
                         success: function (response) {
                             if (response.success) {
-                                toastr.success(response.message, "Xóa thành công");
+                                toastr.success(response.message, "Đã xóa thành công");
                                 setTimeout(function () {
                                     location.reload()
                                 }, 500);
                             } else {
-                                toastr.error("Xóa không thành công.",
-                                    "Operation Failed");
+                                toastr.error("Không thể xóa.",
+                                    "Thất bại");
                             }
                         },
                         error: function (xhr) {
-                            toastr.error("An error occurred.", "Operation Failed");
+                            toastr.error("Đã xãy ra lỗi.", "Thất bại");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#tableKhoa').on('click', '.edit-btn', function () {
+            var khoa = $(this).data('id');
+
+            $('#Formeditkhoa').data('id', khoa);
+            var url = "{{ route('edit-khoa', ':id') }}";
+            url = url.replace(':id', khoa);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.khoa;
+                    $('#ten_khoa_edit').val(data.ten_khoa);
+                    $('#truong_khoa_edit').val(data.truong_khoa);
+                    $('#Modaleditkhoa').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#Formeditkhoa').submit(function (e) {
+            e.preventDefault();
+            var khoaid = $(this).data('id');
+            var url = "{{ route('update-khoa', ':id') }}";
+            url = url.replace(':id', khoaid);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#Modaleditkhoa').modal('hide');
+                        toastr.success(response.response, "Sửa thành công");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Lỗi");
                 }
             });
         });

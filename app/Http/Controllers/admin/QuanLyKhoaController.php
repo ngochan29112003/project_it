@@ -45,4 +45,28 @@ class QuanLyKhoaController extends Controller
             'message' => 'Xóa thành công'
         ]);
     }
+
+    public function editKhoa($id)
+    {
+        $khoa = KhoaModel::findOrFail($id);
+        return response()->json([
+            'khoa' => $khoa
+        ]);
+    }
+
+    public function updateKhoa(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'ten_khoa'=> 'string',
+            'truong_khoa' => 'string'
+        ]);
+
+        $khoa = KhoaModel::findOrFail($id);
+        $khoa->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'khoa' => $khoa,
+        ]);
+    }
 }

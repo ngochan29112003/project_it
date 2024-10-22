@@ -40,11 +40,56 @@ class QuanLySinhVienController extends Controller
 
         // Tạo mới sinh viên với dữ liệu đã validate
         NguoiDungModel::create($validate);
-
         return response()->json([
             'success' => true,
             'status' => 200,
             'message' => 'Thêm thành công!',
+        ]);
+    }
+
+    function deleteSinhVien($id)
+    {
+        $sinhvien = NguoiDungModel::findOrFail($id);
+
+        $sinhvien->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
+    }
+
+    public function editSinhVien($id)
+    {
+        $sinhvien = NguoiDungModel::findOrFail($id);
+        return response()->json([
+            'sinhvien' => $sinhvien
+        ]);
+    }
+
+    public function updateSinhVien(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'ten_nguoi_dung'=>'string',
+            'ma_khoa'=>'int',
+            'ma_lop'=>'int',
+            'gioi_tinh'=>'string',
+            'noi_sinh'=>'string',
+            'ngay_sinh'=>'date',
+            'ho_khau_thuong_tru'=>'string',
+            'cccd'=>'string',
+            'sdt'=>'string',
+            'email'=>'string',
+        ]);
+
+        $validated['ma_quyen'] = 3;
+
+        $sinhvien = NguoiDungModel::findOrFail($id);
+        $sinhvien->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'sinhvien' => $sinhvien,
         ]);
     }
 }
