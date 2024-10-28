@@ -83,6 +83,9 @@
                     </li>
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{asset('thong-tin-sinh-vien')}}">
+
+                        <a class="dropdown-item d-flex align-items-center" href="{{route('thong-tin-tai-khoan')}}">
+
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
