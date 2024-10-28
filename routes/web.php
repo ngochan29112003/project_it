@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\QuanLyLopController;
 use App\Http\Controllers\admin\QuanLySinhVienController;
 use App\Http\Controllers\admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\sinh_vien\DashBoardController;
 use App\Http\Controllers\sinh_vien\SinhVienController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +89,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/sinh-vien'], function () {
         //Trang chủ
         Route::get('/trang-chu',[SinhVienController::class,'getViewTrangChu'])->name('trang-chu-sinh-vien');
+        Route::get('/nha-cua-toi',[DashBoardController::class,'getViewDashBoard'])->name('dash-board-sinh-vien');
 
     });
 
