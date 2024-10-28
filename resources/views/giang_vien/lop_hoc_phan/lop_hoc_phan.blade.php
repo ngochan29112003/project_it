@@ -64,5 +64,5 @@
                 </div>
             </div>
         @endfor
-    </div>
+    </div> 
 @endsection

@@ -15,7 +15,7 @@ class EnrollSVController extends Controller
             ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
             ->where('ma_nguoi_dung','=',session('ma_nguoi_dung'))
             ->first();
-        return view("giang_vien.lop_hoc_phan.enroll", 
+        return view("sinh_vien.lop_hoc_phan.enroll", 
         compact("ttSinhVien"));
     }
 }
