@@ -12,6 +12,12 @@ use App\Http\Controllers\admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\sinh_vien\DashBoardController;
 use App\Http\Controllers\sinh_vien\SinhVienController;
+use App\Http\Controllers\sinh_vien\LopHocPhanSVController;
+use App\Http\Controllers\sinh_vien\EnrollSVController;
+use App\Http\Controllers\sinh_vien\ThongTinTaiKhoanSVController;
+use App\Http\Controllers\giang_vien\LopHocPhanGVController;
+use App\Http\Controllers\giang_vien\EnrollGVController;
+use App\Http\Controllers\giang_vien\ThongTinTaiKhoanGVController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,11 +97,26 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/trang-chu',[SinhVienController::class,'getViewTrangChu'])->name('trang-chu-sinh-vien');
         Route::get('/nha-cua-toi',[DashBoardController::class,'getViewDashBoard'])->name('dash-board-sinh-vien');
 
+        //Lop hoc phan
+        Route::get('/lop-hoc-phan',[LopHocPhanSVController::class,'getViewLopHP'])->name('sinh-vien-lop-hp');
+        Route::get('/lop-hoc-phan-enroll',[EnrollSVController::class,'getViewEnroll'])->name('sinh-vien-lop-hp-enroll');
+
+        //Thông tin tài khoản
+        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanSVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
     });
 
     //Giang vien
     Route::group(['prefix' => '/giang-vien'], function () {
-
+        //Trang chủ
+        Route::get('/trang-chu',[SinhVienController::class,'getViewTrangChu'])->name('trang-chu-sinh-vien');
+        Route::get('/nha-cua-toi',[DashBoardController::class,'getViewDashBoard'])->name('dash-board-giang-vien');
+        
+        //Lớp học phần
+        Route::get('/lop-hoc-phan',[LopHocPhanGVController::class,'getViewLopHP'])->name('giang-vien-lop-hp');
+        Route::get('/lop-hoc-phan-enroll',[EnrollGVController::class,'getViewEnroll'])->name('giang-vien-lop-hp-enroll');
+        
+        //Thông tin tài khoản
+        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanGVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
     });
 
     //API
