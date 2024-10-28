@@ -12,12 +12,16 @@ use App\Http\Controllers\admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\sinh_vien\DashBoardController;
 use App\Http\Controllers\sinh_vien\SinhVienController;
+
+use App\Http\Controllers\sinh_vien\ThongTinSVController;
+
 use App\Http\Controllers\sinh_vien\LopHocPhanSVController;
 use App\Http\Controllers\sinh_vien\EnrollSVController;
 use App\Http\Controllers\sinh_vien\ThongTinTaiKhoanSVController;
 use App\Http\Controllers\giang_vien\LopHocPhanGVController;
 use App\Http\Controllers\giang_vien\EnrollGVController;
 use App\Http\Controllers\giang_vien\ThongTinTaiKhoanGVController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,6 +100,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //Trang chủ
         Route::get('/trang-chu',[SinhVienController::class,'getViewTrangChu'])->name('trang-chu-sinh-vien');
         Route::get('/nha-cua-toi',[DashBoardController::class,'getViewDashBoard'])->name('dash-board-sinh-vien');
+        Route::get('/thong-tin',[ThongTinSVController::class,'getViewThongTinSV'])->name('thong-tin-sinh-vien');
 
         //Lop hoc phan
         Route::get('/lop-hoc-phan',[LopHocPhanSVController::class,'getViewLopHP'])->name('sinh-vien-lop-hp');
