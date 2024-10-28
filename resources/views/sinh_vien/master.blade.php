@@ -20,21 +20,18 @@
 
     <style>
         #sidebar {
-            width: 250px; /* Kích thước cố định cho sidebar */
-            transition: width 0.3s; /* Hiệu ứng chuyển động mượt mà khi mở/đóng */
+            width: 250px;
+            transition: width 0.3s;
         }
 
         #main {
-            flex-grow: 1; /* Phần nội dung sẽ chiếm không gian còn lại */
-            transition: margin-left 0.3s; /* Hiệu ứng chuyển động mượt mà cho phần nội dung */
+            flex-grow: 1;
+            transition: margin-left 0.3s;
         }
 
-        .sidebar.active {
-            width: 0; /* Hoặc giá trị nhỏ hơn cho khi sidebar đóng */
-        }
 
         .sidebar.active + #main {
-            margin-left: 0; /* Giữ margin bằng 0 khi sidebar đóng */
+            margin-left: 0;
         }
     </style>
 
@@ -42,7 +39,6 @@
 
 <body>
 
-<!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
@@ -51,14 +47,14 @@
             <span class="d-none d-lg-block" style="color:#0f77a2">LMS Vlute</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+    </div>
 
     <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="POST" action="#">
             <input type="text" name="query" placeholder="Bạn tìm lớp học phần nào?" title="Enter search keyword">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
-    </div><!-- End Search Bar -->
+    </div>
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -67,7 +63,7 @@
                 <a class="nav-link nav-icon search-bar-toggle " href="#">
                     <i class="bi bi-search"></i>
                 </a>
-            </li><!-- End Search Icon-->
+            </li>
 
             <li class="nav-item dropdown pe-3">
 
@@ -75,7 +71,7 @@
                     <img src="{{asset('assets/img_user/'.$ttSinhVien->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
 
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{$ttSinhVien->ten_nguoi_dung}}</span>
-                </a><!-- End Profile Iamge Icon -->
+                </a>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
@@ -109,7 +105,6 @@
     </nav>
 </header>
 
-<!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
 

@@ -6,7 +6,7 @@
     <body>
     <div class="container-fluid">
         <header id="page-header" class="row">
-            <div class="col-12 pt-4 pb-4"> <!-- Tăng padding trên và dưới -->
+            <div class="col-12 pt-4 pb-4">
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-3">
@@ -14,7 +14,7 @@
                                 <div class="page-header-image">
                                     <a href="#">
                                         <img src="{{asset('/assets/img/user.jpg')}}" alt="Hình của Lê Thị Ngọc Hân"
-                                             title="Hình của Lê Thị Ngọc Hân" class="rounded-circle border" width="120" height="120"> <!-- Tăng kích thước ảnh -->
+                                             title="Hình của {{$ttSinhVien->ten_nguoi_dung}}" class="rounded-circle border" width="120" height="120"> <!-- Tăng kích thước ảnh -->
                                     </a>
                                 </div>
                                 <div class="page-header-headings ms-3">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-wrap justify-content-end">
-                            <button type="button" class="btn btn-secondary btn-lg"> <!-- Tăng kích thước nút -->
+                            <button type="button" class="btn btn-secondary btn-lg">
                                 Tùy chỉnh trang này
                             </button>
                         </div>
@@ -36,7 +36,6 @@
 
         <div class="container mt-4">
             <div class="row">
-                <!-- Recently Accessed Courses -->
                 <div class="col-lg-8 mb-4">
                     <div class="card shadow-sm border-0">
                         <div class="card-body">
