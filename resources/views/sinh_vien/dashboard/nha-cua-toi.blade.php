@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-3">
                             <div class="me-auto d-flex align-items-center">
-                                <div class="page-header-image">
+                                <div class="page-header-image pt-xl-4">
                                     <a href="#">
                                         <img src="{{asset('/assets/img/user.jpg')}}" alt="Hình của Lê Thị Ngọc Hân"
                                              title="Hình của {{$ttSinhVien->ten_nguoi_dung}}" class="rounded-circle border" width="120" height="120"> <!-- Tăng kích thước ảnh -->
@@ -23,11 +23,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex flex-wrap justify-content-end">
-                            <button type="button" class="btn btn-secondary btn-lg">
-                                Tùy chỉnh trang này
-                            </button>
-                        </div>
+{{--                        <div class="d-flex flex-wrap justify-content-end">--}}
+{{--                            <button type="button" class="btn btn-secondary btn-lg">--}}
+{{--                                Tùy chỉnh trang này--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
