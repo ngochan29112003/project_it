@@ -76,7 +76,6 @@
             </a>
         </div>
 
-
         <div class="fp-site-customdesc d-flex align-items-center justify-content-center text-center py-5">
             <div class="container">
                 <h1 class="display-4 fw-bold mb-3 text-primary text-center" style="font-size: 2.5rem; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
