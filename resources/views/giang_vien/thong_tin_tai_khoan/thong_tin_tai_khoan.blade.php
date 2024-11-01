@@ -3,9 +3,9 @@
     <div class="page-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                <img src="{{asset('assets/img_user/'.$ttSinhVien->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
+                <img src="{{asset('assets/img_user/'.$GiangVien->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
 
-                <span class="d-none d-md-block dropdown-toggle ps-2">{{$ttSinhVien->ten_nguoi_dung}}</span>
+                <span class="d-none d-md-block dropdown-toggle ps-2">{{$GiangVien->ten_nguoi_dung}}</span>
             </a>
         </div>
         <div class="breadcrumb">Nhà của tôi / My frofile</div>
@@ -69,5 +69,5 @@
 @endsection
 
 @section('scripts')
-    
+
 @endsection

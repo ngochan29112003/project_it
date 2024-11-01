@@ -13,25 +13,26 @@
                             <div class="me-auto d-flex align-items-center">
                                 <div class="page-header-image">
                                     <a href="#">
-                                        <img src="{{asset('/assets/img/user.jpg')}}" alt="Hình của Lê Thị Ngọc Hân"
-                                             title="Hình của {{$ttSinhVien->ten_nguoi_dung}}" class="rounded-circle border" width="120" height="120"> <!-- Tăng kích thước ảnh -->
+                                        <img src="{{ asset('/assets/img/user.jpg') }}" alt="Profile Picture"
+                                             title="{{ $ttGiangVien->ten_nguoi_dung }}" class="rounded-circle border" width="120" height="120">
                                     </a>
                                 </div>
                                 <div class="page-header-headings ms-3">
-                                    <h1 class="h3 fw-bold mb-0">{{$ttSinhVien->ten_nguoi_dung}}</h1>
-                                    <p class="text-muted">Sinh viên khoa Công nghệ thông tin</p>
+                                    <h1 class="h3 fw-bold mb-0">{{ $ttGiangVien->ten_nguoi_dung }}</h1>
+                                    <p class="text-muted">{{ $ttGiangVien->ten_quyen }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex flex-wrap justify-content-end">
-                            <button type="button" class="btn btn-secondary btn-lg">
+                            <buttGiangVienon type="buttGiangVienon" class="btn btn-secondary btn-lg">
                                 Tùy chỉnh trang này
-                            </button>
+                            </buttGiangVienon>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
+    </div>
 
 
         <div class="container mt-4">
@@ -39,12 +40,12 @@
                 <div class="col-lg-8 mb-4">
                     <div class="card shadow-sm border-0">
                         <div class="card-body">
-                            <h5 class="text-danger fw-bold mb-3 border-bottom pb-2" style="padding-top: 15px">Các khóa học truy cập gần đây</h5>
+                            <h5 class="text-danger fw-bold mb-3 border-bottGiangVienom pb-2" style="padding-top: 15px">Các khóa học truy cập gần đây</h5>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
-                                            <a href="#" class="text-decoration-none text-dark">CB03K31_UDCNTTCB_Nguyễn Ngọc Hoàng Quyên</a>
+                                            <a href="#" class="text-decoration-none text-dark">CB03K31_UDCNttGiangVienCB_Nguyễn Ngọc Hoàng Quyên</a>
                                         </li>
                                         <li class="list-group-item">
                                             <a href="#" class="text-decoration-none text-dark">241_1TH1341_KS2A_01_tructiep - An toàn và an ninh thông tin</a>
@@ -82,7 +83,7 @@
                 <div class="col-lg-4">
                     <div class="card mb-4 shadow-sm border-0">
                         <div class="card-body">
-                            <h5 class="text-danger fw-bold mb-3 border-bottom pb-2 " style="padding-top: 15px">Tệp riêng tư của tôi</h5>
+                            <h5 class="text-danger fw-bold mb-3 border-bottGiangVienom pb-2 " style="padding-top: 15px">Tệp riêng tư của tôi</h5>
                             <p class="text-muted mb-2">Không có tệp</p>
                             <a href="#" class="btn btn-link text-decoration-none">Quản lý tệp riêng tư...</a>
                         </div>
@@ -90,7 +91,7 @@
 
                     <div class="card shadow-sm border-0">
                         <div class="card-body">
-                            <h5 class="text-danger fw-bold mb-3 border-bottom pb-2" style="padding-top: 15px" >Thành viên trực tuyến</h5>
+                            <h5 class="text-danger fw-bold mb-3 border-bottGiangVienom pb-2" style="padding-top: 15px" >Thành viên trực tuyến</h5>
                             <div class="online-user-list">
                                 <a href="#" class="d-flex align-items-center text-decoration-none mb-2">
                                     <span class="bi bi-toggle-on text-success me-2"></span>
@@ -111,6 +112,5 @@
 
             </div>
         </div>
-    </div>
     </body>
 @endsection
