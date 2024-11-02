@@ -20,6 +20,7 @@ use App\Http\Controllers\sinh_vien\ThongTinSVController;
 
 use App\Http\Controllers\sinh_vien\LopHocPhanSVController;
 use App\Http\Controllers\sinh_vien\EnrollSVController;
+use App\Http\Controllers\sinh_vien\NopBaiController;
 use App\Http\Controllers\sinh_vien\ThongTinTaiKhoanSVController;
 use App\Http\Controllers\giang_vien\LopHocPhanGVController;
 use App\Http\Controllers\giang_vien\EnrollGVController;
@@ -112,6 +113,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
         //Thông tin tài khoản
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanSVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
+
+        //Nộp bài
+        Route::get('/nop-bai',[NopBaiController::class,'getViewNopBai'])->name('nop-bai');
+
     });
 
     //Giang vien
