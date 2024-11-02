@@ -38,6 +38,13 @@
 </head>
 
 <body>
+<?php
+use Illuminate\Support\Facades\DB;
+$ttSinhVien = DB::table('nguoi_dung')
+    ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
+    ->where('ma_nguoi_dung','=',session('ma_nguoi_dung'))
+    ->first();
+?>
 
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -50,7 +57,8 @@
     </div>
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <form class="search-form d-flex align-items-center" method="GET" action="{{ route('sinh-vien-lop-hp-enroll') }}">
+            @csrf <!-- Thêm token CSRF để bảo mật -->
             <input type="text" name="query" placeholder="Bạn tìm lớp học phần nào?" title="Enter search keyword">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>

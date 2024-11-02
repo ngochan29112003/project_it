@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 18, 2024 at 08:06 AM
+-- Generation Time: Nov 02, 2024 at 09:53 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.1.25
 
@@ -81,6 +81,42 @@ CREATE TABLE `cay_tien_trinh` (
   `ma_mon` text,
   `ten_mon` text,
   `so_chi` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chi_tiet_hp`
+--
+
+CREATE TABLE `chi_tiet_hp` (
+  `MaCTHP` int(11) NOT NULL,
+  `MaHP` int(11) NOT NULL,
+  `MaLHP` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chi_tiet_lop_hp`
+--
+
+CREATE TABLE `chi_tiet_lop_hp` (
+  `MaCTLHP` int(11) NOT NULL,
+  `MaLHP` int(11) NOT NULL,
+  `MaSV` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dang_ky_hoc_phan`
+--
+
+CREATE TABLE `dang_ky_hoc_phan` (
+  `id` int(11) NOT NULL,
+  `id_lop_hoc_phan` int(11) DEFAULT NULL,
+  `id_sinh_vien` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -184,19 +220,19 @@ INSERT INTO `hoc_ky` (`ma_hoc_ky`, `ten_hoc_ky`, `ngay_bd`, `ngay_ht`, `nam_hoc`
 CREATE TABLE `hoc_phan` (
   `id_hoc_phan` int(11) NOT NULL,
   `ten_hoc_phan` text,
+  `ma_hoc_phan` text,
   `so_chi_ly_thuyet` text,
-  `so_chi_thuc_hanh` text,
-  `ma_hoc_phan` text
+  `so_chi_thuc_hanh` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `hoc_phan`
 --
 
-INSERT INTO `hoc_phan` (`id_hoc_phan`, `ten_hoc_phan`, `so_chi_ly_thuyet`, `so_chi_thuc_hanh`, `ma_hoc_phan`) VALUES
-(1, 'Lập trình web', '2', '2', NULL),
-(2, 'Lập trình mạng', '2', '1', NULL),
-(8, 'Lập trình mạng', '1', '1', NULL);
+INSERT INTO `hoc_phan` (`id_hoc_phan`, `ten_hoc_phan`, `ma_hoc_phan`, `so_chi_ly_thuyet`, `so_chi_thuc_hanh`) VALUES
+(10, 'Lập trình Mạng', 'TH1314', '1', '2'),
+(12, 'Phát triển ứng dụng IoT', 'TH1369', '1', '2'),
+(13, 'Lập trình căn bản', 'TH1204', '2', '1');
 
 -- --------------------------------------------------------
 
@@ -229,7 +265,8 @@ CREATE TABLE `khoa` (
 --
 
 INSERT INTO `khoa` (`ma_khoa`, `ten_khoa`, `truong_khoa`) VALUES
-(1, 'Công nghệ thông tin', 'Phan Anh Cang');
+(1, 'Công nghệ thông tin', 'Phan Anh Cang'),
+(2, 'Công Nghệ Thực Phẩm', 'Mai Hoa');
 
 -- --------------------------------------------------------
 
@@ -249,11 +286,11 @@ CREATE TABLE `lop` (
 --
 
 INSERT INTO `lop` (`ma_lop`, `ma_khoa`, `ten_lop`, `nam_hoc`) VALUES
-(1, 1, '1CTT21A1', '2023-2024'),
-(2, 1, '1CTT21A1', '2021-2022'),
-(3, 1, '1CTT21A2', '2020-2021'),
-(4, 1, '1CTT21A3', '2023-2024'),
-(5, 1, '1CTT21A3', '2024-2025');
+(1, 1, '1CTT21A1', '2021-2025'),
+(2, 1, '1CTT22A1', '2022-2026'),
+(3, 1, '1CTT20A2', '2020-2024'),
+(4, 1, '1CTT20A3', '2020-2024'),
+(5, 1, '1CTT21A3', '2021-2025');
 
 -- --------------------------------------------------------
 
@@ -265,6 +302,17 @@ CREATE TABLE `lop_hoc_phan` (
   `id_lop_hoc_phan` int(11) NOT NULL,
   `ten_lop_hoc_phan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `lop_hoc_phan`
+--
+
+INSERT INTO `lop_hoc_phan` (`id_lop_hoc_phan`, `ten_lop_hoc_phan`) VALUES
+(1, '241_1TH1314_KS2A_01_tructiep'),
+(2, '241_1TH1370_KS2A_02_tructiep'),
+(3, '241_1TH1314_KS2A_03_tructiep'),
+(4, '241_1TH1314_KS2A_04_tructiep'),
+(5, '241_1TH1314_KS2A_05_tructiep');
 
 -- --------------------------------------------------------
 
@@ -294,12 +342,12 @@ CREATE TABLE `nguoi_dung` (
 --
 
 INSERT INTO `nguoi_dung` (`ma_nguoi_dung`, `ten_nguoi_dung`, `ma_khoa`, `ma_lop`, `ma_hoc_phan`, `hinh_anh`, `gioi_tinh`, `ngay_sinh`, `noi_sinh`, `ho_khau_thuong_tru`, `cccd`, `sdt`, `email`, `ma_quyen`) VALUES
-(1, 'Ngọc Hân', 1, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(2, 'Tuấn Anh', 1, NULL, NULL, NULL, 'Nam', NULL, NULL, NULL, NULL, NULL, NULL, 2),
-(3, 'Ngọc Ngân', 1, 1, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 3),
+(1, 'Ngọc Hân', 2, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(2, 'Tuấn Anh', 1, NULL, NULL, NULL, 'Nam', NULL, 'Vĩnh Long', 'dưqdqew', 'ewqrqwe', '0943038574', NULL, 1),
+(3, 'Ngọc Ngân', 2, 2, NULL, NULL, '1', NULL, 'Vĩnh Long', 'dưqdqew', 'ewqrqwe', 'dsadsa', 'fsdfsd', 3),
 (4, 'Huyền Trân', 1, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 1),
 (5, 'Nguyễn Văn A', 1, NULL, NULL, NULL, 'Nam', NULL, NULL, NULL, NULL, NULL, NULL, 2),
-(6, 'Na Na', 1, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(6, 'Ngân', 2, NULL, NULL, NULL, 'Nam', NULL, 'Vĩnh Long', 'dsadsa', 'đâs', 'dsadsa', NULL, 2),
 (7, 'Trần Văn B', 1, NULL, NULL, NULL, 'Nữ', NULL, NULL, NULL, NULL, NULL, NULL, 2);
 
 -- --------------------------------------------------------
@@ -356,7 +404,8 @@ CREATE TABLE `tai_khoan` (
 INSERT INTO `tai_khoan` (`ma_tai_khoan`, `ten_tai_khoan`, `mat_khau`, `ma_nguoi_dung`) VALUES
 (6, 'ngochan@123', '$2y$12$78/poQ1pOvcHqZ97zhzUv.hCW16Hj4ncKcMbnGpdVLdAEHOcVWZ7W', 1),
 (7, 'huyentran@123', '$2y$12$YgFphTYw68Ex3gkq9/wIBuFKkWO7sOGH3b7AboUAjOEJ4BMaKIFGW', 4),
-(8, 'tuananh@123', '$2y$12$b5szlQIXbEID6LxGAOtZe.d6erwRTf4adJU2Nx7rWOEIsr3J3CNM.', 2);
+(8, 'tuananh@123', '$2y$12$b5szlQIXbEID6LxGAOtZe.d6erwRTf4adJU2Nx7rWOEIsr3J3CNM.', 2),
+(9, 'ngocngan', '$2y$12$52I0KXF8z8jjvxhrBou/Du6LXE0k693sI/CTqhhmOPJmhRjBMw/SK', 3);
 
 --
 -- Indexes for dumped tables
@@ -385,6 +434,12 @@ ALTER TABLE `bai_tap`
 --
 ALTER TABLE `cay_tien_trinh`
   ADD PRIMARY KEY (`ma_nganh`);
+
+--
+-- Indexes for table `dang_ky_hoc_phan`
+--
+ALTER TABLE `dang_ky_hoc_phan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `diem_danh`
@@ -487,6 +542,12 @@ ALTER TABLE `cay_tien_trinh`
   MODIFY `ma_nganh` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `dang_ky_hoc_phan`
+--
+ALTER TABLE `dang_ky_hoc_phan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `diem_danh`
 --
 ALTER TABLE `diem_danh`
@@ -502,7 +563,7 @@ ALTER TABLE `ghi_danh`
 -- AUTO_INCREMENT for table `hoc_phan`
 --
 ALTER TABLE `hoc_phan`
-  MODIFY `id_hoc_phan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_hoc_phan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `ket_qua_kiem_tra`
@@ -514,7 +575,7 @@ ALTER TABLE `ket_qua_kiem_tra`
 -- AUTO_INCREMENT for table `khoa`
 --
 ALTER TABLE `khoa`
-  MODIFY `ma_khoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ma_khoa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `lop`
@@ -526,7 +587,7 @@ ALTER TABLE `lop`
 -- AUTO_INCREMENT for table `lop_hoc_phan`
 --
 ALTER TABLE `lop_hoc_phan`
-  MODIFY `id_lop_hoc_phan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_lop_hoc_phan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `nguoi_dung`
@@ -550,7 +611,7 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT for table `tai_khoan`
 --
 ALTER TABLE `tai_khoan`
-  MODIFY `ma_tai_khoan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ma_tai_khoan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

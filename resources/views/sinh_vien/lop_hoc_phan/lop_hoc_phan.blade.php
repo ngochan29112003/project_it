@@ -2,7 +2,7 @@
 @section("contents")
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="text-danger fw-bold mb-0">241_1TH1370_KS2A_02_tructiep - TRIỂN KHAI HỆ THỐNG MẠNG VĂN PHÒNG (1.2) - GV:TRẦN THÁI BẢO</h3>
+            <h3 class="text-danger fw-bold mb-0">241_1TH1314_KS2A_04_tructiep-Lập Trình Mạng (2.1) GV: Nguyễn Thị Hồng Yến</h3>
             <div class="dropdown">
                 <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-three-dots-vertical"></i>

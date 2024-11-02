@@ -48,7 +48,7 @@
                                 @foreach($list_hp as $item)
                                     <tr>
                                         <td>{{ $stt++ }}</td>
-                                        <td>{{ $item->ten_lop_hoc_phan}}</td>
+                                        <td>{{ $item->ma_hoc_phan}}</td>
                                         <td>{{ $item->ten_hoc_phan}}</td>
                                         <td>{{ $item->so_chi_ly_thuyet}}</td>
                                         <td>{{ $item->so_chi_thuc_hanh}}</td>
@@ -88,16 +88,11 @@
                     <form id="Form" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="id_lop_hoc_phan" class="form-label">Mã lớp</label>
-                                <select class="form-select" name="id_lop_hoc_phan" id="id_lop_hoc_phan">
-                                    <option value="" disabled selected>Chọn mã</option>
-                                    @foreach ($list_lop_hp as $item)
-                                        <option value="{{ $item->id_lop_hoc_phan}}">{{ $item->ten_lop_hoc_phan}} </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" name="ma_hoc_phan" id="ma_hoc_phan" required>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="ten_hoc_phan" class="form-label">Tên học phần</label>
                                 <input type="text" class="form-control" name="ten_hoc_phan" id="ten_hoc_phan" required>
                             </div>
@@ -120,7 +115,6 @@
         </div>
     </div>
 
-    <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
     <div class="modal fade" id="Modaledit">
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
@@ -132,16 +126,11 @@
                     <form id="Formedit" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="id_lop_hoc_phan" class="form-label">Mã lớp</label>
-                                <select class="form-select" name="id_lop_hoc_phan" id="id_lop_hoc_phan_edit">
-                                    <option value="" disabled selected>Chọn mã</option>
-                                    @foreach ($list_lop_hp as $item)
-                                        <option value="{{ $item->id_lop_hoc_phan}}">{{ $item->ten_lop_hoc_phan}} </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" name="ma_hoc_phan" id="ma_hoc_phan_edit" required>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="ten_hoc_phan" class="form-label">Tên học phần</label>
                                 <input type="text" class="form-control" name="ten_hoc_phan" id="ten_hoc_phan_edit" required>
                             </div>
@@ -261,7 +250,7 @@
                 method: 'GET',
                 success: function (response) {
                     var data = response.hocphan;
-                    $('#id_lop_hoc_phan_edit').val(data.id_lop_hoc_phan);
+                    $('#ma_hoc_phan_edit').val(data.ma_hoc_phan);
                     $('#ten_hoc_phan_edit').val(data.ten_hoc_phan);
                     $('#so_chi_ly_thuyet_edit').val(data.so_chi_ly_thuyet);
                     $('#so_chi_thuc_hanh_edit').val(data.so_chi_thuc_hanh);

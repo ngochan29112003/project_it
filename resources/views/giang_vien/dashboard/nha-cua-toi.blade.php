@@ -14,12 +14,12 @@
                                 <div class="page-header-image">
                                     <a href="#">
                                         <img src="{{ asset('/assets/img/user.jpg') }}" alt="Profile Picture"
-                                             title="{{ $ttGiangVien->ten_nguoi_dung }}" class="rounded-circle border" width="120" height="120">
+                                             title="{{ $GiangVien->ten_nguoi_dung }}" class="rounded-circle border" width="120" height="120">
                                     </a>
                                 </div>
                                 <div class="page-header-headings ms-3">
-                                    <h1 class="h3 fw-bold mb-0">{{ $ttGiangVien->ten_nguoi_dung }}</h1>
-                                    <p class="text-muted">{{ $ttGiangVien->ten_quyen }}</p>
+                                    <h1 class="h3 fw-bold mb-0">{{ $GiangVien->ten_nguoi_dung }}</h1>
+                                    <p class="text-muted">{{ $GiangVien->ten_quyen }} khoa công nghệ thông tin</p>
                                 </div>
                             </div>
                         </div>

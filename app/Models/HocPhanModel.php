@@ -13,20 +13,12 @@ class HocPhanModel extends Model
     protected $primaryKey = 'id_hoc_phan';
 
     protected $fillable =[
-        'ten_lop_hoc_phan',
         'ten_hoc_phan',
+        'ma_hoc_phan',
         'so_chi_ly_thuyet',
         'so_chi_thuc_hanh',
-        'id_lop_hoc_phan',
     ];
     public $timestamps = false;
-
-    public function getHocPhan()
-    {
-        return DB::table('hoc_phan')
-            ->join('lop_hoc_phan','lop_hoc_phan.id_lop_hoc_phan','=','hoc_phan.id_lop_hoc_phan')
-            ->get();
-    }
 
     public function getLopHocPhan()
     {

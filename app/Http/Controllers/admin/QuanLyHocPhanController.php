@@ -11,19 +11,16 @@ class QuanLyHocPhanController extends Controller
 {
     public function getViewDsHocPhan()
     {
-        $HocPhanModel = new HocPhanModel();
-        $list_hp = $HocPhanModel->getHocPhan();
-        $list_lop_hp = $HocPhanModel->getLopHocPhan();
-//        dd($list_hp->toArray());
+        $list_hp = HocPhanModel::all();
         return view('admin.ql_hoc_phan.danh-sach',
-        compact('list_hp','list_lop_hp'));
+        compact('list_hp'));
     }
 
     function addHocPhan(Request $request)
     {
 //        dd($request);
         $validate = $request->validate([
-            'id_lop_hoc_phan' =>'int',
+            'ma_hoc_phan' =>'string',
             'ten_hoc_phan' => 'string',
             'so_chi_ly_thuyet' => 'int',
             'so_chi_thuc_hanh' => 'int',
@@ -60,7 +57,7 @@ class QuanLyHocPhanController extends Controller
     public function updateHocPhan(Request $request, $id)
     {
         $validated = $request->validate([
-            'id_lop_hoc_phan' =>'int',
+            'ma_hoc_phan' =>'string',
             'ten_hoc_phan' => 'string',
             'so_chi_ly_thuyet' => 'int',
             'so_chi_thuc_hanh' => 'int',

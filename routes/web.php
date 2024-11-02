@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\QuanLySinhVienController;
 use App\Http\Controllers\admin\QuanLyTaiKhoanController;
 use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
+use App\Http\Controllers\giang_vien\TimKiemHPController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\sinh_vien\DashBoardController;
 use App\Http\Controllers\sinh_vien\SinhVienController;
@@ -107,6 +108,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //Lop hoc phan
         Route::get('/lop-hoc-phan',[LopHocPhanSVController::class,'getViewLopHP'])->name('sinh-vien-lop-hp');
         Route::get('/lop-hoc-phan-enroll',[EnrollSVController::class,'getViewEnroll'])->name('sinh-vien-lop-hp-enroll');
+        Route::get('/tim-kiem', [SinhVienController::class, 'getViewTimKiemSv'])->name('sinh-vien-lop-hp-enroll');
 
         //Thông tin tài khoản
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanSVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
@@ -121,6 +123,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //Lớp học phần
         Route::get('/lop-hoc-phan',[LopHocPhanGVController::class,'getViewLopHP'])->name('giang-vien-lop-hp');
         Route::get('/lop-hoc-phan-enroll',[EnrollGVController::class,'getViewEnroll'])->name('giang-vien-lop-hp-enroll');
+        Route::get('/tim-kiem', [GiangVienController::class, 'getViewTimKiem'])->name('lop-hoc-phan-enroll');
 
         //Thông tin tài khoản
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanGVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');

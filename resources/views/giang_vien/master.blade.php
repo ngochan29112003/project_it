@@ -38,7 +38,13 @@
 </head>
 
 <body>
-
+<?php
+    use Illuminate\Support\Facades\DB;
+    $GiangVien = DB::table('nguoi_dung')
+        ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
+        ->where('ma_nguoi_dung','=',session('ma_nguoi_dung'))
+        ->first();
+?>
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
@@ -50,7 +56,8 @@
     </div>
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <form class="search-form d-flex align-items-center" method="GET" action="{{ route('lop-hoc-phan-enroll') }}">
+            @csrf <!-- Thêm token CSRF để bảo mật -->
             <input type="text" name="query" placeholder="Bạn tìm lớp học phần nào?" title="Enter search keyword">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
@@ -68,15 +75,15 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{asset('assets/img_user/'.$ttGiangVien->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
+                    <img src="{{asset('assets/img_user/'.$GiangVien->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
 
                     <span class="d-none d-md-block dropdown-toggle ps-2">Ngọc Hân</span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>{{$ttGiangVien->ten_nguoi_dung}}</h6>
-                        <span>{{$ttGiangVien->ten_quyen}}</span>
+                        <h6>{{$GiangVien->ten_nguoi_dung}}</h6>
+                        <span>{{$GiangVien->ten_quyen}}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
