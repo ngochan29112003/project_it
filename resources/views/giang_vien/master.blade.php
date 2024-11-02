@@ -77,7 +77,7 @@
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="{{asset('assets/img_user/'.$GiangVien->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
 
-                    <span class="d-none d-md-block dropdown-toggle ps-2">Ngọc Hân</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{$GiangVien->ten_nguoi_dung}}</span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
