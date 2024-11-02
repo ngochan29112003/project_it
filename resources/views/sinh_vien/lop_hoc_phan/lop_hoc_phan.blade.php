@@ -77,7 +77,7 @@
             <div class="card-body">
                 <ul class="list-unstyled">
                     <li class="activity assign modtype_assign mb-3" id="module-47474">
-                        <div class="d-flex justify-content-between align-items-center p-3 border rounded shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mt-4 p-3 border rounded shadow-sm">
                             <div class="d-flex align-items-center">
                                 <a href="{{route('nop-bai')}}" class="text-decoration-none d-flex align-items-center">
                                     <i class="bi bi-file-earmark-text me-3" style="font-size: 1.5rem;" role="presentation"></i>
