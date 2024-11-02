@@ -75,7 +75,27 @@
         <div class="card mb-4">
             <h5 class="card-header bg-light fw-bold text-primary">Kiểm tra đánh giá</h5>
             <div class="card-body">
-                <p>Các bài kiểm tra và đánh giá sẽ được công bố sau.</p>
+                <ul class="list-unstyled">
+                    <li class="activity assign modtype_assign mb-3" id="module-47474">
+                        <div class="d-flex justify-content-between align-items-center p-3 border rounded shadow-sm">
+                            <div class="d-flex align-items-center">
+                                <a href="{{route('nop-bai')}}" class="text-decoration-none d-flex align-items-center">
+                                    <i class="bi bi-file-earmark-text me-3" style="font-size: 1.5rem;" role="presentation"></i>
+                                    <span class="instancename text-dark fw-bold">Nộp bài kiểm tra 10% lần 1</span>
+                                </a>
+                            </div>
+                            <span class="actions">
+                        <form method="post" action="{{asset('nop-bai')}}" class="togglecompletion d-inline">
+                            <input type="hidden" name="id" value="47474">
+                            <input type="hidden" name="sesskey" value="COirSQ080U">
+                            <input type="hidden" name="modulename" value="Nộp bài kiểm tra 10% lần 1">
+                            <input type="hidden" name="completionstate" value="1">
+                            <input type="checkbox" id="completion-47474" name="completion" class="form-check-input" title="Đã hoàn thành; hãy chọn đánh dấu hoàn thành" onchange="this.form.submit()">
+                        </form>
+                    </span>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

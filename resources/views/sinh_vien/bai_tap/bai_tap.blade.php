@@ -3,12 +3,12 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4 p-3 border rounded position-relative">
             <div>
-                <h4 class="text-danger fw-bold mb-0">241_1TH1370_KS2A_02_tructiep - TRIỂN KHAI HỆ THỐNG MẠNG VĂN PHÒNG (1.2) - GV: TRẦN THÁI BẢO</h4>
+                <h4 class="text-danger fw-bold mb-0">211_1TH1201_02 (59 sv) TH1201 - Tin học cơ sở (2.0) - GV: Trần Thu Mai</h4>
                 <nav class="breadcrumb p-0 mb-0 pt-xl-4">
                     <a href="{{route('dash-board-sinh-vien')}}" class="breadcrumb-item">Nhà của tôi</a>
                     <a href="#" class="breadcrumb-item">Khóa học</a>
                     <span class="breadcrumb-item active">Học kỳ II</span>
-                    <span class="breadcrumb-item active">241_1TH1370_KS2A_02_tructiep</span>
+                    <span class="breadcrumb-item active">211_1TH1201_02 (59 sv)</span>
                 </nav>
             </div>
         </div>
@@ -75,7 +75,7 @@
                         </tr>
                         <tr>
                             <td class="fw-bold">Người chấm điểm:</td>
-                            <td>Trần Thái Bảo</td>
+                            <td>Trần Thu Mai</td>
                         </tr>
                         </tbody>
                     </table>
