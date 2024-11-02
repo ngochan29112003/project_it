@@ -1,102 +1,82 @@
 @extends('sinh_vien.master')
 @section("contents")
-    <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="text-danger fw-bold mb-0">241_1TH1314_KS2A_04_tructiep-Lập Trình Mạng (2.1) GV: Nguyễn Thị Hồng Yến</h3>
-            <div class="dropdown">
-                <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots-vertical"></i>
+    <div class="container-fluid mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 p-3 border rounded position-relative">
+            <div>
+                <h3 class="text-danger fw-bold mb-0">211_1TH1201_02 (59 sv) TH1201 - Tin học cơ sở (2.0) - GV: Trần Thu Mai</h3>
+                <nav class="breadcrumb p-0 mb-0 pt-xl-4">
+                    <a href="{{route('dash-board-sinh-vien')}}" class="breadcrumb-item">Nhà của tôi</a>
+                    <a href="#" class="breadcrumb-item">Khóa học</a>
+                    <span class="breadcrumb-item active">Học kỳ II</span>
+                    <span class="breadcrumb-item active">211_1TH1201_02 (59 sv)</span>
+                </nav>
+            </div>
+
+            <div class="dropdown position-absolute" style="top: 10px; right: 15px;">
+                <button class="btn btn-link text-primary p-0" type="button" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-gear"></i>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Rút tên tôi khỏi khóa học này</a></li>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+                    <li><a class="dropdown-item text-danger" href="#">Rút tôi ra khỏi khóa học</a></li>
                 </ul>
             </div>
         </div>
-        <div class="breadcrumb">Nhà của tôi / Khoa học / Các khóa học / Học kỳ 2</div>
 
-        @for ($i = 1; $i <= 4; $i++)
-            <div class="coursebox card mb-4" data-courseid="387{{ $i }}" data-type="1">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title mb-0" style="font-family: 'Roboto', sans-serif;">
-                            <a class="text-primary" href="#">CHỦ ĐỀ {{ $i }}</a>
-                        </h5>
-                        
-                        <!-- Dropdown menu with 3-dot icon -->
-                        <div class="dropdown">
-                            <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton{{ $i }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $i }}">
-                                <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="card mb-4">
+            <h5 class="card-header bg-light fw-bold text-primary">Thông báo</h5>
+            <div class="card-body">
+                <p>Không có thông báo nào vào lúc này.</p>
+            </div>
+        </div>
 
-                    <!-- Nội dung riêng cho từng chủ đề -->
-                    @if ($i == 1)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 1</strong>. Chủ đề này tập trung vào các khái niệm cơ bản về mạng văn phòng và cấu trúc mạng.
-                        </p>
-                        <ul>
-                            <li>Giới thiệu về mạng văn phòng</li>
-                            <li>Các thành phần cơ bản của mạng</li>
-                            <li>Các thiết bị mạng thường dùng</li>
-                        </ul>
-                    @elseif ($i == 2)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 2</strong>. Chủ đề này sẽ đi sâu vào cấu hình và quản lý các thiết bị mạng.
-                        </p>
-                        <ul>
-                            <li>Cấu hình router và switch</li>
-                            <li>Thiết lập mạng LAN và WLAN</li>
-                            <li>Quản lý và giám sát mạng</li>
-                        </ul>
-                    @elseif ($i == 3)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 3</strong>. Chủ đề này sẽ nghiên cứu về bảo mật mạng và cách bảo vệ hệ thống mạng.
-                        </p>
-                        <ul>
-                            <li>Khái niệm về bảo mật mạng</li>
-                            <li>Phòng chống xâm nhập mạng</li>
-                            <li>Chính sách bảo mật mạng</li>
-                        </ul>
-                    @elseif ($i == 4)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 4</strong>. Chủ đề này sẽ tổng kết và thực hành triển khai hệ thống mạng văn phòng.
-                        </p>
-                        <ul>
-                            <li>Lên kế hoạch triển khai mạng</li>
-                            <li>Các bước triển khai thực tế</li>
-                            <li>Kiểm tra và bảo trì hệ thống</li>
-                        </ul>
-                    @endif
-                </div>
+        <div class="card mb-4">
+            <h5 class="card-header bg-light fw-bold text-primary">Thông tin học phần</h5>
+            <div class="card-body bg-light">
+                <p>Lớp học phần: <strong>Tin học cơ sở 211, 1TH1201 CTT, 76.150 (59 sv)</strong></p>
+                <p>Tên học phần: <strong>Tin học cơ sở</strong></p>
+                <p>Mã học phần: <strong>TH1201</strong></p>
+                <p>Số tín chỉ: <strong>2TC</strong> (lý thuyết)</p>
             </div>
-           <div class="coursebox card mb-4" data-courseid="3872" data-type="1">
-                <div class="card-body">
-                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;">
-                        <a class="text-primary" href="#">CHỦ ĐỀ 3</a>
-                    </h5>
-                    <p class="card-text text-muted"></p>
-                    <p class="card-text text-muted"></p>
-                    <p class="card-text"><small class="text-success"></small></p>
-                </div>
-            </div>
+        </div>
 
-            <div class="coursebox card mb-4" data-courseid="3873" data-type="1">
-                <div class="card-body">
-                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;">
-                        <a class="text-primary" href="#">CHỦ ĐỀ 4</a>
-                    </h5>
-                    <p class="card-text text-muted"></p>
-                    <p class="card-text text-muted"></p>
-                    <p class="card-text"><small class="text-success"></small></p>
-                </div>
+        <div class="card mb-4">
+            <h5 class="card-header bg-light fw-bold text-primary">Kế hoạch giảng dạy</h5>
+            <div class="card-body">
+                <p><strong>Thứ hai (tiết 3 - 4, 08g40 – 10g10)</strong></p>
+                <p>Tuần học: <strong>34 - 35 - 36 - 37 - 38 - 39 - 40 - 41</strong></p>
+                <p>Ngày học: <strong>7/10, 14/10, 21/10, 28/10</strong></p>
+                <p>Link học trực tuyến: <a href="https://meet.google.com/xym-ytor-sbm" target="_blank">meet.google.com/xym-ytor-sbm</a></p>
             </div>
+        </div>
+
+        <div class="card mb-4">
+            <h5 class="card-header bg-light fw-bold text-primary">Đề cương học phần</h5>
+            <div class="card-body">
+                <p>Đề cương học phần sẽ được cung cấp trong lớp học.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <h5 class="card-header bg-light fw-bold text-primary">Giáo trình - Bài giảng - tài liệu tham khảo</h5>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-file-earmark-pdf text-danger"></i> <a href="#">Giáo trình Tin học cơ sở</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <h5 class="card-header bg-light fw-bold text-primary">Video giảng dạy</h5>
+            <div class="card-body">
+                <p>Video giảng dạy sẽ được cập nhật tại đây.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <h5 class="card-header bg-light fw-bold text-primary">Kiểm tra đánh giá</h5>
+            <div class="card-body">
+                <p>Các bài kiểm tra và đánh giá sẽ được công bố sau.</p>
+            </div>
+        </div>
     </div>
 @endsection
-        @endfor
-    </div> 
-@endsection
-

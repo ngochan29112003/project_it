@@ -1,68 +1,143 @@
 @extends('giang_vien.master')
 @section("contents")
-    <div class="container mt-4">
-        <h3 class="text-danger fw-bold mb-4">241_1TH1370_KS2A_02_tructiep - TRIỂN KHAI HỆ THỐNG MẠNG VĂN PHÒNG (1.2) - GV: TRẦN THÁI BẢO</h3>
-        <div class="breadcrumb">Nhà của tôi / Khoa học / Các khóa học / Học kỳ 2</div>
+    <div class="container-fluid mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 p-3 border rounded position-relative">
+            <div>
+                <h3 class="text-danger fw-bold mb-0">241_1TH1370_KS2A_02_tructiep - TRIỂN KHAI HỆ THỐNG MẠNG VĂN PHÒNG (1.2) - GV: TRẦN THÁI BẢO</h3>
+                <nav class="breadcrumb p-0 mb-0 pt-xl-4">
+                    <a href="{{route('dash-board-sinh-vien')}}" class="breadcrumb-item">Nhà của tôi</a>
+                    <a href="#" class="breadcrumb-item">Khóa học</a>
+                    <span class="breadcrumb-item active">Học kỳ II</span>
+                    <span class="breadcrumb-item active">241_1TH1370_KS2A_02_tructiep</span>
+                </nav>
+            </div>
+        </div>
 
-        @for ($i = 1; $i <= 4; $i++)
-            <div class="coursebox card mb-4" data-courseid="387{{ $i }}" data-type="1">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title mb-0" style="font-family: 'Roboto', sans-serif;">
-                            <a class="text-primary" href="#">CHỦ ĐỀ {{ $i }}</a>
-                        </h5>
-                        
-                        <!-- Dropdown menu with 3-dot icon -->
-                        <div class="dropdown">
-                            <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton{{ $i }}" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $i }}">
-                                <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Nội dung riêng cho từng chủ đề -->
-                    @if ($i == 1)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 1</strong>. Chủ đề này tập trung vào các khái niệm cơ bản về mạng văn phòng và cấu trúc mạng.
-                        </p>
-                        <ul>
-                            <li>Giới thiệu về mạng văn phòng</li>
-                            <li>Các thành phần cơ bản của mạng</li>
-                            <li>Các thiết bị mạng thường dùng</li>
-                        </ul>
-                    @elseif ($i == 2)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 2</strong>. Chủ đề này sẽ đi sâu vào cấu hình và quản lý các thiết bị mạng.
-                        </p>
-                        <ul>
-                            <li>Cấu hình router và switch</li>
-                            <li>Thiết lập mạng LAN và WLAN</li>
-                            <li>Quản lý và giám sát mạng</li>
-                        </ul>
-                    @elseif ($i == 3)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 3</strong>. Chủ đề này sẽ nghiên cứu về bảo mật mạng và cách bảo vệ hệ thống mạng.
-                        </p>
-                        <ul>
-                            <li>Khái niệm về bảo mật mạng</li>
-                            <li>Phòng chống xâm nhập mạng</li>
-                            <li>Chính sách bảo mật mạng</li>
-                        </ul>
-                    @elseif ($i == 4)
-                        <p class="card-text mt-3">
-                            Đây là nội dung của <strong>CHỦ ĐỀ 4</strong>. Chủ đề này sẽ tổng kết và thực hành triển khai hệ thống mạng văn phòng.
-                        </p>
-                        <ul>
-                            <li>Lên kế hoạch triển khai mạng</li>
-                            <li>Các bước triển khai thực tế</li>
-                            <li>Kiểm tra và bảo trì hệ thống</li>
-                        </ul>
-                    @endif
+        <div class="card mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header bg-light fw-bold text-primary">Thông báo</h5>
+                <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
+                    </ul>
                 </div>
             </div>
-        @endfor
-    </div> 
+            <div class="card-body">
+                <p>Không có thông báo nào vào lúc này.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header bg-light fw-bold text-primary">Thông tin học phần</h5>
+                <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body bg-light">
+                <p>Lớp học phần: <strong>Triển khai hệ thống mạng văn phòng 241, 1TH1370, KS2A, 02, trực tiếp</strong></p>
+                <p>Tên học phần: <strong>Triển khai hệ thống mạng văn phòng</strong></p>
+                <p>Mã học phần: <strong>TH1370</strong></p>
+                <p>Số tín chỉ: <strong>3TC</strong> (1 lý thuyết : 2 thực hành)</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header bg-light fw-bold text-primary">Kế hoạch giảng dạy</h5>
+                <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <p><strong>Thứ ba (tiết 3 - 4, 08g40 – 10g50)</strong></p>
+                <p>Tuần học: <strong>337 - 38 - 39 - 40 - 41</strong></p>
+                <p>Ngày học: <strong>11/09, 18/09, 25/09, 02/10, 09/10</strong></p>
+                <p>Link học trực tuyến: <a href="https://meet.google.com/xym-ytor-sbm" target="_blank">meet.google.com/xym-ytor-sbm</a></p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header bg-light fw-bold text-primary">Đề cương học phần</h5>
+                <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>Đề cương học phần sẽ được cung cấp trong lớp học.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header bg-light fw-bold text-primary">Giáo trình - Bài giảng - tài liệu tham khảo</h5>
+                <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-file-earmark-pdf text-danger"></i> <a href="#">Tài liệu tham khảo TKMVP</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header bg-light fw-bold text-primary">Video giảng dạy</h5>
+                <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton6">
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>Video giảng dạy sẽ được cập nhật tại đây.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header bg-light fw-bold text-primary">Kiểm tra đánh giá</h5>
+                <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>Các bài kiểm tra và đánh giá sẽ được công bố sau.</p>
+            </div>
+        </div>
+    </div>
 @endsection
