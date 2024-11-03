@@ -39,11 +39,11 @@
 
 <body>
 <?php
-    use Illuminate\Support\Facades\DB;
-    $nguoiDung = DB::table('nguoi_dung')
-        ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
-        ->where('ma_nguoi_dung','=',session('ma_nguoi_dung'))
-        ->first();
+use Illuminate\Support\Facades\DB;
+$nguoiDung = DB::table('nguoi_dung')
+    ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
+    ->where('ma_nguoi_dung','=',session('ma_nguoi_dung'))
+    ->first();
 ?>
 <header id="header" class="header fixed-top d-flex align-items-center">
 

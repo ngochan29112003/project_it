@@ -15,15 +15,15 @@ class QuanLyLopHocPhanController extends Controller
             ->first();
         $hocKy = DB::table('hoc_ky')->orderByDesc('ma_hoc_ky')->get();
         $giangVien = DB::table('nguoi_dung')
-                ->where('ma_quyen','=',2)
-                ->get();
+            ->where('ma_quyen','=',2)
+            ->get();
         $list_lhp = DB::table('lop_hoc_phan')
             ->join('nguoi_dung','lop_hoc_phan.giang_vien','=','nguoi_dung.ma_nguoi_dung')
             ->where('id_hoc_phan','=',$id)
             ->get();
         return
             view('admin.ql_lop_hoc_phan.danh-sach',
-            compact('ttHocPhan', 'hocKy', 'giangVien','list_lhp'));
+                compact('ttHocPhan', 'hocKy', 'giangVien','list_lhp'));
     }
 
     public function addLopHocPhan(Request $request)

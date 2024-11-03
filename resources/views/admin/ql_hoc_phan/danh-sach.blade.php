@@ -102,7 +102,7 @@
                                 <label for="ten_hoc_phan" class="form-label">Tên học phần</label>
                                 <input type="text" class="form-control" name="ten_hoc_phan" id="ten_hoc_phan" required>
                             </div>
-                             <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="so_chi_ly_thuyet" class="form-label">Số chỉ lý thuyết</label>
                                 <input type="number" class="form-control" name="so_chi_ly_thuyet" id="so_chi_ly_thuyet" required>
                             </div>

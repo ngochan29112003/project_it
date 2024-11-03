@@ -26,6 +26,22 @@
             color: #e0e0e0;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
+
+        /* Hiện nút điều hướng vĩnh viễn */
+        .carousel-control-prev,
+        .carousel-control-next {
+            opacity: 1; /* Đảm bảo các nút luôn hiển thị */
+            transition: opacity 0.3s; /* Hiệu ứng chuyển tiếp */
+            z-index: 1; /* Đảm bảo các nút nằm trên cùng hình ảnh */
+        }
+
+        .carousel-control-prev {
+            left: 10px; /* Đặt vị trí nút Previous */
+        }
+
+        .carousel-control-next {
+            right: 10px; /* Đặt vị trí nút Next */
+        }
     </style>
     <div class="page-body ">
         <div id="carousel-captions" class="carousel slide" data-bs-ride="carousel" style="max-height: 400px; overflow: hidden;">

@@ -1,9 +1,10 @@
-@extends('master')
+@extends('e')
 @section('contents')
     <div class="page-body">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                <img src="{{asset('assets/img_user/'.$nguoiDung->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
+                <img src="{{asset('assets/img_user/'.$nguoiDung->hinh_anh)}}" class="rounded-circle"
+                     style="height: 100px; object-fit: contain;">
 
                 <span class="d-none d-md-block dropdown-toggle ps-2">{{$nguoiDung->ten_nguoi_dung}}</span>
             </a>
@@ -22,7 +23,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="ten_nguoi_dung" class="form-label">Họ tên</label>
-                                <input type="test" class="form-control" name="ten_nguoi_dung" id="edit_ten_nguoi_dung" required>
+                                <input type="test" class="form-control" name="ten_nguoi_dung" id="edit_ten_nguoi_dung"
+                                       required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="ngay_sinh" class="form-label">Ngày sinh</label>
@@ -54,7 +56,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="ho_khau_thuong_tru" class="form-label">Hộ khẩu thường trú</label>
-                                <input type="test" class="form-control" name="ho_khau_thuong_tru" id="edit_ho_khau_thuong_tru" required>
+                                <input type="test" class="form-control" name="ho_khau_thuong_tru"
+                                       id="edit_ho_khau_thuong_tru" required>
                             </div>
                         </div>
                         <div class="text-end">
@@ -67,7 +70,5 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
-
 @endsection
