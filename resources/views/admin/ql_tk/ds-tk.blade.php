@@ -19,7 +19,7 @@
             <div class = "row g-2 align-items-center">
                 <div class = "col">
                     <h2 class = "page-title">
-                        TRANG QUẢN LÝ TÀI KHOẢN </h2>
+                        QUẢN LÝ TÀI KHOẢN </h2>
                 </div>
             </div>
             <div class = "row mt-2">

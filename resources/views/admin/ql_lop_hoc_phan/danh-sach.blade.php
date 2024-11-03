@@ -2,20 +2,19 @@
 @section('contents')
     <div class="page-header d-print-none">
         <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">
-                        QUẢN LÝ HỌC PHẦN
-                    </h2>
-                </div>
-            </div>
 
-            <!-- lấy này nè -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item fs-2 "><a href="{{route('hoc-phan')}}" class="text-dark fw-bold">QUẢN LÝ LỚP HỌC PHẦN</a></li>
+                    <li class="breadcrumb-item active fs-2" aria-current="page" style="color:#0f77a2"> {{$ttHocPhan->ma_hoc_phan}} - {{$ttHocPhan->ten_hoc_phan}}</li>
+                </ol>
+            </nav>
+
             <div class="row mt-2">
                 <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
                     <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#Modal">
                         <i class="bi bi-file-earmark-plus pe-2"></i>
-                        Thêm mới
+                        Tạo lớp học phần
                     </button>
                     <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
                         <i class="bi bi-file-earmark-arrow-down pe-2"></i>
@@ -36,29 +35,21 @@
                                 <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Mã lớp</th>
-                                    <th>Tên học phần</th>
-                                    <th>Số TC-LT</th>
-                                    <th>Số TC-TH</th>
+                                    <th>Tên lớp học phần</th>
+                                    <th>Số lượng SV</th>
+                                    <th>Giảng viên giảng dạy</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @php $stt = 1; @endphp <!-- Initialize the serial number -->
-                                @foreach($list_hp as $item)
+                                @foreach($list_lhp as $item)
                                     <tr>
                                         <td>{{ $stt++ }}</td>
-                                        <td>{{ $item->ma_hoc_phan}}</td>
-                                        <td>{{ $item->ten_hoc_phan}}</td>
-                                        <td>{{ $item->so_chi_ly_thuyet}}</td>
-                                        <td>{{ $item->so_chi_thuc_hanh}}</td>
+                                        <td>{{ $item->ten_lop_hoc_phan}}</td>
+                                        <td>{{ $item->so_luong_sinh_vien}}</td>
+                                        <td>{{ $item->ten_nguoi_dung}}</td>
                                         <td class="text-center align-middle">
-                                            <a
-                                                href="{{ route('lop-hoc-phan', ['id' => $item->id_hoc_phan]) }}"
-                                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none info-btn">
-                                                <i class="bi bi-eye text-green"></i>
-                                            </a>
-                                            |
                                             <button
                                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
                                                 data-id="{{ $item->id_hoc_phan}}">
@@ -87,32 +78,63 @@
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Thêm Học Phần</h4>
+                    <h4 class="modal-title">Lớp học phần: <span style="color:#0f77a2">{{$ttHocPhan->ma_hoc_phan}} - {{$ttHocPhan->ten_hoc_phan}}</span></h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="Form" enctype="multipart/form-data">
                         @csrf
+                        <input type="text" value="{{$ttHocPhan->ma_hoc_phan}}" name="ma_hoc_phan" hidden>
+                        <input type="text" value="{{$ttHocPhan->id_hoc_phan}}" name="id_hoc_phan" hidden>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="id_lop_hoc_phan" class="form-label">Mã lớp</label>
-                                <input type="text" class="form-control" name="ma_hoc_phan" id="ma_hoc_phan" required>
+                                <label for="maHK" class="form-label">Học kỳ</label>
+                                <select class="form-select" name="maHK" id="maHK">
+                                    @foreach ($hocKy as $item)
+                                        <option value="{{ $item->ma_hoc_ky}}">{{ $item->ten_hoc_ky}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="ten_hoc_phan" class="form-label">Tên học phần</label>
-                                <input type="text" class="form-control" name="ten_hoc_phan" id="ten_hoc_phan" required>
-                            </div>
-                             <div class="col-md-6 mb-3">
-                                <label for="so_chi_ly_thuyet" class="form-label">Số chỉ lý thuyết</label>
-                                <input type="number" class="form-control" name="so_chi_ly_thuyet" id="so_chi_ly_thuyet" required>
+                                <label for="giang_vien" class="form-label">Giảng viên giảng dạy</label>
+                                <select class="form-select" name="giang_vien" id="giang_vien">
+                                    @foreach ($giangVien as $item)
+                                        <option value="{{ $item->ma_nguoi_dung}}">{{ $item->ten_nguoi_dung}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="so_chi_thuc_hanh" class="form-label">Số chỉ thực hành</label>
-                                <input type="number" class="form-control" name="so_chi_thuc_hanh" id="so_chi_thuc_hanh" required>
+                                <label for="dot" class="form-label">Đợt</label>
+                                <select class="form-select" name="dot" id="dot">
+                                    <option value="1">Đợt 1</option>
+                                    <option value="2">Đợt 2</option>
+                                    <option value="3">Đợt 3</option>
+                                </select>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="loai_lop" class="form-label">Loại lớp</label>
+                                <select class="form-select" name="loai_lop" id="loai_lop">
+                                    <option value="LT">Lý thuyết</option>
+                                    <option value="BT">Thực hành</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-check">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input class="form-check-input" type="checkbox" id="toggleCheckbox">
+                                            <span class="form-check-label">Tạo nhanh nhiều lớp</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="number" class="form-control" id="soluonglop" name="soluonglop" min="1" disabled>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+
                         </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <button type="submit" class="btn btn-primary">Tạo</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         </div>
                     </form>
@@ -173,13 +195,18 @@
             }
         });
 
+        document.getElementById('toggleCheckbox').addEventListener('change', function() {
+            const inputField = document.getElementById('soluonglop');
+            inputField.disabled = !this.checked;  // Enable input if checkbox is checked, disable if not
+        });
+
         var table = $('#table').DataTable();
 
         $('#Form').submit(function (e) {
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('add-hoc-phan') }}',
+                url: '{{ route('add-lop-hoc-phan') }}',
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function (response) {

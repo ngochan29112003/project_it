@@ -12,16 +12,9 @@ class LopHocPhanModel extends Model
 
     protected $table = 'lop_hoc_phan';
     protected $primaryKey = 'id_lop_hoc_phan';
-
-    // protected $fillable = [
-    //   'MaTK',
-    //   'MaSP',
-    //   'TenBD',
-    //   'AnhBD',
-    //   'NoiDungBD',
-    //   'NgayTaoBD',
-    //   'TrangThaiBD'
-    // ];
+    protected $fillable = [
+        'ten_hoc_phan',
+    ];
 
     public $timestamps = false;
     public function getLopHP()

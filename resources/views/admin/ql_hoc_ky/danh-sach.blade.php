@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        TRANG QUẢN LÝ HỌC KỲ
+                        QUẢN LÝ HỌC KỲ
                     </h2>
                 </div>
             </div>

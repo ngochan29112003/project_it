@@ -61,17 +61,11 @@ class LoginController extends Controller
             'status' => 200,
             'redirect' => route('trang-chu-admin'),
         ]);
-    } elseif ($ma_quyen->ma_quyen == 2) {
+    } elseif ($ma_quyen->ma_quyen == 2 || $ma_quyen->ma_quyen == 3) {
         return response()->json([
             'success' => true,
             'status' => 200,
-            'redirect' => route('trang-chu-giang-vien'),
-        ]);
-    } elseif($ma_quyen->ma_quyen == 3) {
-        return response()->json([
-            'success'  => true,
-            'status'   => 200,
-            'redirect' => route('trang-chu-sinh-vien'),
+            'redirect' => route('trang-chu'),
         ]);
     } else {
         return response()->json([

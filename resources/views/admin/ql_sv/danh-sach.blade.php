@@ -5,7 +5,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        TRANG QUẢN LÝ SINH VIÊN
+                        QUẢN LÝ SINH VIÊN
                     </h2>
                 </div>
             </div>

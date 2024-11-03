@@ -24,4 +24,6 @@ class HocPhanModel extends Model
     {
         return DB::table('lop_hoc_phan')->get();
     }
+
+
 }

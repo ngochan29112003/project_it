@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\QuanLyLopHocPhanController;
 use App\Http\Controllers\admin\QuanLyDeXuatController;
 use App\Http\Controllers\admin\QuanLyGiangVienController;
 use App\Http\Controllers\admin\QuanLyHocKyController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\giang_vien\LopHocPhanGVController;
 use App\Http\Controllers\giang_vien\EnrollGVController;
 use App\Http\Controllers\giang_vien\ThongTinTaiKhoanGVController;
 
+use App\Http\Controllers\TrangChuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,44 +97,54 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/khoa/edit/{id}', [QuanLyKhoaController::class, 'editKhoa'])->name('edit-khoa');
         Route::post('/khoa/update/{id}', [QuanLyKhoaController::class, 'updateKhoa'])->name('update-khoa');
 
+        //QL Lớp Học Phần
+        Route::get('/lop-hoc-phan/{id}',[QuanLyLopHocPhanController::class,'viewLopHocPhan'])->name('lop-hoc-phan');
+        Route::post('/lop-hoc-phan/add',[QuanLyLopHocPhanController::class,'addLopHocPhan'])->name('add-lop-hoc-phan');
+
         //QL Học kỳ (Kéo API nên không cần làm gì hết)
         Route::get('/hoc-ky',[QuanLyHocKyController::class,'getViewDsHocKy'])->name('hoc-ky');
     });
 
+
     //Sinh vien
-    Route::group(['prefix' => '/sinh-vien'], function () {
-        //Trang chủ
-        Route::get('/trang-chu',[SinhVienController::class,'getViewTrangChu'])->name('trang-chu-sinh-vien');
-        Route::get('/nha-cua-toi',[DashBoardController::class,'getViewDashBoard'])->name('dash-board-sinh-vien');
-        Route::get('/thong-tin',[ThongTinSVController::class,'getViewThongTinSV'])->name('thong-tin-sinh-vien');
+//    Route::group(['prefix' => '/sinh-vien'], function () {
+//        //Trang chủ
+//        Route::get('/trang-chu',[SinhVienController::class,'getViewTrangChu'])->name('trang-chu-sinh-vien');
+//        Route::get('/nha-cua-toi',[DashBoardController::class,'getViewDashBoard'])->name('dash-board-sinh-vien');
+//        Route::get('/thong-tin',[ThongTinSVController::class,'getViewThongTinSV'])->name('thong-tin-sinh-vien');
+//
+//        //Lop hoc phan
+//        Route::get('/lop-hoc-phan',[LopHocPhanSVController::class,'getViewLopHP'])->name('sinh-vien-lop-hp');
+//        Route::get('/lop-hoc-phan-enroll',[EnrollSVController::class,'getViewEnroll'])->name('sinh-vien-lop-hp-enroll');
+//        Route::get('/tim-kiem', [SinhVienController::class, 'getViewTimKiemSv'])->name('sinh-vien-lop-hp-enroll');
+//
+//        //Thông tin tài khoản
+//        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanSVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
+//
+//        //Nộp bài
+//        Route::get('/nop-bai',[NopBaiController::class,'getViewNopBai'])->name('nop-bai');
+//
+//    });
 
-        //Lop hoc phan
-        Route::get('/lop-hoc-phan',[LopHocPhanSVController::class,'getViewLopHP'])->name('sinh-vien-lop-hp');
-        Route::get('/lop-hoc-phan-enroll',[EnrollSVController::class,'getViewEnroll'])->name('sinh-vien-lop-hp-enroll');
-        Route::get('/tim-kiem', [SinhVienController::class, 'getViewTimKiemSv'])->name('sinh-vien-lop-hp-enroll');
+//    //Giang vien
+//    Route::group(['prefix' => '/giang-vien'], function () {
+//        //Trang chủ
+//        Route::get('/trang-chu',[GiangVienController::class,'getViewTrangChuGV'])->name('trang-chu-giang-vien');
+//        Route::get('/nha-cua-toi',[DashBoardGVController::class,'GetViewTTGV'])->name('dash-board-giang-vien');
+//
+//        //Lớp học phần
+//        Route::get('/lop-hoc-phan',[LopHocPhanGVController::class,'getViewLopHP'])->name('giang-vien-lop-hp');
+//        Route::get('/lop-hoc-phan-enroll',[EnrollGVController::class,'getViewEnroll'])->name('giang-vien-lop-hp-enroll');
+//        Route::get('/tim-kiem', [GiangVienController::class, 'getViewTimKiem'])->name('lop-hoc-phan-enroll');
+//
+//        //Thông tin tài khoản
+//        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanGVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
+//    });
 
-        //Thông tin tài khoản
-        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanSVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
-
-        //Nộp bài
-        Route::get('/nop-bai',[NopBaiController::class,'getViewNopBai'])->name('nop-bai');
-
-    });
-
-    //Giang vien
-    Route::group(['prefix' => '/giang-vien'], function () {
-        //Trang chủ
-        Route::get('/trang-chu',[GiangVienController::class,'getViewTrangChuGV'])->name('trang-chu-giang-vien');
-        Route::get('/nha-cua-toi',[DashBoardGVController::class,'GetViewTTGV'])->name('dash-board-giang-vien');
-
-        //Lớp học phần
-        Route::get('/lop-hoc-phan',[LopHocPhanGVController::class,'getViewLopHP'])->name('giang-vien-lop-hp');
-        Route::get('/lop-hoc-phan-enroll',[EnrollGVController::class,'getViewEnroll'])->name('giang-vien-lop-hp-enroll');
-        Route::get('/tim-kiem', [GiangVienController::class, 'getViewTimKiem'])->name('lop-hoc-phan-enroll');
-
-        //Thông tin tài khoản
-        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanGVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
-    });
+    //Người dùng đã đăng nhập
+    Route::get('/trang-chu',[TrangChuController::class,'viewTrangChu'])->name('trang-chu');
+    Route::get('/tim-kiem-hoc-phan', [TrangChuController::class, 'viewTimKiem'])->name('tim-kiem-hoc-phan');
+    Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
 
     //API
     Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
