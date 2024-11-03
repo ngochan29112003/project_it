@@ -201,4 +201,3 @@ $nguoiDung = DB::table('nguoi_dung')
     </div>
 </footer>
 </html>
-

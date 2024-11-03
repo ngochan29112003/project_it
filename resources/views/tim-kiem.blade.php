@@ -1,4 +1,4 @@
-@extends('e')
+@extends('master')
 @section("contents")
     <div id="page" class="container-fluid">
         <header id="page-header" class="row py-4 bg-light">
@@ -12,9 +12,7 @@
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                                 <li class="breadcrumb-item"><a href="#">Đăng ký khóa học</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">241_1TH1390_(BT)_KS2A_tructiep -
-                                    IoT (BT)
-                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">241_1TH1390_(BT)_KS2A_tructiep - IoT (BT)</li>
                             </ol>
                         </nav>
                     </div>
@@ -29,8 +27,7 @@
                         <div class="card-body">
                             <span class="notifications" id="user-notifications"></span>
                             <div role="main">
-                                <h2 class="h5 mb-3 pt-xl-4">Kết quả tìm
-                                    kiếm: {{ $lop_hoc_phan ? count($lop_hoc_phan) : 0 }}</h2>
+                                <h2 class="h5 mb-3 pt-xl-4">Kết quả tìm kiếm: {{ $lop_hoc_phan ? count($lop_hoc_phan) : 0 }}</h2>
 
                                 <div class="courses course-search-result">
                                     @if($lop_hoc_phan->isEmpty())
@@ -41,16 +38,14 @@
                                                 <div class="card-body">
                                                     <h3 class="coursename h6 pt-xl-4">
                                                         <a href="#">
-                                                            ({{ $lop->ten_lop_hoc_phan }}) - Lập Trình Mạng (2.1) GV:
-                                                            Nguyễn Thị Hồng Yến
+                                                            ({{ $lop->ten_lop_hoc_phan }}) - Lập Trình Mạng (2.1) GV: Nguyễn Thị Hồng Yến
                                                         </a>
                                                     </h3>
                                                     <div class="text-muted mb-2">Học kỳ:
                                                         <a href="#">1</a>
                                                     </div>
                                                     <div class="enrolmenticons mb-3">
-                                                        <i class="fas fa-sign-in-alt me-2" title="Tự đăng ký"
-                                                           aria-label="Tự đăng ký"></i>
+                                                        <i class="fas fa-sign-in-alt me-2" title="Tự đăng ký" aria-label="Tự đăng ký"></i>
                                                     </div>
                                                     <a class="btn btn-success" href="">Đăng ký vào lớp học</a>
                                                 </div>
@@ -58,6 +53,7 @@
                                         @endforeach
                                     @endif
                                 </div>
+
                             </div>
                         </div>
                     </div>
