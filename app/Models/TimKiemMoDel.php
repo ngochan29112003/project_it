@@ -12,5 +12,12 @@ class TimKiemMoDel extends Model
     protected $primaryKey = 'id_lop_hoc_phan';
     protected $fillable = [
         'ten_hoc_phan',
+        'so_luong_sinh_vien',
+        'giang_vien',
+        'id_hoc_phan',
+        'dot',
+        'loai_lop',
+        'ngay_tao',
+        'hoc_ki',
     ];
 }

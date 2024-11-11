@@ -16,8 +16,12 @@ class TrangChuController extends Controller
     {
         $keyword = $request->input('query');
         if ($keyword) {
-            $lop_hoc_phan = TimKiemMoDel::where('ten_lop_hoc_phan', 'LIKE', "%{$keyword}%")
-                ->orderBy('ten_lop_hoc_phan', 'asc') // Sắp xếp theo tên lớp học phần
+            $lop_hoc_phan = DB::table('lop_hoc_phan')
+                ->join('hoc_phan', 'hoc_phan.id_hoc_phan', '=', 'lop_hoc_phan.id_hoc_phan')
+                ->join('nguoi_dung', 'nguoi_dung.ma_nguoi_dung', '=', 'lop_hoc_phan.giang_vien')
+                ->join('hoc_ky', 'hoc_ky.ma_hoc_ky', '=', 'lop_hoc_phan.hoc_ki')
+                ->where('lop_hoc_phan.ten_lop_hoc_phan', 'LIKE', "%{$keyword}%")
+                ->orderBy('ten_lop_hoc_phan', 'ASC') // Sắp xếp theo tên lớp học phần
                 ->get();
         }
         // Trả kết quả về view với thông tin giảng viên và kết quả tìm kiếm
@@ -37,4 +41,25 @@ class TrangChuController extends Controller
             ->get();
         return view('thong-tin-tai-khoan', compact('nguoiDung','nguoi_dung'));
     }
+
+    public function thamGiaLop(Request $request)
+    {
+        // Lấy mã người dùng từ session
+        $maNguoiDung = session('ma_nguoi_dung');
+
+        // Validate dữ liệu gửi đến
+        $request->validate([
+            'ma_hoc_phan' => 'required|integer',
+        ]);
+
+        // Thêm dữ liệu vào bảng ghi_danh
+        DB::table('ghi_danh')->insert([
+            'ma_hoc_phan' => $request->ma_hoc_phan,
+            'ma_nguoi_dung' => $maNguoiDung,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Bạn đã ghi danh thành công!']);
+    }
+
+
 }

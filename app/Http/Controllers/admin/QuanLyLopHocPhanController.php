@@ -46,6 +46,7 @@ class QuanLyLopHocPhanController extends Controller
         $loai_lop = $request->loai_lop;
         $giang_vien = $request->giang_vien;
         $soluonglop = $request->soluonglop ?? 1; // Nếu không có `soluonglop` thì mặc định là 1
+        $hoc_ki = $request->maHK;
 
         // Lấy số thứ tự lớn nhất của lớp có cùng `maHK`, `dot`, `ma_hoc_phan` từ DB
         $lastClass = DB::table('lop_hoc_phan')
@@ -86,6 +87,8 @@ class QuanLyLopHocPhanController extends Controller
                 'id_hoc_phan' => $id_hoc_phan,
                 'dot' => $dot,
                 'loai_lop' => $loai_lop,
+                'ngay_tao' => now(),
+                'hoc_ki' => $hoc_ki
             ]);
         }
 
