@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\DB; @endphp
 @extends('master')
 @section('contents')
     <style>
@@ -5,6 +6,7 @@
             background-color: #f8f9fa; /* Màu nền nhạt */
             padding: 2rem; /* Thêm padding */
         }
+
         .carousel-caption {
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
             padding: 20px;
@@ -28,38 +30,44 @@
         }
     </style>
     <div class="page-body ">
-        <div id="carousel-captions" class="carousel slide" data-bs-ride="carousel" style="max-height: 400px; overflow: hidden;">
+        <div id="carousel-captions" class="carousel slide" data-bs-ride="carousel"
+             style="max-height: 400px; overflow: hidden;">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="3000">
-                    <img class="d-block w-100" style="height: 400px; object-fit: cover;" src="{{asset('/assets/img/news-1.jpg')}}" />
+                    <img class="d-block w-100" style="height: 400px; object-fit: cover;"
+                         src="{{asset('/assets/img/news-1.jpg')}}"/>
                     <div class="carousel-caption d-none d-md-block text-center text-white">
                         <h3 class="caption-title">Tri thức</h3>
                         <p class="caption-text">Nơi hội tụ kiến thức và nguồn cảm hứng học tập bất tận.</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
-                    <img class="d-block w-100" style="height: 400px; object-fit: cover;" src="{{asset('/assets/img/news-2.jpg')}}" />
+                    <img class="d-block w-100" style="height: 400px; object-fit: cover;"
+                         src="{{asset('/assets/img/news-2.jpg')}}"/>
                     <div class="carousel-caption d-none d-md-block text-center text-white">
                         <h3 class="caption-title">Sáng tạo</h3>
                         <p class="caption-text">Mở ra lối đi mới với kiến thức đa dạng và bài học thực tế.</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
-                    <img class="d-block w-100" style="height: 400px; object-fit: cover;" src="{{asset('/assets/img/news-3.jpg')}}" />
+                    <img class="d-block w-100" style="height: 400px; object-fit: cover;"
+                         src="{{asset('/assets/img/news-3.jpg')}}"/>
                     <div class="carousel-caption d-none d-md-block text-center text-white">
                         <h3 class="caption-title">Phát triển</h3>
                         <p class="caption-text">Đồng hành và phát triển cùng những khóa học hàng đầu.</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
-                    <img class="d-block w-100" style="height: 400px; object-fit: cover;" src="{{asset('/assets/img/news-4.jpg')}}" />
+                    <img class="d-block w-100" style="height: 400px; object-fit: cover;"
+                         src="{{asset('/assets/img/news-4.jpg')}}"/>
                     <div class="carousel-caption d-none d-md-block text-center text-white">
                         <h3 class="caption-title">Hội nhập</h3>
                         <p class="caption-text">Tiến tới thành công với kiến thức toàn cầu và kỹ năng chuyên sâu.</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
-                    <img class="d-block w-100" style="height: 400px; object-fit: cover;" src="{{asset('/assets/img/news-5.jpg')}}" />
+                    <img class="d-block w-100" style="height: 400px; object-fit: cover;"
+                         src="{{asset('/assets/img/news-5.jpg')}}"/>
                     <div class="carousel-caption d-none d-md-block text-center text-white">
                         <h3 class="caption-title">Tương lai</h3>
                         <p class="caption-text">Chuẩn bị cho tương lai với nền tảng kiến thức vững chắc.</p>
@@ -78,153 +86,44 @@
 
         <div class="fp-site-customdesc d-flex align-items-center justify-content-center text-center py-5">
             <div class="container">
-                <h1 class="display-4 fw-bold mb-3 text-primary text-center" style="font-size: 2.5rem; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
+                <h1 class="display-4 fw-bold mb-3 text-primary text-center"
+                    style="font-size: 2.5rem; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
                     Hệ thống LMS - VLUTE</h1>
-                <p class="lead text-secondary">Chào mừng bạn đến với Hệ Thống Đào Tạo giảng dạy trực tuyến. Khám phá những kiến thức mới nhất và nâng cao kỹ năng của bạn.</p>
+                <p class="lead text-secondary">Chào mừng bạn đến với Hệ Thống Đào Tạo giảng dạy trực tuyến. Khám phá
+                    những kiến thức mới nhất và nâng cao kỹ năng của bạn.</p>
             </div>
         </div>
 
         <div class="container">
             <div class="container my-5">
-                <h3 class="text-danger fw-bold" >
+                <h3 class="text-danger fw-bold">
                     KHÓA HỌC MỚI
                 </h3>
             </div>
             <div class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                $recentClasses = DB::table('lop_hoc_phan')
+                    ->join('hoc_phan', 'hoc_phan.id_hoc_phan', '=', 'lop_hoc_phan.id_hoc_phan')
+                    ->orderBy('ngay_tao', 'desc')
+                    ->limit(12)
+                    ->get();
+//                dd($recentClasses);
+                ?>
 
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
+                @foreach($recentClasses as $item)
+                    <div class="col-md-3 mb-4">
+                        <div class="card" style="height: 20rem;">
+                            <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block"
+                                 style="height: 10rem; width: auto;" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="text-danger">{{$item->ten_hoc_phan}}</h5>
+                                <p class="card-text">{{$item->ten_lop_hoc_phan}}</p>
+                                <a href="{{route('chi-tiet-lop-hoc-phan',['id'=>$item->id_lop_hoc_phan])}}" class="btn btn-danger">Xem Chi Tiết</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card" style="height: 20rem;">
-                        <img src="{{asset('/assets/img/book.jpg')}}" class="card-img-top mx-auto d-block" style="height: 10rem; width: auto;" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="text-danger">Lập trình mạng</h5>
-                            <p class="card-text">241_1TH1314_KS2A_02_tructiep</p>
-                            <a href="#" class="btn btn-danger">Xem Chi Tiết</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @endforeach
         </div>
 
         <div class="container mt-5">

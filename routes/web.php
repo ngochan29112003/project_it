@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\QuanLyKhoaController;
 use App\Http\Controllers\admin\QuanLyLopController;
 use App\Http\Controllers\admin\QuanLySinhVienController;
 use App\Http\Controllers\admin\QuanLyTaiKhoanController;
+use App\Http\Controllers\ChiTietLopHocPhanController;
 use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
 use App\Http\Controllers\giang_vien\TimKiemHPController;
@@ -105,8 +106,19 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/hoc-ky',[QuanLyHocKyController::class,'getViewDsHocKy'])->name('hoc-ky');
     });
 
+    //Người dùng đã đăng nhập
+    Route::get('/trang-chu',[TrangChuController::class,'viewTrangChu'])->name('trang-chu');
+    Route::get('/tim-kiem-hoc-phan', [TrangChuController::class, 'viewTimKiem'])->name('tim-kiem-hoc-phan');
+    Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
+    Route::get('/chi-tiet-hoc-phan/{id}',[ChiTietLopHocPhanController::class,'getViewChiTietLopHocPhan'])->name('chi-tiet-lop-hoc-phan');
+    Route::post('/tham-gia-lop', [TrangChuController::class, 'thamGiaLop'])->name('thamGiaLop');
 
-    //Sinh vien
+    //API
+    Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
+});
+
+
+//Sinh vien
 //    Route::group(['prefix' => '/sinh-vien'], function () {
 //        //Trang chủ
 //        Route::get('/trang-chu',[SinhVienController::class,'getViewTrangChu'])->name('trang-chu-sinh-vien');
@@ -140,12 +152,3 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 //        //Thông tin tài khoản
 //        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanGVController::class,'getViewTTTK'])->name('thong-tin-tai-khoan');
 //    });
-
-    //Người dùng đã đăng nhập
-    Route::get('/trang-chu',[TrangChuController::class,'viewTrangChu'])->name('trang-chu');
-    Route::get('/tim-kiem-hoc-phan', [TrangChuController::class, 'viewTimKiem'])->name('tim-kiem-hoc-phan');
-    Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
-
-    //API
-    Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
-});

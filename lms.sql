@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 03, 2024 at 11:33 PM
+-- Generation Time: Nov 11, 2024 at 11:41 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -143,9 +143,15 @@ CREATE TABLE `diem_danh` (
 CREATE TABLE `ghi_danh` (
   `ma_ghi_danh` int(11) NOT NULL,
   `ma_hoc_phan` text,
-  `ma_sinh_vien` text,
-  `ngay_ghi_danh` text
+  `ma_nguoi_dung` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ghi_danh`
+--
+
+INSERT INTO `ghi_danh` (`ma_ghi_danh`, `ma_hoc_phan`, `ma_nguoi_dung`) VALUES
+(3, '18', '10');
 
 -- --------------------------------------------------------
 
@@ -425,8 +431,29 @@ CREATE TABLE `lop_hoc_phan` (
   `giang_vien` int(11) DEFAULT NULL,
   `id_hoc_phan` int(11) DEFAULT NULL,
   `dot` int(11) DEFAULT NULL,
-  `loai_lop` text
+  `loai_lop` text,
+  `ngay_tao` timestamp NULL DEFAULT NULL,
+  `hoc_ki` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `lop_hoc_phan`
+--
+
+INSERT INTO `lop_hoc_phan` (`id_lop_hoc_phan`, `ten_lop_hoc_phan`, `so_luong_sinh_vien`, `giang_vien`, `id_hoc_phan`, `dot`, `loai_lop`, `ngay_tao`, `hoc_ki`) VALUES
+(10, '241_1TH1201_KS2A_01_tructiep', 0, 15, 12, 1, 'LT', '2024-11-11 08:12:55', 241),
+(11, '241_1TH1201_KS2A_02_tructiep', 0, 15, 12, 1, 'LT', '2024-11-11 08:12:55', 241),
+(12, '241_1TH1201_KS2A_03_tructiep', 0, 15, 12, 1, 'LT', '2024-11-11 08:12:55', 241),
+(13, '241_1TH1203_KS2A_01_tructiep', 0, 29, 10, 1, 'LT', '2024-11-11 08:20:23', 241),
+(14, '241_1TH1203_KS2A_02_tructiep', 0, 29, 10, 1, 'LT', '2024-11-11 08:20:23', 241),
+(15, '241_1TH1203_KS2A_03_tructiep', 0, 29, 10, 1, 'LT', '2024-11-11 08:20:23', 241),
+(16, '241_1TH1203_KS2A_04_tructiep', 0, 29, 10, 1, 'LT', '2024-11-11 08:20:23', 241),
+(17, '241_1TH1203_KS2A_05_tructiep', 0, 29, 10, 1, 'LT', '2024-11-11 08:20:23', 241),
+(18, '241_1TH1219_KS2A_01_tructiep', 0, 23, 28, 1, 'LT', '2024-11-11 08:51:44', 241),
+(19, '241_1TH1219_KS2A_02_tructiep', 0, 23, 28, 1, 'LT', '2024-11-11 08:51:44', 241),
+(20, '241_1TH1219_KS2A_03_tructiep', 0, 23, 28, 1, 'LT', '2024-11-11 08:51:44', 241),
+(21, '241_1TH1219_KS2A_04_tructiep', 0, 23, 28, 1, 'LT', '2024-11-11 08:51:44', 241),
+(22, '241_1TH1219_KS2A_05_tructiep', 0, 23, 28, 1, 'LT', '2024-11-11 08:51:44', 241);
 
 -- --------------------------------------------------------
 
@@ -701,7 +728,7 @@ ALTER TABLE `diem_danh`
 -- AUTO_INCREMENT for table `ghi_danh`
 --
 ALTER TABLE `ghi_danh`
-  MODIFY `ma_ghi_danh` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ma_ghi_danh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hoc_phan`
@@ -731,7 +758,7 @@ ALTER TABLE `lop`
 -- AUTO_INCREMENT for table `lop_hoc_phan`
 --
 ALTER TABLE `lop_hoc_phan`
-  MODIFY `id_lop_hoc_phan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_lop_hoc_phan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `nguoi_dung`
