@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NguoiDungModel;
 use App\Models\TimKiemMoDel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,9 +38,11 @@ class TrangChuController extends Controller
             ->where('ma_nguoi_dung', '=', session('ma_nguoi_dung'))
             ->first();
         $nguoi_dung = DB::table('nguoi_dung')
-
             ->get();
-        return view('thong-tin-tai-khoan', compact('nguoiDung','nguoi_dung'));
+
+        $thongtin = new NguoiDungModel();
+        $user = $thongtin->getthongtin();
+        return view('thong-tin-tai-khoan', compact('nguoiDung','nguoi_dung', 'user'));
     }
 
     public function thamGiaLop(Request $request)

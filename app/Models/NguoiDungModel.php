@@ -39,6 +39,16 @@ class NguoiDungModel extends Model
             ->get();
     }
 
+    public function getthongtin()
+    {
+        $maNguoiDung = session('ma_nguoi_dung');
+        return DB::table('nguoi_dung')
+            ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
+            ->leftJoin('tai_khoan','tai_khoan.ma_nguoi_dung','=','nguoi_dung.ma_nguoi_dung')
+            ->where('tai_khoan.ma_nguoi_dung','=',$maNguoiDung)
+            ->first();
+    }
+
     public function getGiangVien()
     {
         return DB::table('nguoi_dung')

@@ -49,7 +49,7 @@ Route::post('/login',[LoginController::class,'loginAction'])->name('login');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
 //Chỉnh sửa thông tin
-Route::get('/nguoi-dung/{id}/profile', [SuaThongTinController::class, 'getviewThongTin']);
+Route::get('/nguoi-dung/profile', [SuaThongTinController::class, 'getviewThongTin']);
 Route::post('/nguoi-dung/{id}/update-profile', [SuaThongTinController::class, 'updateThongTin']);
 Route::post('/nguoi-dung/{id}/change-password', [SuaThongTinController::class, 'changePassword']);
 
