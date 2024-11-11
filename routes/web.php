@@ -27,6 +27,7 @@ use App\Http\Controllers\giang_vien\LopHocPhanGVController;
 use App\Http\Controllers\giang_vien\EnrollGVController;
 use App\Http\Controllers\giang_vien\ThongTinTaiKhoanGVController;
 
+use App\Http\Controllers\SuaThongTinController;
 use App\Http\Controllers\TrangChuController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LoginController::class, 'getViewLogin'])->name('index.login');
 Route::post('/login',[LoginController::class,'loginAction'])->name('login');
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
+
+//Chỉnh sửa thông tin
+Route::get('/nguoi-dung/{id}/profile', [SuaThongTinController::class, 'getviewThongTin']);
+Route::post('/nguoi-dung/{id}/update-profile', [SuaThongTinController::class, 'updateThongTin']);
+Route::post('/nguoi-dung/{id}/change-password', [SuaThongTinController::class, 'changePassword']);
 
 //Xử lý các route đã đăng nhập
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
@@ -148,4 +154,5 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
     //API
     Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
+
 });

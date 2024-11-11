@@ -28,8 +28,13 @@ class TrangChuController extends Controller
     {
         $nguoiDung = DB::table('nguoi_dung')
             ->join('quyen', 'nguoi_dung.ma_quyen', '=', 'quyen.ma_quyen')
+            ->join('khoa','nguoi_dung.ma_khoa','=','khoa.ma_khoa')
+            ->join('lop','nguoi_dung.ma_lop','=','lop.ma_lop')
             ->where('ma_nguoi_dung', '=', session('ma_nguoi_dung'))
             ->first();
-        return view('thong-tin-tai-khoan', compact('nguoiDung'));
+        $nguoi_dung = DB::table('nguoi_dung')
+
+            ->get();
+        return view('thong-tin-tai-khoan', compact('nguoiDung','nguoi_dung'));
     }
 }

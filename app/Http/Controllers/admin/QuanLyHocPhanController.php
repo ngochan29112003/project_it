@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\HocPhanModel;
 use App\Models\NguoiDungModel;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class QuanLyHocPhanController extends Controller
 {
