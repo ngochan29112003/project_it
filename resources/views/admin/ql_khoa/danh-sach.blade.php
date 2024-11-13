@@ -17,7 +17,7 @@
                         <i class="bi bi-file-earmark-plus pe-2"></i>
                         Thêm mới
                     </button>
-                    <a href="#" class="btn btn-success d-flex align-items-center text-white btn-export">
+                    <a href="{{route('export-khoa')}}" class="btn btn-success d-flex align-items-center text-white btn-export">
                         <i class="bi bi-file-earmark-arrow-down pe-2"></i>
                         Xuất file Excel
                     </a>

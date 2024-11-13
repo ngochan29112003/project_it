@@ -6,6 +6,7 @@ use App\Models\NguoiDungModel;
 use App\Models\TimKiemMoDel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TrangChuController extends Controller
 {
@@ -64,5 +65,46 @@ class TrangChuController extends Controller
         return response()->json(['success' => true, 'message' => 'Bạn đã ghi danh thành công!']);
     }
 
+    public function updateTTTK(Request $request, $id)
+{
+    // Xác thực dữ liệu từ form
+    $validated = $request->validate([
+        'fullName' => 'required|string',
+        'gender' => 'required|string',
+        'dob' => 'required|date',
+        'birthPlace' => 'required|string',
+        'address' => 'required|string',
+        'phone' => 'required|string',
+        'email' => 'required|email',
+    ]);
 
+    // Lấy thông tin người dùng từ cơ sở dữ liệu
+    $tttk = NguoiDungModel::findOrFail($id);
+    // Kiểm tra xem có ảnh mới hay không
+    if ($request->hasFile('profile_image') && $request->file('profile_image')->isValid()) {
+        // Lấy tệp ảnh và lưu vào thư mục public/assets/img_user
+        $file = $request->file('profile_image');
+        $fileName = $file->getClientOriginalName();  // Lấy tên gốc của ảnh
+
+        // Lưu ảnh vào thư mục public/assets/img_user
+        $file->move(public_path('assets/img_user'), $fileName);
+
+        // Cập nhật tên ảnh vào cơ sở dữ liệu
+        $tttk->hinh_anh = $fileName;
+    }
+
+    // Cập nhật thông tin người dùng
+    $tttk->update([
+        'ten_nguoi_dung' => $validated['fullName'],
+        'gioi_tinh' => $validated['gender'],
+        'ngay_sinh' => $validated['dob'],
+        'noi_sinh' => $validated['birthPlace'],
+        'ho_khau_thuong_tru' => $validated['address'],
+        'sdt' => $validated['phone'],
+        'email' => $validated['email'],
+    ]);
+
+    // Trả về phản hồi JSON
+    return redirect()->route('thong-tin-tai-khoan')->with('success', 'Cập nhật thông tin tài khoản thành công!');
+}
 }

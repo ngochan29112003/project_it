@@ -53,6 +53,7 @@ Route::get('/nguoi-dung/profile', [SuaThongTinController::class, 'getviewThongTi
 Route::post('/nguoi-dung/{id}/update-profile', [SuaThongTinController::class, 'updateThongTin']);
 Route::post('/nguoi-dung/{id}/change-password', [SuaThongTinController::class, 'changePassword']);
 
+
 //Xử lý các route đã đăng nhập
 Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
@@ -72,6 +73,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/sinh-vien/delete/{id}',[QuanLySinhVienController::class,'deleteSinhVien'])->name('delete-sinh-vien');
         Route::get('/sinh-vien/edit/{id}', [QuanLySinhVienController::class, 'editSinhVien'])->name('edit-sinh-vien');
         Route::post('/sinh-vien/update/{id}', [QuanLySinhVienController::class, 'updateSinhVien'])->name('update-sinh-vien');
+        Route::get('/sinh-vien/export', [QuanLySinhVienController::class, 'exportSinhVien'])->name('export-sinh-vien');
 
         //QL Giảng Viên
         Route::get('/giang-vien',[QuanLyGiangVienController::class,'getViewDsGiangVien'])->name('giang-vien');
@@ -79,7 +81,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/giang-vien/delete/{id}',[QuanLyGiangVienController::class,'deleteGiangVien'])->name('delete-giang-vien');
         Route::get('/giang-vien/edit/{id}', [QuanLyGiangVienController::class, 'editGiangVien'])->name('edit-giang-vien');
         Route::post('/giang-vien/update/{id}', [QuanLyGiangVienController::class, 'updateGiangVien'])->name('update-giang-vien');
-
+        Route::get('/giang-vien/export', [QuanLyGiangVienController::class, 'exportGiangVien'])->name('export-giang-vien');
+        
         //QL Đề xuất (--Bàn sau--)
         Route::get('/de-xuat',[QuanLyDeXuatController::class,'getViewDsDeXuat'])->name('de-xuat');
 
@@ -89,6 +92,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/hoc-phan/delete/{id}',[QuanLyHocPhanController::class,'deleteHocPhan'])->name('delete-hoc-phan');
         Route::get('/hoc-phan/edit/{id}', [QuanLyHocPhanController::class, 'editHocPhan'])->name('edit-hoc-phan');
         Route::post('/hoc-phan/update/{id}', [QuanLyHocPhanController::class, 'updateHocPhan'])->name('update-hoc-phan');
+        Route::get('/export', [QuanLyHocPhanController::class, 'exportHocPhan'])->name('export-hoc-phan');
 
         //QL Lớp
         Route::get('/lop',[QuanLyLopController::class,'getViewDsLop'])->name('lop');
@@ -96,6 +100,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/lop/delete/{id}',[QuanLyLopController::class,'deleteLop'])->name('delete-lop');
         Route::get('/lop/edit/{id}', [QuanLyLopController::class, 'editLop'])->name('edit-lop');
         Route::post('/lop/update/{id}', [QuanLyLopController::class, 'updateLop'])->name('update-lop');
+        Route::get('/lop/export', [QuanLyLopController::class, 'exportLop'])->name('export-lop');
 
         //QL Khoa
         Route::get('/khoa',[QuanLyKhoaController::class,'getViewDsKhoa'])->name('khoa');
@@ -103,6 +108,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/khoa/delete/{id}',[QuanLyKhoaController::class,'deleteKhoa'])->name('delete-khoa');
         Route::get('/khoa/edit/{id}', [QuanLyKhoaController::class, 'editKhoa'])->name('edit-khoa');
         Route::post('/khoa/update/{id}', [QuanLyKhoaController::class, 'updateKhoa'])->name('update-khoa');
+        Route::get('/khoa/export', [QuanLyKhoaController::class, 'exportKhoa'])->name('export-khoa');
 
         //QL Lớp Học Phần
         Route::get('/lop-hoc-phan/{id}',[QuanLyLopHocPhanController::class,'viewLopHocPhan'])->name('lop-hoc-phan');
@@ -118,6 +124,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
     Route::get('/chi-tiet-hoc-phan/{id}',[ChiTietLopHocPhanController::class,'getViewChiTietLopHocPhan'])->name('chi-tiet-lop-hoc-phan');
     Route::post('/tham-gia-lop', [TrangChuController::class, 'thamGiaLop'])->name('thamGiaLop');
+    Route::post('/update-thong-tin-tai-khoan/{id}', [TrangChuController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
 
     //API
     Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');

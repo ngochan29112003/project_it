@@ -20,6 +20,11 @@ class HocPhanModel extends Model
     ];
     public $timestamps = false;
 
+    public function getHocPhan()
+    {
+        return DB::table('hoc_phan')
+            ->get();
+    }
     public function getLopHocPhan()
     {
         return DB::table('lop_hoc_phan')

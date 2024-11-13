@@ -79,61 +79,84 @@
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit" role="tabpanel">
                                 <h5 class="card-title" style="font-family: 'Arial', sans-serif;"><b>Chỉnh Sửa Hồ Sơ</b></h5>
-                                <form>
+                                <form id="profile-edit" enctype="multipart/form-data" method="POST" action="{{ route('update-thong-tin-tai-khoan', ['id' => $user->ma_nguoi_dung]) }}">
+                                    @csrf
                                     <div class="row mb-3">
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Ảnh Đại Diện</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <img src="{{asset('assets/img_user/user.png')}}" alt="Profile">
+                                            <!-- Hiển thị ảnh đại diện, nếu có -->
+                                            <img src="{{ asset('assets/img_user/' . ($user->hinh_anh ?: 'user.png')) }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
                                             <div class="pt-2">
-                                                <a href="#" class="btn btn-primary btn-sm" title="Tải ảnh đại diện mới"><i class="bi bi-upload"></i></a>
-                                                <a href="#" class="btn btn-danger btn-sm" title="Xóa ảnh đại diện"><i class="bi bi-trash"></i></a>
+                                                <!-- Thêm file input -->
+                                                <input type="file" name="profile_image" id="profileImageInput" accept="image/*" style="display: none;">
+                                                <a href="#" class="btn btn-primary btn-sm" title="Tải ảnh đại diện mới" onclick="document.getElementById('profileImageInput').click();">
+                                                    <i class="bi bi-upload"></i> Tải ảnh
+                                                </a>
+                                                <a  class="btn btn-danger btn-sm" title="Xóa ảnh đại diện" id="deleteProfileImageBtn">
+                                                    <i class="bi bi-trash"></i> Xóa ảnh
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Họ và Tên</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="text" class="form-control" value="Kevin Anderson" name="fullName">
+                                            <input type="text" class="form-control" id="edit_ten" value="{{ $user->ten_nguoi_dung }}" name="fullName">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Giới Tính</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <select class="form-select" name="gender">
-                                                <option value="Nam" selected>Nam</option>
-                                                <option value="Nữ">Nữ</option>
-                                                <option value="Khác">Khác</option>
+                                            <select class="form-select" name="gender" id="edit_gioitinh">
+                                                <option value="{{ $user->gioi_tinh }}" selected>
+                                                    {{ $user->gioi_tinh }}
+                                                </option>
+                                                @if ($user->gioi_tinh === 'Nam')
+                                                    <option value="Nữ">Nữ</option>
+                                                    <option value="Khác">Khác</option>
+                                                @elseif ($user->gioi_tinh === 'Nữ')
+                                                    <option value="Nam">Nam</option>
+                                                    <option value="Khác">Khác</option>
+                                                @else
+                                                    <option value="Nam">Nam</option>
+                                                    <option value="Nữ">Nữ</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Ngày Sinh</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="date" class="form-control" value="1990-01-01" name="dob">
+                                            <input type="date" class="form-control" value="{{$user->ngay_sinh}}" id="edit_ngaysinh" name="dob">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Nơi Sinh</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="text" class="form-control" value="New York, USA" name="birthPlace">
+                                            <input type="text" class="form-control" value="{{ $user->noi_sinh }}" id="edit_noisinh" name="birthPlace">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Địa Chỉ</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="text" class="form-control" value="A108 Adam Street, New York, NY 535022" name="address">
+                                            <input type="text" class="form-control" value="{{ $user->ho_khau_thuong_tru }}" id="edit_diachi" name="address">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Số Điện Thoại</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="tel" class="form-control" value="(436) 486-3538 x29071" name="phone">
+                                            <input type="tel" class="form-control" value="{{ $user->sdt }}" id="edit_sdt" name="phone">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Email</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="email" class="form-control" value="k.anderson@example.com" name="email">
+                                            <input type="email" class="form-control" value="{{ $user->email }}" id="edit_email" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-8 col-lg-9 offset-md-4 offset-lg-3">
+                                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                                         </div>
                                     </div>
                                 </form>
@@ -177,4 +200,10 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+<script>
+</script>
+
 @endsection
