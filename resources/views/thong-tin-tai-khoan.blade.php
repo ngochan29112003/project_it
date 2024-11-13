@@ -16,7 +16,7 @@
             <div class="col-xl-4">
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <img src="{{asset('assets/img_user/user.png')}}" alt="Thông tin tài khoản" class="rounded-circle">
+                        <img src="{{asset('assets/img_user/' . $user->hinh_anh)}}" alt="Thông tin tài khoản" class="rounded-circle">
                         <h2>{{ $user->ten_nguoi_dung }}</h2>
                         <h3>{{ $user->ten_quyen }}</h3>
                         <div class="social-links mt-2">
