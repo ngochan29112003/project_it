@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\QuanLyKhoaController;
 use App\Http\Controllers\admin\QuanLyLopController;
 use App\Http\Controllers\admin\QuanLySinhVienController;
 use App\Http\Controllers\admin\QuanLyTaiKhoanController;
+use App\Http\Controllers\admin\QuanLyCayTienTrinhController;
 use App\Http\Controllers\ChiTietLopHocPhanController;
 use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\giang_vien\ThongTinTaiKhoanGVController;
 
 use App\Http\Controllers\SuaThongTinController;
 use App\Http\Controllers\TrangChuController;
+use App\Http\Controllers\CayTienTrinhController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +54,9 @@ Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 Route::get('/nguoi-dung/profile', [SuaThongTinController::class, 'getviewThongTin']);
 Route::post('/nguoi-dung/{id}/update-profile', [SuaThongTinController::class, 'updateThongTin']);
 Route::post('/nguoi-dung/{id}/change-password', [SuaThongTinController::class, 'changePassword']);
+
+//Cây tiến trình
+Route::get('/cay-tien-trinh', [CayTienTrinhController::class, 'getViewCayTienTrinh'])->name('view-cay-tien-trinh');
 
 
 //Xử lý các route đã đăng nhập
@@ -83,8 +88,12 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/giang-vien/update/{id}', [QuanLyGiangVienController::class, 'updateGiangVien'])->name('update-giang-vien');
         Route::get('/giang-vien/export', [QuanLyGiangVienController::class, 'exportGiangVien'])->name('export-giang-vien');
         
-        //QL Đề xuất (--Bàn sau--)
-        Route::get('/de-xuat',[QuanLyDeXuatController::class,'getViewDsDeXuat'])->name('de-xuat');
+        //QL cây tiến trình
+        Route::get('/danh-sach-cay-tien-trinh',[QuanLyCayTienTrinhController::class,'getViewDsCTT'])->name('danh-sach-cay-tien-trinh');
+        Route::post('/cay-tien-trinh/add',[QuanLyCayTienTrinhController::class,'addCTT'])->name('add-cay-tien-trinh');
+        Route::delete('/cay-tien-trinh/delete/{id}',[QuanLyCayTienTrinhController::class,'deleteCTT'])->name('delete-cay-tien-trinh');
+        Route::get('/hoc-phan/edit/{id}', [QuanLyCayTienTrinhController::class, 'editHocPhan'])->name('edit-hoc-phan');
+        Route::post('/hoc-phan/update/{id}', [QuanLyCayTienTrinhController::class, 'updateHocPhan'])->name('update-hoc-phan');
 
         //QL Học phần
         Route::get('/hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('hoc-phan');

@@ -138,6 +138,13 @@ $nguoiDung = DB::table('nguoi_dung')
                 <span>Tài liệu cá nhân</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('view-cay-tien-trinh')}}">
+                <i class="bi bi-list"></i>
+                <span>Cây tiến trình các khoa</span>
+            </a>
+        </li>
     </ul>
 
 </aside>
@@ -157,6 +164,7 @@ $nguoiDung = DB::table('nguoi_dung')
 <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 
 
 </body>
