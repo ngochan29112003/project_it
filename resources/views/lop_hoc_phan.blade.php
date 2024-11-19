@@ -1,5 +1,5 @@
 @extends('master')
-@section("contents")
+@section('contents')
     <div class="container-fluid mt-4">
         <div class="d-flex justify-content-between mb-4 p-3 border rounded position-relative">
             <div class="d-flex flex-column">
@@ -79,7 +79,7 @@
                         <div class="modal-body">
                             <form id="formAddBaiGiang" enctype="multipart/form-data">
                                 @csrf
-                                <input name="id_lop_hoc_phan"  value="{{$chiTietLHP->id_lop_hoc_phan}}">
+                                <input name="id_lop_hoc_phan" hidden value="{{$chiTietLHP->id_lop_hoc_phan}}">
                                 <!-- Tên bài giảng -->
                                 <div class="mb-3">
                                     <label for="ten_bai_giang" class="form-label">Tên bài giảng</label>
@@ -289,41 +289,6 @@
     </div>
 
     <script>
-        document.querySelector('.thamGiaLHP').addEventListener('click', function() {
-            Swal.fire({
-                title: 'Bạn có chắc muốn ghi danh vào lớp này?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Có, ghi danh!',
-                cancelButtonText: 'Hủy'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch('{{ route('thamGiaLop') }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({
-                            ma_hoc_phan: {{ $chiTietLHP->id_lop_hoc_phan }}
-                        })
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                Swal.fire('Thành công!', data.message, 'success').then(() => location.reload());
-                            } else {
-                                Swal.fire('Lỗi!', 'Có lỗi xảy ra, vui lòng thử lại.', 'error');
-                            }
-                        })
-                        .catch(error => Swal.fire('Lỗi!', 'Không thể kết nối đến server.', 'error'));
-                }
-            });
-        });
-    </script>
-    <script>
         $('#formAddBaiGiang').submit(function (e) {
             e.preventDefault();
 
@@ -362,6 +327,44 @@
 
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Đặt toàn bộ mã liên quan đến addEventListener vào đây
+            document.querySelector('.thamGiaLHP').addEventListener('click', function () {
+                Swal.fire({
+                    title: 'Bạn có chắc muốn ghi danh vào lớp này?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Có, ghi danh!',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('{{ route('thamGiaLop') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                ma_hoc_phan: {{ $chiTietLHP->id_lop_hoc_phan }}
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire('Thành công!', data.message, 'success').then(() => location.reload());
+                                } else {
+                                    Swal.fire('Lỗi!', 'Có lỗi xảy ra, vui lòng thử lại.', 'error');
+                                }
+                            })
+                            .catch(error => Swal.fire('Lỗi!', 'Không thể kết nối đến server.', 'error'));
+                    }
+                });
+            });
+        });
+
     </script>
 @endsection
 
