@@ -148,8 +148,6 @@
             }
         });
 
-        var table = $('#tableKhoa').DataTable();
-
         $('#Formthemkhoa').submit(function (e) {
             e.preventDefault();
 

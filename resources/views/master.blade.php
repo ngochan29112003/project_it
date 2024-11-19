@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>LMS - Vlute</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="{{asset('assets/img/icon.png')}}">
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -18,7 +19,7 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
     <style>
         #sidebar {
@@ -146,7 +147,6 @@ $nguoiDung = DB::table('nguoi_dung')
 <main id="main" class="main">
     @yield('contents')
 </main>
-
 <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
@@ -156,7 +156,9 @@ $nguoiDung = DB::table('nguoi_dung')
 <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
 
 </body>

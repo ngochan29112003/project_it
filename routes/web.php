@@ -10,6 +10,8 @@ use App\Http\Controllers\admin\QuanLyKhoaController;
 use App\Http\Controllers\admin\QuanLyLopController;
 use App\Http\Controllers\admin\QuanLySinhVienController;
 use App\Http\Controllers\admin\QuanLyTaiKhoanController;
+use App\Http\Controllers\BaiGiangController;
+use App\Http\Controllers\BaiTapController;
 use App\Http\Controllers\ChiTietLopHocPhanController;
 use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
@@ -82,7 +84,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/giang-vien/edit/{id}', [QuanLyGiangVienController::class, 'editGiangVien'])->name('edit-giang-vien');
         Route::post('/giang-vien/update/{id}', [QuanLyGiangVienController::class, 'updateGiangVien'])->name('update-giang-vien');
         Route::get('/giang-vien/export', [QuanLyGiangVienController::class, 'exportGiangVien'])->name('export-giang-vien');
-        
+
         //QL Đề xuất (--Bàn sau--)
         Route::get('/de-xuat',[QuanLyDeXuatController::class,'getViewDsDeXuat'])->name('de-xuat');
 
@@ -122,9 +124,14 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/trang-chu',[TrangChuController::class,'viewTrangChu'])->name('trang-chu');
     Route::get('/tim-kiem-hoc-phan', [TrangChuController::class, 'viewTimKiem'])->name('tim-kiem-hoc-phan');
     Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
+
     Route::get('/chi-tiet-hoc-phan/{id}',[ChiTietLopHocPhanController::class,'getViewChiTietLopHocPhan'])->name('chi-tiet-lop-hoc-phan');
+    Route::post('/chi-tiet-hoc-phan/add', [ChiTietLopHocPhanController::class, 'addBaiGiang'])->name('add-bai-giang');
+
     Route::post('/tham-gia-lop', [TrangChuController::class, 'thamGiaLop'])->name('thamGiaLop');
     Route::post('/update-thong-tin-tai-khoan/{id}', [TrangChuController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
+
+    Route::get('/nop-bai',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
 
     //API
     Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaiGiangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\select;
 
 class ChiTietLopHocPhanController extends Controller
 {
@@ -25,7 +27,52 @@ class ChiTietLopHocPhanController extends Controller
             ->where('ma_nguoi_dung', $maNguoiDung)
             ->exists();
 
-//        dd($chiTietLHP);
-        return view('lop_hoc_phan', compact('chiTietLHP', 'daGhiDanh'));
+        $dsBaiGiang = DB::table('bai_giang')
+            ->where('id_lop_hoc_phan', $chiTietLHP->id_lop_hoc_phan)
+            ->get();
+//        dd($dsBaiGiang);
+        return view('lop_hoc_phan',
+            compact('chiTietLHP', 'daGhiDanh','dsBaiGiang'));
     }
+
+    public function addBaiGiang(Request $request)
+    {
+//        dd($request);
+        // Validate các trường dữ liệu
+        $validate = $request->validate([
+            'id_lop_hoc_phan'=>'int',
+            'ten_bai_giang' => 'required|string|max:255',
+            'noi_dung_bai_giang' => 'nullable|string',
+            'file' => 'nullable|file|max:20480', // 20MB
+            'video' => 'nullable|url', // 50MB
+            'link' => 'nullable|url',
+            'kiem_tra' => 'nullable|string',
+            'bai_tap' => 'nullable|string',
+        ]);
+
+//        // Khởi tạo biến lưu đường dẫn file và video
+//        $filePath = $videoPath = null;
+//
+//        // Kiểm tra và lưu file nếu có
+//        if ($request->hasFile('file')) {
+//            $filePath = $request->file('file')->move(public_path('file'), $request->file('file')->getClientOriginalName());
+//        }
+//
+//        // Kiểm tra và lưu video nếu có
+//        if ($request->hasFile('video')) {
+//            $videoPath = $request->file('video')->move(public_path('video'), $request->file('video')->getClientOriginalName());
+//        }
+
+        BaiGiangModel::create($validate);
+        // Trả về phản hồi JSON với dữ liệu bài giảng
+        return response()->json([
+            'success' => true,
+            'status' => 200,
+            'message' => 'Thêm thành công!',
+        ]);
+
+    }
+
+
+
 }
