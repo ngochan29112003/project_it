@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Nơi Sinh</div>
-                                    <div class="col-lg-9 col-md-8">{{$user->ngay_sinh}}</div>
+                                    <div class="col-lg-9 col-md-8">{{$user->noi_sinh}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Địa Chỉ</div>
@@ -77,15 +77,19 @@
                                 </div>
                             </div>
 
+                            <?php
+                            use Carbon\Carbon;
+                                ?>
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit" role="tabpanel">
                                 <h5 class="card-title" style="font-family: 'Arial', sans-serif;"><b>Chỉnh Sửa Hồ Sơ</b></h5>
-                                <form id="profile-edit" enctype="multipart/form-data" method="POST" action="{{ route('update-thong-tin-tai-khoan', ['id' => $user->ma_nguoi_dung]) }}">
+                                <form id="Formedit" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Ảnh Đại Diện</label>
                                         <div class="col-md-8 col-lg-9">
+                                            <input hidden name="ma_nguoi_dung" value="{{$user->ma_nguoi_dung}}">
                                             <!-- Hiển thị ảnh đại diện, nếu có -->
-                                            <img src="{{ asset('assets/img_user/' . ($user->hinh_anh ?: 'user.png')) }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+                                            <img src="{{ asset('assets/img_user/' . ($user->hinh_anh)) }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
                                             <div class="pt-2">
                                                 <!-- Thêm file input -->
                                                 <input type="file" name="profile_image" id="profileImageInput" accept="image/*" style="display: none;">
@@ -101,13 +105,13 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Họ và Tên</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="text" class="form-control" id="edit_ten" value="{{ $user->ten_nguoi_dung }}" name="fullName">
+                                            <input type="text" class="form-control" id="edit_ten" value="{{ $user->ten_nguoi_dung }}" name="ten_nguoi_dung">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Giới Tính</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <select class="form-select" name="gender" id="edit_gioitinh">
+                                            <select class="form-select" name="gioi_tinh" id="edit_gioitinh">
                                                 <option value="{{ $user->gioi_tinh }}" selected>
                                                     {{ $user->gioi_tinh }}
                                                 </option>
@@ -127,25 +131,25 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Ngày Sinh</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="date" class="form-control" value="{{$user->ngay_sinh}}" id="edit_ngaysinh" name="dob">
+                                            <input type="date" class="form-control" value="{{ $user->ngay_sinh = Carbon::createFromFormat('d/m/Y', $user->ngay_sinh)->format('Y-m-d') }}" id="edit_ngay_sinh" name="ngay_sinh">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Nơi Sinh</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="text" class="form-control" value="{{ $user->noi_sinh }}" id="edit_noisinh" name="birthPlace">
+                                            <input type="text" class="form-control" value="{{ $user->noi_sinh }}" id="edit_noi_sinh" name="noi_sinh">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Địa Chỉ</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="text" class="form-control" value="{{ $user->ho_khau_thuong_tru }}" id="edit_diachi" name="address">
+                                            <input type="text" class="form-control" value="{{ $user->ho_khau_thuong_tru }}" id="edit_dia_chi" name="ho_khau_thuong_tru">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Số Điện Thoại</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="tel" class="form-control" value="{{ $user->sdt }}" id="edit_sdt" name="phone">
+                                            <input type="tel" class="form-control" value="{{ $user->sdt }}" id="edit_sdt" name="sdt" pattern="[0-9]{10,15}">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -200,10 +204,46 @@
             </div>
         </div>
     </section>
+
+    <script>
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#Formedit').submit(function (e) {
+            e.preventDefault();
+            var url = "{{ route('update-thong-tin-tai-khoan') }}";
+            var formData = new FormData(this);
+
+            // Kiểm tra ảnh có bị xóa không
+            if ($(this).attr('data-delete-image') === 'true') {
+                formData.append('delete_image', 'true');
+            }
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success("Thông tin đã được cập nhật.");
+                        // setTimeout(function () {
+                        //     location.reload();
+                        // }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors;
+                        for (const [field, messages] of Object.entries(errors)) {
+                            toastr.error(messages[0]);
+                        }
+                    } else {
+                        toastr.error("Có lỗi xảy ra.");
+                    }
+                }
+            });
+        });
+    </script>
 @endsection
 
-@section('scripts')
-<script>
-</script>
 
-@endsection

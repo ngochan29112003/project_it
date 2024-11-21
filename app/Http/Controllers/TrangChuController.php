@@ -43,6 +43,7 @@ class TrangChuController extends Controller
 
         $thongtin = new NguoiDungModel();
         $user = $thongtin->getthongtin();
+//        dd($user);
         return view('thong-tin-tai-khoan', compact('nguoiDung','nguoi_dung', 'user'));
     }
 
@@ -65,46 +66,47 @@ class TrangChuController extends Controller
         return response()->json(['success' => true, 'message' => 'Bạn đã ghi danh thành công!']);
     }
 
-    public function updateTTTK(Request $request, $id)
-{
-    // Xác thực dữ liệu từ form
-    $validated = $request->validate([
-        'fullName' => 'required|string',
-        'gender' => 'required|string',
-        'dob' => 'required|date',
-        'birthPlace' => 'required|string',
-        'address' => 'required|string',
-        'phone' => 'required|string',
-        'email' => 'required|email',
-    ]);
+    public function updateTTTK(Request $request)
+    {
+        dd($request);
+        $validated = $request->validate([
+            'ma_nguoi_dung'=> 'int',
+            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra file ảnh
+            'ten_nguoi_dung' => 'required|string|max:255',
+            'gioi_tinh' => 'required|string',
+            'ngay_sinh' => 'required|date',
+            'noi_sinh' => 'nullable|string|max:255',
+            'ho_khau_thuong_tru' => 'nullable|string|max:255',
+            'email' => 'required|email',
+            'sdt' => 'required|string|max:15',
+        ]);
 
-    // Lấy thông tin người dùng từ cơ sở dữ liệu
-    $tttk = NguoiDungModel::findOrFail($id);
-    // Kiểm tra xem có ảnh mới hay không
-    if ($request->hasFile('profile_image') && $request->file('profile_image')->isValid()) {
-        // Lấy tệp ảnh và lưu vào thư mục public/assets/img_user
-        $file = $request->file('profile_image');
-        $fileName = $file->getClientOriginalName();  // Lấy tên gốc của ảnh
 
-        // Lưu ảnh vào thư mục public/assets/img_user
-        $file->move(public_path('assets/img_user'), $fileName);
+        $thongtintk = NguoiDungModel::findOrFail($validated['ma_nguoi_dung']);
 
-        // Cập nhật tên ảnh vào cơ sở dữ liệu
-        $tttk->hinh_anh = $fileName;
+        // Xử lý file upload
+        if ($request->hasFile('hinh_anh')) {
+            $file = $request->file('hinh_anh');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/img_user'), $fileName);
+            $validated['hinh_anh'] = $fileName;
+
+            // Xóa ảnh cũ nếu có
+            if ($request->input('delete_image') === "true") {
+                if ($thongtintk->hinh_anh && file_exists(public_path('assets/img_user/' . $thongtintk->hinh_anh))) {
+                    unlink(public_path('assets/img_user/' . $thongtintk->hinh_anh));
+                }
+                $validated['hinh_anh'] = null; // Xóa ảnh khỏi DB
+            }
+        }
+
+        $thongtintk->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'thongtintk' => $thongtintk,
+        ]);
     }
 
-    // Cập nhật thông tin người dùng
-    $tttk->update([
-        'ten_nguoi_dung' => $validated['fullName'],
-        'gioi_tinh' => $validated['gender'],
-        'ngay_sinh' => $validated['dob'],
-        'noi_sinh' => $validated['birthPlace'],
-        'ho_khau_thuong_tru' => $validated['address'],
-        'sdt' => $validated['phone'],
-        'email' => $validated['email'],
-    ]);
 
-    // Trả về phản hồi JSON
-    return redirect()->route('thong-tin-tai-khoan')->with('success', 'Cập nhật thông tin tài khoản thành công!');
-}
 }
