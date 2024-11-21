@@ -92,8 +92,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/danh-sach-cay-tien-trinh',[QuanLyCayTienTrinhController::class,'getViewDsCTT'])->name('danh-sach-cay-tien-trinh');
         Route::post('/cay-tien-trinh/add',[QuanLyCayTienTrinhController::class,'addCTT'])->name('add-cay-tien-trinh');
         Route::delete('/cay-tien-trinh/delete/{id}',[QuanLyCayTienTrinhController::class,'deleteCTT'])->name('delete-cay-tien-trinh');
-        Route::get('/hoc-phan/edit/{id}', [QuanLyCayTienTrinhController::class, 'editHocPhan'])->name('edit-hoc-phan');
-        Route::post('/hoc-phan/update/{id}', [QuanLyCayTienTrinhController::class, 'updateHocPhan'])->name('update-hoc-phan');
+        Route::get('/cay-tien-trinh/edit/{id}', [QuanLyCayTienTrinhController::class, 'editCTT'])->name('edit-cay-tien-trinh');
+        Route::post('/cay-tien-trinh/update/{id}', [QuanLyCayTienTrinhController::class, 'updateCTT'])->name('update-cay-tien-trinh');
 
         //QL Học phần
         Route::get('/hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('hoc-phan');

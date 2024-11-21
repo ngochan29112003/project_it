@@ -70,4 +70,48 @@ class QuanLyCayTienTrinhController extends Controller
             'message' => 'Xóa thành công'
         ]);
     }
+
+    public function editCTT($id)
+    {
+        $ctt = CayTienTrinhModel::findOrFail($id);
+        return response()->json([
+            'ctt' => $ctt
+        ]);
+    }
+
+    public function updateCTT(Request $request, $id)
+{
+    // Xác thực dữ liệu từ form
+    $validated = $request->validate([
+        'ma_khoa' => 'required|string',
+        'khoa_hoc' => 'required|string',
+    ]);
+
+    // Lấy thông tin cây tiến trình từ database
+    $ctt = CayTienTrinhModel::findOrFail($id);
+
+    // Kiểm tra và xử lý file ảnh
+    if ($request->hasFile('cay_tien_trinh') && $request->file('cay_tien_trinh')->isValid()) {
+        // Lấy tệp ảnh và lưu vào thư mục public/assets/img_tientrinh
+        $file = $request->file('cay_tien_trinh');
+        $fileName = $file->getClientOriginalName(); // Lấy tên gốc của file
+        $file->move(public_path('assets/img_tientrinh'), $fileName);
+
+        // Cập nhật tên file vào database
+        $ctt->cay_tien_trinh = $fileName;
+    }
+
+    // Cập nhật các thông tin khác
+    $ctt->update([
+        'ma_khoa' => $validated['ma_khoa'],
+        'khoa_hoc' => $validated['khoa_hoc'],
+    ]);
+
+    // Trả về phản hồi JSON
+    return response()->json([
+        'success' => true,
+        'ctt' => $ctt,
+        'message' => 'Cập nhật cây tiến trình thành công!',
+    ]);
+}
 }

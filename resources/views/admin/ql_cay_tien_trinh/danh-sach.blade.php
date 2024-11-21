@@ -116,71 +116,40 @@
 </div>
 
         <!-- ======= Modal sửa (tìm hiểu Modal này trên BS5) ======= -->
-        <div class="modal fade" id="Modeleditgiangvien">
-            <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
+        <div class="modal fade" id="Modelsuactt">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Sửa giảng viên</h4>
+                        <h4 class="modal-title">Sửa cây tiến trình</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="Formeditgiangvien" enctype="multipart/form-data">
+                        <form id="Formsuactt" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                    <label for="ten_nguoi_dung" class="form-label">Họ tên</label>
-                                    <input type="text" class="form-control" name="ten_nguoi_dung" id="ten_nguoi_dung_edit" required>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="ma_khoa" class="form-label">Tên khoa</label>
-                                    <select class="form-select" name="ma_khoa" id="ma_khoa">
+                                    <label for="ma_khoa" class="form-label">Tên khoa</label>
+                                    <select class="form-select" name="ma_khoa" id="edit_ma_khoa">
                                         <option value="" disabled selected>Chọn khoa</option>
                                         @foreach ($list_khoa as $item)
-                                            <option value="{{ $item->ma_khoa}}">{{ $item->ten_khoa}} </option>
+                                            <option value="{{ $item->ma_khoa }}">{{ $item->ten_khoa }}</option>
                                         @endforeach
                                     </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="gioi_tinh" class="form-label">Giới tính</label>
-                                    <select class="form-select" name="gioi_tinh" id="gioi_tinh_edit">
-                                        <option value="" disabled selected>Chọn giới tính</option>
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ">Nữ</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="ngay_sinh" class="form-label">Ngày sinh</label>
-                                    <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh_edit" required>
                                 </div>
                             </div>
                             <div class="row">
+                            <div class="col-md-6 mb-3">
+    <label for="cay_tien_trinh" class="form-label">Hình cây tiến trình</label>
+    <input type="file" class="form-control" name="cay_tien_trinh" id="edit_cay_tien_trinh">
+    <p id="file-name" class="text-muted"></p> <!-- Hiển thị tên file -->
+</div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="noi_sinh" class="form-label">Nơi sinh</label>
-                                    <input type="text" class="form-control" name="noi_sinh" id="noi_sinh_edit" required>
+                                    <label for="khoa_hoc" class="form-label">Khóa học</label>
+                                    <input type="text" class="form-control" id="edit_khoa_hoc" name="khoa_hoc" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="ho_khau_thuong_tru" class="form-label">Hộ khẩu thường trú</label>
-                                    <input type="text" class="form-control" name="ho_khau_thuong_tru" id="ho_khau_thuong_tru_edit" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cccd" class="form-label">Căn cước công dân</label>
-                                    <input type="text" class="form-control" name="cccd" id="cccd_edit" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="sdt" class="form-label">Số điện thoại</label>
-                                    <input type="text" class="form-control" name="sdt" id="sdt_edit" required>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email_edit" required>
                             </div>
                             <div class="text-end">
-                                <button type="submit" class="btn btn-primary">Sửa</button>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                             </div>
                         </form>
@@ -273,6 +242,64 @@
                             toastr.error("Đã xãy ra lỗi.", "Thất bại");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#table').on('click', '.edit-btn', function () {
+            var ctt = $(this).data('id');
+
+            $('#Formsuactt').data('id', ctt);
+            var url = "{{ route('edit-cay-tien-trinh', ':id') }}";
+            url = url.replace(':id', ctt);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+    var data = response.ctt;
+
+    $('#edit_ma_khoa').val(data.ma_khoa);
+    $('#edit_khoa_hoc').val(data.khoa_hoc);
+
+    // Hiển thị tên file
+    if (data.hinh_anh) {
+        $('#file-name').text(data.hinh_anh); // Hiển thị tên file hiện tại
+    } else {
+        $('#file-name').text("Chưa có file nào được chọn.");
+    }
+
+    $('#Modelsuactt').modal('show');
+},
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#Formsuactt').submit(function (e) {
+            e.preventDefault();
+            var cttid = $(this).data('id');
+            var url = "{{ route('update-cay-tien-trinh', ':id') }}";
+            url = url.replace(':id', cttid);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#Modelsuactt').modal('hide');
+                        toastr.success(response.response, "Sửa thành công");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Lỗi");
                 }
             });
         });
