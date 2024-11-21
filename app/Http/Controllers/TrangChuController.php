@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NguoiDungModel;
 use App\Models\TimKiemMoDel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -68,7 +69,6 @@ class TrangChuController extends Controller
 
     public function updateTTTK(Request $request)
     {
-        dd($request);
         $validated = $request->validate([
             'ma_nguoi_dung'=> 'int',
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra file ảnh
@@ -81,7 +81,6 @@ class TrangChuController extends Controller
             'sdt' => 'required|string|max:15',
         ]);
 
-
         $thongtintk = NguoiDungModel::findOrFail($validated['ma_nguoi_dung']);
 
         // Xử lý file upload
@@ -91,15 +90,17 @@ class TrangChuController extends Controller
             $file->move(public_path('assets/img_user'), $fileName);
             $validated['hinh_anh'] = $fileName;
 
-            // Xóa ảnh cũ nếu có
-            if ($request->input('delete_image') === "true") {
-                if ($thongtintk->hinh_anh && file_exists(public_path('assets/img_user/' . $thongtintk->hinh_anh))) {
-                    unlink(public_path('assets/img_user/' . $thongtintk->hinh_anh));
+            // Kiểm tra nếu người dùng yêu cầu xóa ảnh cũ và ảnh cũ không phải là 'user.png'
+            if ($request->input('delete_image') === "true" && $thongtintk->hinh_anh && $thongtintk->hinh_anh !== 'user.png') {
+                // Kiểm tra sự tồn tại của file ảnh cũ và xóa nó
+                $oldImagePath = public_path('assets/img_user/' . $thongtintk->hinh_anh);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath); // Xóa ảnh cũ
                 }
-                $validated['hinh_anh'] = null; // Xóa ảnh khỏi DB
             }
         }
 
+        // Cập nhật thông tin người dùng với ảnh mới hoặc không có thay đổi ảnh
         $thongtintk->update($validated);
 
         return response()->json([
@@ -107,6 +108,51 @@ class TrangChuController extends Controller
             'thongtintk' => $thongtintk,
         ]);
     }
+
+
+
+//    public function updateTTTK(Request $request)
+//    {
+////        dd($request);
+//        $validated = $request->validate([
+//            'ma_nguoi_dung'=> 'int',
+//            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra file ảnh
+//            'ten_nguoi_dung' => 'required|string|max:255',
+//            'gioi_tinh' => 'required|string',
+//            'ngay_sinh' => 'required|date',
+//            'noi_sinh' => 'nullable|string|max:255',
+//            'ho_khau_thuong_tru' => 'nullable|string|max:255',
+//            'email' => 'required|email',
+//            'sdt' => 'required|string|max:15',
+//        ]);
+//
+//
+//        $thongtintk = NguoiDungModel::findOrFail($validated['ma_nguoi_dung']);
+//
+//
+//        // Xử lý file upload
+//        if ($request->hasFile('hinh_anh')) {
+//            $file = $request->file('hinh_anh');
+//            $fileName = time() . '_' . $file->getClientOriginalName();
+//            $file->move(public_path('assets/img_user'), $fileName);
+//            $validated['hinh_anh'] = $fileName;
+//
+//            // Xóa ảnh cũ nếu có
+//            if ($request->input('delete_image') === "true") {
+//                if ($thongtintk->hinh_anh && file_exists(public_path('assets/img_user/' . $thongtintk->hinh_anh))) {
+//                    unlink(public_path('assets/img_user/' . $thongtintk->hinh_anh));
+//                }
+//                $validated['hinh_anh'] = null; // Xóa ảnh khỏi DB
+//            }
+//        }
+//
+//        $thongtintk->update($validated);
+//
+//        return response()->json([
+//            'success' => true,
+//            'thongtintk' => $thongtintk,
+//        ]);
+//    }
 
 
 }

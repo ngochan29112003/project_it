@@ -77,9 +77,7 @@
                                 </div>
                             </div>
 
-                            <?php
-                            use Carbon\Carbon;
-                                ?>
+
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit" role="tabpanel">
                                 <h5 class="card-title" style="font-family: 'Arial', sans-serif;"><b>Chỉnh Sửa Hồ Sơ</b></h5>
                                 <form id="Formedit" enctype="multipart/form-data">
@@ -92,13 +90,13 @@
                                             <img src="{{ asset('assets/img_user/' . ($user->hinh_anh)) }}" alt="Profile" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
                                             <div class="pt-2">
                                                 <!-- Thêm file input -->
-                                                <input type="file" name="profile_image" id="profileImageInput" accept="image/*" style="display: none;">
+                                                <input type="file" name="hinh_anh" id="profileImageInput" style="display: none;" onchange="previewImage();">
                                                 <a href="#" class="btn btn-primary btn-sm" title="Tải ảnh đại diện mới" onclick="document.getElementById('profileImageInput').click();">
                                                     <i class="bi bi-upload"></i> Tải ảnh
                                                 </a>
-                                                <a  class="btn btn-danger btn-sm" title="Xóa ảnh đại diện" id="deleteProfileImageBtn">
-                                                    <i class="bi bi-trash"></i> Xóa ảnh
-                                                </a>
+{{--                                                <a href="#" class="btn btn-danger btn-sm" title="Xóa ảnh đại diện" id="deleteProfileImageBtn">--}}
+{{--                                                    <i class="bi bi-trash"></i> Xóa ảnh--}}
+{{--                                                </a>--}}
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +129,7 @@
                                     <div class="row mb-3">
                                         <label class="col-lg-3 col-md-4 col-form-label">Ngày Sinh</label>
                                         <div class="col-lg-9 col-md-8">
-                                            <input type="date" class="form-control" value="{{ $user->ngay_sinh = Carbon::createFromFormat('d/m/Y', $user->ngay_sinh)->format('Y-m-d') }}" id="edit_ngay_sinh" name="ngay_sinh">
+                                            <input type="date" class="form-control" value="{{ $user->ngay_sinh }}" id="edit_ngay_sinh" name="ngay_sinh">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -226,9 +224,9 @@
                 success: function (response) {
                     if (response.success) {
                         toastr.success("Thông tin đã được cập nhật.");
-                        // setTimeout(function () {
-                        //     location.reload();
-                        // }, 500);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 500);
                     }
                 },
                 error: function (xhr) {
@@ -244,6 +242,35 @@
             });
         });
     </script>
+    <script>
+        function previewImage() {
+            const fileInput = document.getElementById('profileImageInput');
+            const file = fileInput.files[0];
+            const imagePreview = document.querySelector('img');  // Lấy phần tử img để cập nhật hình ảnh
+
+            // Kiểm tra nếu người dùng chọn file và nếu file là hình ảnh
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;  // Cập nhật src của ảnh
+
+                    // Hiển thị thông báo thành công bằng Toastr
+                    toastr.success('Thêm ảnh đại diện thành công!', 'Thông Báo');
+                };
+
+                reader.readAsDataURL(file);  // Đọc file hình ảnh và tạo URL tạm thời
+            }
+        }
+
+        // Xử lý sự kiện xóa ảnh
+        document.getElementById('deleteProfileImageBtn').addEventListener('click', function() {
+            const imagePreview = document.querySelector('img');
+            imagePreview.src = "{{ asset('assets/img_user/default.png') }}";  // Đặt lại ảnh mặc định hoặc ảnh ban đầu
+            document.getElementById('profileImageInput').value = '';  // Xóa giá trị input file
+        });
+    </script>
+
 @endsection
 
 
