@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\KhoaModel;
+use App\Models\NguoiDungModel;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -15,9 +16,11 @@ class QuanLyKhoaController extends Controller
     {
         $modelKhoa = new KhoaModel();
         $list_khoa = $modelKhoa->getKhoa();
+        $modelGV = new NguoiDungModel();
+        $list_gv=$modelGV->getGiangVien();
 //        dd($list_khoa);
         return view('admin.ql_khoa.danh-sach',
-            compact('list_khoa'));
+            compact('list_khoa','list_gv'));
     }
 
     function addKhoa(Request $request)

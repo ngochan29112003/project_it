@@ -47,7 +47,7 @@
                                     <tr>
                                         <td class="align-middle">{{ $stt++ }}</td>
                                         <td class="align-middle">{{ $item->ten_khoa }}</td>
-                                        <td class="align-middle">{{ $item->truong_khoa }}</td>
+                                        <td class="align-middle">{{ $item->truong_khoa_ten }}</td> <!-- Hiển thị tên trưởng khoa -->
                                         <td class="text-center align-middle">
                                             <button
                                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
@@ -90,7 +90,12 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="truong_khoa" class="form-label">Trưởng khoa</label>
-                                <input type="text" class="form-control" name="truong_khoa" id="truong_khoa" required>
+                                <select class="form-select" name="truong_khoa" id="truong_khoa">
+                                    <option value="" disabled selected>Chọn trưởng khoa</option>
+                                    @foreach ($list_gv as $item)
+                                        <option value="{{ $item->ma_nguoi_dung}}">{{ $item->ten_nguoi_dung}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="text-end">
@@ -121,7 +126,12 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="truong_khoa" class="form-label">Trưởng khoa</label>
-                                <input type="text" class="form-control" name="truong_khoa" id="truong_khoa_edit" required>
+                                <select class="form-select" name="truong_khoa" id="truong_khoa_edit">
+                                    <option value="" disabled selected>Chọn trưởng khoa</option>
+                                    @foreach ($list_gv as $item)
+                                        <option value="{{ $item->ma_nguoi_dung}}">{{ $item->ten_nguoi_dung}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="text-end">

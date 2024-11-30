@@ -25,17 +25,47 @@ class QuanLySinhVienController extends Controller
     function addSinhVien(Request $request)
     {
         $validate = $request->validate([
-            'ten_nguoi_dung'=>'string',
-            'ma_khoa'=>'int',
-            'ma_lop'=>'int',
-            'gioi_tinh'=>'string',
+            'ten_nguoi_dung'=>'required|string',
+            'ma_khoa'=>'required|int',
+            'ma_lop'=>'required|int',
+            'gioi_tinh'=>'required|string|in:Nam,Nữ',
             'noi_sinh'=>'string',
-            'ngay_sinh'=>'date',
-            'ho_khau_thuong_tru'=>'string',
-            'cccd'=>'string',
-            'sdt'=>'string',
-            'email'=>'string',
-        ]);
+            'ngay_sinh'=>[
+                'required',
+                'date',
+                function ($attribute, $value, $fail) {
+                    $minAgeDate = now()->subYears(18)->format('Y-m-d');
+                    if ($value > $minAgeDate) {
+                        $fail('Ngày sinh phải đủ 18 tuổi.');
+                    }
+                },
+            ],
+            'ho_khau_thuong_tru'=>'nullable|string|max:255',
+            'cccd' => [
+                'required',
+                'string',
+                'regex:/^0[0-9]{11}$/', // Đảm bảo chỉ chứa đúng 12 chữ số
+            ],
+            'sdt'=>[
+                'required',
+                'string',
+                'regex:/^0[0-9]{9}$/', // Định dạng số điện thoại bắt đầu bằng 0 và có 10 chữ số
+            ],
+            'email'=>[
+                'required',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|vn|edu|gov)$/',
+                'max:255',
+            ],
+        ],[
+                'ngay_sinh.required' => 'Ngày sinh là bắt buộc.',
+                'ngay_sinh.date' => 'Ngày sinh phải là một ngày hợp lệ.',
+                'email.required' => 'Email là bắt buộc.',
+                'email.regex' => 'Email đảm bảo có @ và có đuôi miền hợp lệ như .com, .vn, .org, ...',
+                'email.max' => 'Email không được vượt quá 255 ký tự.',
+                'sdt.regex' => 'Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 chữ số.',
+                'cccd.regex' => 'Căn cước công dân phải bắt đầu bằng số 0 và có đúng 12 chữ số.',
+            ]);
+
 
         // Thêm ma_quyen với giá trị mặc định là 3
         $validate['ma_quyen'] = 3;
@@ -73,17 +103,46 @@ class QuanLySinhVienController extends Controller
     public function updateSinhVien(Request $request, $id)
     {
         $validated = $request->validate([
-            'ten_nguoi_dung'=>'string',
-            'ma_khoa'=>'int',
-            'ma_lop'=>'int',
-            'gioi_tinh'=>'string',
+            'ten_nguoi_dung'=>'required|string',
+            'ma_khoa'=>'required|int',
+            'ma_lop'=>'required|int',
+            'gioi_tinh'=>'required|string|in:Nam,Nữ',
             'noi_sinh'=>'string',
-            'ngay_sinh'=>'date',
-            'ho_khau_thuong_tru'=>'string',
-            'cccd'=>'string',
-            'sdt'=>'string',
-            'email'=>'string',
-        ]);
+            'ngay_sinh'=>[
+                'required',
+                'date',
+                function ($attribute, $value, $fail) {
+                    $minAgeDate = now()->subYears(18)->format('Y-m-d');
+                    if ($value > $minAgeDate) {
+                        $fail('Ngày sinh phải đủ 18 tuổi.');
+                    }
+                },
+            ],
+            'ho_khau_thuong_tru'=>'nullable|string|max:255',
+            'cccd' => [
+                'required',
+                'string',
+                'regex:/^0[0-9]{11}$/', // Đảm bảo chỉ chứa đúng 12 chữ số
+            ],
+            'sdt'=>[
+                'required',
+                'string',
+                'regex:/^0[0-9]{9}$/', // Định dạng số điện thoại bắt đầu bằng 0 và có 10 chữ số
+            ],
+            'email'=>[
+                'required',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|vn|edu|gov)$/',
+                'max:255',
+            ],
+        ],[
+                'ngay_sinh.required' => 'Ngày sinh là bắt buộc.',
+                'ngay_sinh.date' => 'Ngày sinh phải là một ngày hợp lệ.',
+                'email.required' => 'Email là bắt buộc.',
+                'email.regex' => 'Email đảm bảo có @ và có đuôi miền hợp lệ như .com, .vn, .org, ...',
+                'email.max' => 'Email không được vượt quá 255 ký tự.',
+                'sdt.regex' => 'Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 chữ số.',
+                'cccd.regex' => 'Căn cước công dân phải bắt đầu bằng số 0 và có đúng 12 chữ số.',
+            ]);
 
         $validated['ma_quyen'] = 3;
 
