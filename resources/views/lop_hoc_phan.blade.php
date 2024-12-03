@@ -94,14 +94,14 @@
 
                                 <!-- Tải lên file -->
                                 <div class="mb-3">
-                                    <label for="file" class="form-label">Tải lên tài liệu</label>
-                                    <input type="file" class="form-control" id="file" name="file" accept=".doc,.docx,.pdf,.xls,.xlsx">
+                                    <label for="file_path" class="form-label">Tải lên tài liệu</label>
+                                    <input type="file" class="form-control" id="file_path" name="file_path" accept=".doc,.docx,.pdf,.xls,.xlsx">
                                 </div>
 
                                 <!-- Tải lên video -->
                                 <div class="mb-3">
-                                    <label for="video" class="form-label">Tải lên video</label>
-                                    <input type="file" class="form-control" id="video" name="video" accept="video/*">
+                                    <label for="video_path" class="form-label">Tải lên video</label>
+                                    <input type="url" class="form-control" id="video_path" name="video_path" placeholder="Nhập link video bài giảng (nếu có)">
                                 </div>
 
                                 <!-- Link bài giảng -->
@@ -197,40 +197,20 @@
 
                                 <!-- Video -->
                                 @if($baiGiang->video_path)
-                                    <div class="mb-3">
-                                        <h5 class="fw-bold mb-1 d-flex align-items-center">
-                                            <i class="bi bi-play-circle-fill me-2" style="font-size: 1.2rem; color: #ffc107;"></i>
-                                            Link video:
-                                        </h5>
-                                        <p class="text-dark ms-4">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal"
-                                               class="text-decoration-none">
-                                                Xem video
-                                            </a>
-                                        </p>
-                                    </div>
-
-                                    <!-- Modal Video -->
-                                    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="videoModalLabel">Video</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h5 class="text-dark ms-4">
-                                                        <a href="{{ asset('storage/' . $baiGiang->video_path) }}"
-                                                           target="_blank"
-                                                           class="bi bi-play-circle-fill text-decoration-none">
-                                                            {{ asset('storage/' . $baiGiang->video_path) }}
-                                                        </a>
-                                                    </h5>
-                                                </div>
-                                            </div>
+                                        <div>
+                                            <h5 class="fw-bold mb-1 d-flex align-items-center">
+                                                <i class="bi bi-camera-video me-2" style="font-size: 1.2rem; color: #9628a7;"></i>
+                                                Video bài giảng:
+                                            </h5>
+                                            <p class="text-dark ms-4">
+                                                <a href="{{ $baiGiang->video_path }}"
+                                                   target="_blank"
+                                                   class="text-decoration-none">
+                                                    {{ $baiGiang->video_path }}
+                                                </a>
+                                            </p>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
 
                                 <!-- Link học trực tuyến -->
                                 @if($baiGiang->link)

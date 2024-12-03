@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="d-flex align-content-center">
-                    <button class="btn btn-primary">Sửa bài nộp</button>
+                    <a href="{{route('nop-bai-tap')}}" class="btn btn-primary">Sửa bài nộp</a>
                 </div>
 
                 <div class="submission-feedback mt-4">

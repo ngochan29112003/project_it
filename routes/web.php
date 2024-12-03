@@ -17,6 +17,7 @@ use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
 use App\Http\Controllers\giang_vien\TimKiemHPController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NopBaiTapController;
 use App\Http\Controllers\sinh_vien\DashBoardController;
 use App\Http\Controllers\sinh_vien\SinhVienController;
 
@@ -132,6 +133,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::post('/update-thong-tin-tai-khoan/{id}', [TrangChuController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
 
     Route::get('/nop-bai',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
+    Route::get('/nop-bai-tap',[NopBaiTapController::class,'getView'])->name('nop-bai-tap');
 
     //API
     Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
