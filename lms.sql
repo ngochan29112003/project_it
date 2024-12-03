@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th10 19, 2024 lúc 04:02 PM
--- Phiên bản máy phục vụ: 5.7.24
--- Phiên bản PHP: 8.1.25
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 03, 2024 lúc 07:50 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bai_giang` (
   `ma_bai_giang` int(11) NOT NULL,
-  `ten_bai_giang` text,
-  `file_path` text,
-  `video_path` text,
-  `link` text,
-  `noi_dung_bai_giang` text,
+  `ten_bai_giang` text DEFAULT NULL,
+  `file_path` text DEFAULT NULL,
+  `video_path` text DEFAULT NULL,
+  `link` text DEFAULT NULL,
+  `noi_dung_bai_giang` text DEFAULT NULL,
   `id_lop_hoc_phan` int(11) DEFAULT NULL,
-  `kiem_tra` text,
-  `bai_tap` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `kiem_tra` text DEFAULT NULL,
+  `bai_tap` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `bai_giang`
@@ -46,9 +46,8 @@ CREATE TABLE `bai_giang` (
 INSERT INTO `bai_giang` (`ma_bai_giang`, `ten_bai_giang`, `file_path`, `video_path`, `link`, `noi_dung_bai_giang`, `id_lop_hoc_phan`, `kiem_tra`, `bai_tap`) VALUES
 (1, 'Thông báo', 'hoc_phan.pdf', '423dsad_321easd_#21dsad', 'https://meet.google.com/gxy-oznd-mxe', 'Lịch học tuần này\nT2 7h - 8h20\nT3 3h - 4h50', 23, 'Kiểm tra 15 phút', NULL),
 (2, 'Đề cương học phần', 'DeCuong.pdf', NULL, NULL, NULL, 23, NULL, 'Nộp bai tập'),
-(4, 'hihi', NULL, NULL, 'https://ems.vlute.edu.vn/vTKBGiangVien', 'jjjjjj', NULL, NULL, NULL),
 (5, 'Bài tập trên lớp', NULL, NULL, NULL, 'Nộp bài trước 15 giờ', 23, NULL, 'Bài tập'),
-(23, 'a', NULL, NULL, NULL, 'a', 23, NULL, NULL);
+(6, 'Tài liệu kiểm tra giữa kì', 'DeCuong.pdf', NULL, 'https://ems.vlute.edu.vn/vTKBGiangVien', 'Nhớ học bài kỹ nhe các em', 23, 'Kiểm tra 15 phút', NULL);
 
 -- --------------------------------------------------------
 
@@ -60,13 +59,13 @@ CREATE TABLE `bai_kiem_tra` (
   `ma_bai_kiem_tra` int(11) NOT NULL,
   `ma_hoc_phan` int(11) DEFAULT NULL,
   `ma_sinh_vien_lam` int(11) DEFAULT NULL,
-  `tieu_de` text,
-  `dap_an_da_chon` text,
-  `dap_an_dung` text,
-  `so_cau` text,
-  `ngay_kiem_tra` text,
-  `thoi_gian_lam_bai` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `tieu_de` text DEFAULT NULL,
+  `dap_an_da_chon` text DEFAULT NULL,
+  `dap_an_dung` text DEFAULT NULL,
+  `so_cau` text DEFAULT NULL,
+  `ngay_kiem_tra` text DEFAULT NULL,
+  `thoi_gian_lam_bai` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -77,10 +76,10 @@ CREATE TABLE `bai_kiem_tra` (
 CREATE TABLE `bai_tap` (
   `ma_bai_tap` int(11) NOT NULL,
   `ma_hoc_phan` int(11) DEFAULT NULL,
-  `ten_bai_tap` text,
-  `noi_dung_bai_tap` text,
+  `ten_bai_tap` text DEFAULT NULL,
+  `noi_dung_bai_tap` text DEFAULT NULL,
   `han_nop` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -90,13 +89,13 @@ CREATE TABLE `bai_tap` (
 
 CREATE TABLE `cay_tien_trinh` (
   `ma_nganh` int(11) NOT NULL,
-  `ten_nganh` text,
-  `ten_chuyen_nganh` text,
-  `hoc_ky` text,
-  `ma_mon` text,
-  `ten_mon` text,
-  `so_chi` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ten_nganh` text DEFAULT NULL,
+  `ten_chuyen_nganh` text DEFAULT NULL,
+  `hoc_ky` text DEFAULT NULL,
+  `ma_mon` text DEFAULT NULL,
+  `ten_mon` text DEFAULT NULL,
+  `so_chi` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -108,7 +107,7 @@ CREATE TABLE `chi_tiet_hp` (
   `MaCTHP` int(11) NOT NULL,
   `MaHP` int(11) NOT NULL,
   `MaLHP` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -120,7 +119,7 @@ CREATE TABLE `chi_tiet_lop_hp` (
   `MaCTLHP` int(11) NOT NULL,
   `MaLHP` int(11) NOT NULL,
   `MaSV` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -132,7 +131,7 @@ CREATE TABLE `dang_ky_hoc_phan` (
   `id` int(11) NOT NULL,
   `id_lop_hoc_phan` int(11) DEFAULT NULL,
   `id_sinh_vien` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -145,9 +144,9 @@ CREATE TABLE `diem_danh` (
   `ma_hoc_phan` int(11) DEFAULT NULL,
   `nguoi_diem_danh` int(11) DEFAULT NULL,
   `ma_sinh_vien` int(11) DEFAULT NULL,
-  `ngay_diem_danh` text,
-  `trang_thai` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ngay_diem_danh` text DEFAULT NULL,
+  `trang_thai` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -157,9 +156,9 @@ CREATE TABLE `diem_danh` (
 
 CREATE TABLE `ghi_danh` (
   `ma_ghi_danh` int(11) NOT NULL,
-  `ma_hoc_phan` text,
-  `ma_nguoi_dung` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ma_hoc_phan` text DEFAULT NULL,
+  `ma_nguoi_dung` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `ghi_danh`
@@ -169,7 +168,9 @@ INSERT INTO `ghi_danh` (`ma_ghi_danh`, `ma_hoc_phan`, `ma_nguoi_dung`) VALUES
 (3, '18', '10'),
 (4, '18', '9'),
 (5, '23', '8'),
-(6, '13', '8');
+(6, '13', '8'),
+(7, '19', '9'),
+(8, '23', '9');
 
 -- --------------------------------------------------------
 
@@ -179,15 +180,15 @@ INSERT INTO `ghi_danh` (`ma_ghi_danh`, `ma_hoc_phan`, `ma_nguoi_dung`) VALUES
 
 CREATE TABLE `hoc_ky` (
   `ma_hoc_ky` int(11) NOT NULL,
-  `ten_hoc_ky` text,
-  `ngay_bd` text,
-  `ngay_ht` text,
-  `nam_hoc` text,
-  `tuan_bat_dau` text,
-  `so_tuan` text,
-  `loai_hoc_ky` text,
+  `ten_hoc_ky` text DEFAULT NULL,
+  `ngay_bd` text DEFAULT NULL,
+  `ngay_ht` text DEFAULT NULL,
+  `nam_hoc` text DEFAULT NULL,
+  `tuan_bat_dau` text DEFAULT NULL,
+  `so_tuan` text DEFAULT NULL,
+  `loai_hoc_ky` text DEFAULT NULL,
   `id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `hoc_ky`
@@ -243,11 +244,11 @@ INSERT INTO `hoc_ky` (`ma_hoc_ky`, `ten_hoc_ky`, `ngay_bd`, `ngay_ht`, `nam_hoc`
 
 CREATE TABLE `hoc_phan` (
   `id_hoc_phan` int(11) NOT NULL,
-  `ten_hoc_phan` text,
-  `ma_hoc_phan` text,
-  `so_chi_ly_thuyet` text,
-  `so_chi_thuc_hanh` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ten_hoc_phan` text DEFAULT NULL,
+  `ma_hoc_phan` text DEFAULT NULL,
+  `so_chi_ly_thuyet` text DEFAULT NULL,
+  `so_chi_thuc_hanh` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `hoc_phan`
@@ -386,9 +387,9 @@ CREATE TABLE `ket_qua_kiem_tra` (
   `ma_ket_qua` int(11) NOT NULL,
   `ma_bai_kiem_tra` int(11) DEFAULT NULL,
   `ma_sinh_vien` int(11) DEFAULT NULL,
-  `so_cau_dung` text,
-  `so_diem` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `so_cau_dung` text DEFAULT NULL,
+  `so_diem` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -398,9 +399,9 @@ CREATE TABLE `ket_qua_kiem_tra` (
 
 CREATE TABLE `khoa` (
   `ma_khoa` int(11) NOT NULL,
-  `ten_khoa` text,
-  `truong_khoa` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ten_khoa` text DEFAULT NULL,
+  `truong_khoa` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `khoa`
@@ -419,9 +420,9 @@ INSERT INTO `khoa` (`ma_khoa`, `ten_khoa`, `truong_khoa`) VALUES
 CREATE TABLE `lop` (
   `ma_lop` int(11) NOT NULL,
   `ma_khoa` int(11) DEFAULT NULL,
-  `ten_lop` text,
-  `nam_hoc` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ten_lop` text DEFAULT NULL,
+  `nam_hoc` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `lop`
@@ -442,15 +443,15 @@ INSERT INTO `lop` (`ma_lop`, `ma_khoa`, `ten_lop`, `nam_hoc`) VALUES
 
 CREATE TABLE `lop_hoc_phan` (
   `id_lop_hoc_phan` int(11) NOT NULL,
-  `ten_lop_hoc_phan` text,
+  `ten_lop_hoc_phan` text DEFAULT NULL,
   `so_luong_sinh_vien` int(11) DEFAULT NULL,
   `giang_vien` int(11) DEFAULT NULL,
   `id_hoc_phan` int(11) DEFAULT NULL,
   `dot` int(11) DEFAULT NULL,
-  `loai_lop` text,
+  `loai_lop` text DEFAULT NULL,
   `ngay_tao` timestamp NULL DEFAULT NULL,
   `hoc_ki` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `lop_hoc_phan`
@@ -480,20 +481,20 @@ INSERT INTO `lop_hoc_phan` (`id_lop_hoc_phan`, `ten_lop_hoc_phan`, `so_luong_sin
 
 CREATE TABLE `nguoi_dung` (
   `ma_nguoi_dung` int(11) NOT NULL,
-  `ten_nguoi_dung` text,
+  `ten_nguoi_dung` text DEFAULT NULL,
   `ma_khoa` int(11) DEFAULT NULL,
   `ma_lop` int(11) DEFAULT NULL,
   `ma_hoc_phan` int(11) DEFAULT NULL,
-  `hinh_anh` text,
-  `gioi_tinh` text,
-  `ngay_sinh` text,
-  `noi_sinh` text,
-  `ho_khau_thuong_tru` text,
-  `cccd` text,
-  `sdt` text,
-  `email` text,
+  `hinh_anh` text DEFAULT NULL,
+  `gioi_tinh` text DEFAULT NULL,
+  `ngay_sinh` text DEFAULT NULL,
+  `noi_sinh` text DEFAULT NULL,
+  `ho_khau_thuong_tru` text DEFAULT NULL,
+  `cccd` text DEFAULT NULL,
+  `sdt` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
   `ma_quyen` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `nguoi_dung`
@@ -545,9 +546,9 @@ CREATE TABLE `nop_bai_tap` (
   `ma_nop_bai` int(11) NOT NULL,
   `ma_bai_tap` int(11) DEFAULT NULL,
   `ma_sinh_vien_nop` int(11) DEFAULT NULL,
-  `ngay_nop` text,
-  `bai_nop` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ngay_nop` text DEFAULT NULL,
+  `bai_nop` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -557,8 +558,8 @@ CREATE TABLE `nop_bai_tap` (
 
 CREATE TABLE `quyen` (
   `ma_quyen` int(11) NOT NULL,
-  `ten_quyen` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ten_quyen` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `quyen`
@@ -577,10 +578,10 @@ INSERT INTO `quyen` (`ma_quyen`, `ten_quyen`) VALUES
 
 CREATE TABLE `tai_khoan` (
   `ma_tai_khoan` int(11) NOT NULL,
-  `ten_tai_khoan` text,
-  `mat_khau` text,
+  `ten_tai_khoan` text DEFAULT NULL,
+  `mat_khau` text DEFAULT NULL,
   `ma_nguoi_dung` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tai_khoan`
@@ -709,7 +710,7 @@ ALTER TABLE `tai_khoan`
 -- AUTO_INCREMENT cho bảng `bai_giang`
 --
 ALTER TABLE `bai_giang`
-  MODIFY `ma_bai_giang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ma_bai_giang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `bai_kiem_tra`
@@ -745,7 +746,7 @@ ALTER TABLE `diem_danh`
 -- AUTO_INCREMENT cho bảng `ghi_danh`
 --
 ALTER TABLE `ghi_danh`
-  MODIFY `ma_ghi_danh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ma_ghi_danh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `hoc_phan`
