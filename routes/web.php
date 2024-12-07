@@ -17,6 +17,7 @@ use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
 use App\Http\Controllers\giang_vien\TimKiemHPController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NhaCuaToiController;
 use App\Http\Controllers\NopBaiTapController;
 use App\Http\Controllers\sinh_vien\DashBoardController;
 use App\Http\Controllers\sinh_vien\SinhVienController;
@@ -126,11 +127,20 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/tim-kiem-hoc-phan', [TrangChuController::class, 'viewTimKiem'])->name('tim-kiem-hoc-phan');
     Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
 
-    Route::get('/chi-tiet-hoc-phan/{id}',[ChiTietLopHocPhanController::class,'getViewChiTietLopHocPhan'])->name('chi-tiet-lop-hoc-phan');
+    Route::get('/chi-tiet-hoc-phan/{id}', [ChiTietLopHocPhanController::class, 'getViewChiTietLopHocPhan'])->name('chi-tiet-lop-hoc-phan');
     Route::post('/chi-tiet-hoc-phan/add', [ChiTietLopHocPhanController::class, 'addBaiGiang'])->name('add-bai-giang');
+    Route::get('/chi-tiet-hoc-phan/hien/{id}', [ChiTietLopHocPhanController::class, 'hien'])->name('bai-giang.hien');
+    Route::get('/chi-tiet-hoc-phan/an/{id}', [ChiTietLopHocPhanController::class, 'an'])->name('bai-giang.an');
+    Route::delete('/chi-tiet-hoc-phan/delete/{id}', [ChiTietLopHocPhanController::class, 'deleteBaiGiang'])->name('delete-bai-giang');
+    Route::get('/chi-tiet-hoc-phan/edit/{id}', [ChiTietLopHocPhanController::class, 'editBaiGiang'])->name('edit-bai-giang');
+    Route::post('/chi-tiet-hoc-phan/update/{id}', [ChiTietLopHocPhanController::class, 'updateBaiGiang'])->name('update-bai-giang');
+
 
     Route::post('/tham-gia-lop', [TrangChuController::class, 'thamGiaLop'])->name('thamGiaLop');
     Route::post('/update-thong-tin-tai-khoan/{id}', [TrangChuController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
+
+    Route::get('/nha-cua-toi',[NhaCuaToiController::class,'GetViewNhaCuaToi'])->name('nha-cua-toi');
+
 
     Route::get('/nop-bai',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
     Route::get('/nop-bai-tap',[NopBaiTapController::class,'getView'])->name('nop-bai-tap');

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\BaiGiangModel;
+use App\Models\FileBaiGiangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function Laravel\Prompts\select;
+use Illuminate\Support\Facades\Storage;
 
 class ChiTietLopHocPhanController extends Controller
 {
+    /**
+     * Hiển thị chi tiết lớp học phần.
+     */
     public function getViewChiTietLopHocPhan($id)
     {
         $chiTietLHP  = DB::table('lop_hoc_phan')
@@ -18,8 +22,15 @@ class ChiTietLopHocPhanController extends Controller
             ->where('lop_hoc_phan.id_lop_hoc_phan', '=', $id)
             ->first();
 
-        // Lấy ID người dùng từ session (hoặc phương thức phù hợp)
-        $maNguoiDung = session('ma_nguoi_dung'); // Giả sử mã người dùng lưu trong session
+        // Lấy ID người dùng từ session
+        $maNguoiDung = session('ma_nguoi_dung');
+        $maQuyen = session('ma_quyen');
+
+        // Kiểm tra nếu session không có ma_quyen, lấy từ database
+        if (!$maQuyen) {
+            $maQuyen = DB::table('nguoi_dung')->where('ma_nguoi_dung', $maNguoiDung)->value('ma_quyen');
+            session(['ma_quyen' => $maQuyen]);
+        }
 
         // Kiểm tra xem người dùng đã ghi danh vào lớp học phần chưa
         $daGhiDanh = DB::table('ghi_danh')
@@ -27,48 +38,211 @@ class ChiTietLopHocPhanController extends Controller
             ->where('ma_nguoi_dung', $maNguoiDung)
             ->exists();
 
-        $dsBaiGiang = DB::table('bai_giang')
-            ->where('id_lop_hoc_phan', $chiTietLHP->id_lop_hoc_phan)
+        // Lấy danh sách bài giảng và file bài giảng
+        $dsBaiGiang = BaiGiangModel::where('id_lop_hoc_phan', $chiTietLHP->id_lop_hoc_phan)
+            ->with('files')
             ->get();
-//        dd($dsBaiGiang);
-        return view('lop_hoc_phan',
-            compact('chiTietLHP', 'daGhiDanh','dsBaiGiang'));
+
+        return view('lop_hoc_phan', compact('chiTietLHP', 'daGhiDanh', 'dsBaiGiang'));
     }
 
+    /**
+     * Thêm mới bài giảng.
+     */
     public function addBaiGiang(Request $request)
     {
-//        dd($request);
         // Validate các trường dữ liệu
-        $validate = $request->validate([
-            'id_lop_hoc_phan'=>'int',
+        $validated = $request->validate([
+            'id_lop_hoc_phan' => 'required|integer',
             'ten_bai_giang' => 'required|string|max:255',
             'noi_dung_bai_giang' => 'nullable|string',
-            'file_path' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx,ppt,pptx,txt|max:10000', // 20MB
-            'video_path' => 'nullable|url', // 50MB
+            'files.*' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx,ppt,pptx,txt,xlsx|max:10000',
+            'video_path' => 'nullable|url',
             'link' => 'nullable|url',
             'kiem_tra' => 'nullable|string',
             'bai_tap' => 'nullable|string',
+            'diem_danh' => 'nullable|string',
+            'trang_thai' => 'required|integer'
         ]);
 
-        // Khởi tạo biến lưu đường dẫn file và video
-        $file_path = null;
+        // Thêm mới bài giảng vào bảng `bai_giang`
+        $baiGiang = BaiGiangModel::create([
+            'id_lop_hoc_phan' => $validated['id_lop_hoc_phan'],
+            'ten_bai_giang' => $validated['ten_bai_giang'],
+            'noi_dung_bai_giang' => $validated['noi_dung_bai_giang'],
+            'video_path' => $validated['video_path'],
+            'link' => $validated['link'],
+            'kiem_tra' => $validated['kiem_tra'],
+            'bai_tap' => $validated['bai_tap'],
+            'diem_danh' => $validated['diem_danh'],
+            'trang_thai' => $validated['trang_thai'],
+        ]);
 
-        // Kiểm tra và lưu file nếu có
-        if ($request->hasFile('file')) {
-            $file_path = $request->file('file')->move(public_path('file'), $request->file('file')->getClientOriginalName());
+        // Kiểm tra và xử lý các file nếu có
+        if ($request->hasFile('files')) {
+            $folderPath = public_path('/file_bai_giang');
+
+            // Tạo thư mục nếu chưa tồn tại
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+
+            foreach ($request->file('files') as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move($folderPath, $fileName);
+
+                // Lưu file vào bảng `bai_giang_files`
+                FileBaiGiangModel::create([
+                    'file' => $fileName,
+                    'ma_bai_giang' => $baiGiang->ma_bai_giang,
+                ]);
+            }
         }
 
-
-        BaiGiangModel::create($validate);
-        // Trả về phản hồi JSON với dữ liệu bài giảng
         return response()->json([
             'success' => true,
             'status' => 200,
-            'message' => 'Thêm thành công!',
+            'message' => 'Thêm bài giảng và tài liệu thành công!',
         ]);
-
     }
 
+    /**
+     * Hiển thị bài giảng.
+     */
+    public function hien($id)
+    {
+        $baiGiang = BaiGiangModel::findOrFail($id);
+        $baiGiang->trang_thai = 0; // Đặt trạng thái là hiển thị
+        $baiGiang->save();
 
+        return redirect()->back()->with('success', 'Bài giảng đã được hiển thị.');
+    }
 
-}
+    /**
+     * Ẩn bài giảng.
+     */
+    public function an($id)
+    {
+        $baiGiang = BaiGiangModel::findOrFail($id);
+        $baiGiang->trang_thai = 1; // Đặt trạng thái là ẩn
+        $baiGiang->save();
+
+        return redirect()->back()->with('success', 'Bài giảng đã được ẩn.');
+    }
+
+    /**
+     * Xóa bài giảng và các file liên quan.
+     */
+    public function deleteBaiGiang($id)
+    {
+        $baiGiang = BaiGiangModel::findOrFail($id);
+
+        if ($baiGiang->files) {
+            foreach ($baiGiang->files as $file) {
+                $filePath = public_path('file_bai_giang/' . $file->file);
+                if (file_exists($filePath)) {
+                    unlink($filePath); // Xóa file khỏi hệ thống file
+                }
+            }
+        }
+
+        // Xóa các tệp tin liên quan trong cơ sở dữ liệu
+        FileBaiGiangModel::where('ma_bai_giang', $id)->delete();
+
+        $baiGiang->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
+    }
+
+    /**
+     * Lấy dữ liệu bài giảng để chỉnh sửa.
+     */
+    public function editBaiGiang($id)
+    {
+        $baiGiang = BaiGiangModel::with('files')->findOrFail($id);
+
+        return response()->json([
+            'baiGiang' => $baiGiang
+        ]);
+    }
+
+    /**
+     * Cập nhật bài giảng và xử lý việc xóa thêm các file nếu có.
+     */
+    public function updateBaiGiang(Request $request, $id)
+    {
+        // Xác thực dữ liệu
+        $validated = $request->validate([
+            'id_lop_hoc_phan' => 'required|integer',
+            'ten_bai_giang' => 'required|string|max:255',
+            'noi_dung_bai_giang' => 'nullable|string',
+            'files.*' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx,ppt,pptx,txt,xlsx|max:10000',
+            'video_path' => 'nullable|url',
+            'link' => 'nullable|url',
+            'kiem_tra' => 'nullable|string',
+            'bai_tap' => 'nullable|string',
+            'diem_danh' => 'nullable|string',
+            'trang_thai' => 'required|integer',
+            'files_to_delete' => 'nullable|string',
+        ]);
+
+        // Tìm bài giảng cần cập nhật
+        $baiGiang = BaiGiangModel::findOrFail($id);
+
+        // Xử lý các tệp tin cần xóa
+        if ($request->filled('files_to_delete')) {
+            $fileIdsToDelete = explode(',', $request->files_to_delete);
+            foreach ($fileIdsToDelete as $fileId) {
+                $file = FileBaiGiangModel::find($fileId);
+                if ($file) {
+                    // Xóa tệp tin khỏi hệ thống file
+                    $filePath = public_path('file_bai_giang/' . $file->file);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                    // Xóa bản ghi trong database
+                    $file->delete();
+                }
+            }
+        }
+
+        // Cập nhật các trường thông tin khác
+        $baiGiang->ten_bai_giang = $validated['ten_bai_giang'];
+        $baiGiang->noi_dung_bai_giang = $validated['noi_dung_bai_giang'];
+        $baiGiang->diem_danh = $validated['diem_danh'];
+        $baiGiang->video_path = $validated['video_path'];
+        $baiGiang->link = $validated['link'];
+        $baiGiang->kiem_tra = $validated['kiem_tra'];
+        $baiGiang->bai_tap = $validated['bai_tap'];
+        $baiGiang->trang_thai = $validated['trang_thai'];
+        $baiGiang->save();
+
+        // Xử lý các tệp tin mới được tải lên
+        if ($request->hasFile('files')) {
+            $folderPath = public_path('/file_bai_giang');
+
+            // Tạo thư mục nếu chưa tồn tại
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+
+            foreach ($request->file('files') as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move($folderPath, $fileName);
+
+                // Lưu file vào bảng `bai_giang_files`
+                FileBaiGiangModel::create([
+                    'file' => $fileName,
+                    'ma_bai_giang' => $baiGiang->ma_bai_giang,
+                ]);
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật bài giảng thành công.',
+        ]);
+    }}

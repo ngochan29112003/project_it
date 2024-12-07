@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <!-- ======= Modal ửa (tìm hiểu Modal này trên BS5) ======= -->
+    <!-- ======= Modal sửa (tìm hiểu Modal này trên BS5) ======= -->
     <div class="modal fade" id="Modaleditkhoa">
         <div class="modal-dialog modal-lg"> <!-- Chỉnh thành modal-lg để form rộng hơn -->
             <div class="modal-content">

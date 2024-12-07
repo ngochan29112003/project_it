@@ -45,16 +45,36 @@
                 </div>
 
                 <div class="d-flex align-content-center">
-                    <a href="{{route('nop-bai-tap')}}" class="btn btn-primary">Sửa bài nộp</a>
+                    <a href="{{route('nop-bai-tap')}}" class="btn btn-primary">Thêm bài nộp</a>
                 </div>
 
                 <div class="submission-feedback mt-4">
-                    <h4 class="text-primary">Phản hồi</h4>
-                    <table class="table table-bordered">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="text-primary mb-0">Phản hồi</h4>
+                        <!-- Dropdown chỉnh sửa -->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Chỉnh sửa
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <i class="bi bi-pencil-square me-2 text-primary"></i> Sửa điểm
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <i class="bi bi-trash-fill me-2 text-danger"></i> Xóa tất cả
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <table class="table table-bordered mt-3">
                         <tbody>
                         <tr>
                             <td class="fw-bold">Điểm:</td>
-                            <td>10,00&nbsp;/&nbsp;10,00</td>
+                            <td>8.0/10.0</td>
                         </tr>
                         <tr>
                             <td class="fw-bold">Chấm điểm vào:</td>
@@ -62,12 +82,10 @@
                         </tr>
                         <tr>
                             <td class="fw-bold">Người chấm điểm:</td>
-                            <td>Trần Thu Mai</td>
+                            <td>Nguyễn Vạn Năng</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
+
 @endsection
