@@ -19,7 +19,11 @@ class KhoaModel extends Model
 
     function getKhoa()
     {
-        return DB::table('khoa')->get();
+        return DB::table('khoa')
+        ->join('nguoi_dung','nguoi_dung.ma_nguoi_dung','=','khoa.truong_khoa')
+        ->where('nguoi_dung.ma_quyen','=',2)
+        ->select('khoa.*', 'nguoi_dung.ten_nguoi_dung as truong_khoa_ten') // Lấy tên trưởng khoa
+        ->get();
     }
 
 }
