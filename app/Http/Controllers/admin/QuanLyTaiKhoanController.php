@@ -43,19 +43,32 @@ class QuanLyTaiKhoanController extends Controller
             ]);
         }
 
+//        $anhmacdinh = 'user.png';
         $matkhaubam = Hash::make($request->mat_khau);
 
         $taikhoanmoi = new TaiKhoanModel();
         $taikhoanmoi->ten_tai_khoan = $request->ten_tai_khoan;
         $taikhoanmoi->ma_nguoi_dung = $request->ma_nguoi_dung;
         $taikhoanmoi->mat_khau = $matkhaubam;
-        if($taikhoanmoi->save()){
+
+        // Lưu tài khoản
+        if ($taikhoanmoi->save()) {
+            // Cập nhật hình ảnh mặc định vào bảng nguoi_dung
+            $anhmacdinh = 'user.png'; // Hình ảnh mặc định
+
+            // Cập nhật hình ảnh vào bảng nguoi_dung
+            $nguoiDung = NguoiDungModel::find($request->ma_nguoi_dung);
+            if ($nguoiDung) {
+                $nguoiDung->hinh_anh = $anhmacdinh;
+                $nguoiDung->save();
+            }
+
             return response()->json([
                 'success' => true,
                 'status' => 200,
                 'message' => 'Tạo tài khoản thành công!',
             ]);
-        }else{
+        } else {
             return response()->json([
                 'success' => false,
                 'status' => 400,

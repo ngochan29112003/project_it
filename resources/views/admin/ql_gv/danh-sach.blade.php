@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="ngay_sinh" class="form-label">Ngày sinh</label>
-                                    <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh_edit" required>
+                                    <input type="date" class="form-control" id="ngay_sinh_edit" name="ngay_sinh" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -211,7 +211,7 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email_edit" required>
+                                <input type="text" class="form-control" id="email_edit" name="email" required>
                             </div>
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary">Sửa</button>
@@ -245,21 +245,28 @@
                 success: function (response) {
                     if (response.success) {
                         $('#Modelthemgiangvien').modal('hide');
-                        toastr.success(response.message, "Successful");
+                        toastr.success(response.message, "Thêm thành công");
                         setTimeout(function () {
                             location.reload()
                         }, 500);
                     } else {
-                        toastr.error(response.message, "Error");
+                        toastr.error(response.message, "Có lỗi, vui lòng kiểm tra");
                     }
                 },
                 error: function (xhr) {
-                    toastr.error(response.message, "Error");
-                    if (xhr.status === 400) {
-                        var response = xhr.responseJSON;
-                        toastr.error(response.message, "Error");
+                    if (xhr.status === 422) { // Lỗi validate
+                        let errors = xhr.responseJSON.errors;
+                        for (const [field, messages] of Object.entries(errors)) {
+                            // Hiển thị từng thông báo lỗi bằng toastr
+                            messages.forEach(message => {
+                                toastr.error(message, 'Lỗi');
+                            });
+
+                            // Tô viền đỏ input bị lỗi nếu cần
+                            $(`#Formthemgiangvien [name="${field}"]`).addClass('is-invalid');
+                        }
                     } else {
-                        toastr.error("An error occurred", "Error");
+                        toastr.error("Đã xảy ra lỗi, vui lòng thử lại", "Error");
                     }
                 }
             });
@@ -355,7 +362,20 @@
                     }
                 },
                 error: function (xhr) {
-                    toastr.error("Lỗi");
+                    if (xhr.status === 422) { // Lỗi validate
+                        let errors = xhr.responseJSON.errors;
+                        for (const [field, messages] of Object.entries(errors)) {
+                            // Hiển thị từng thông báo lỗi bằng toastr
+                            messages.forEach(message => {
+                                toastr.error(message, 'Lỗi');
+                            });
+
+                            // Tô viền đỏ input bị lỗi nếu cần
+                            $(`#Formeditgiangvien [name="${field}"]`).addClass('is-invalid');
+                        }
+                    } else {
+                        toastr.error("Đã xảy ra lỗi, vui lòng thử lại", "Error");
+                    }
                 }
             });
         });

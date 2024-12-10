@@ -119,8 +119,8 @@
                                     <label for="gioi_tinh" class="form-label">Giới tính</label>
                                     <select class="form-select" name="gioi_tinh" id="gioi_tinh">
                                         <option value="" disabled selected>Chọn giới tính</option>
-                                        <option value="1"> Nam</option>
-                                        <option value="2">nữ</option>
+                                        <option value="Nam"> Nam</option>
+                                        <option value="Nữ">Nữ</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -202,13 +202,13 @@
                                     <label for="gioi_tinh" class="form-label">Giới tính</label>
                                     <select class="form-select" name="gioi_tinh" id="gioi_tinh_edit">
                                         <option value="" disabled selected>Chọn giới tính</option>
-                                        <option value="1"> Nam</option>
-                                        <option value="2">nữ</option>
+                                        <option value="Nam"> Nam</option>
+                                        <option value="Nữ">Nữ</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="ngay_sinh" class="form-label">Ngày sinh</label>
-                                    <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh_edit" required>
+                                    <input type="date" class="form-control" id="ngay_sinh_edit" name="ngay_sinh" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -233,7 +233,7 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email_edit" required>
+                                <input type="email" class="form-control" id="email_edit" name="email" required>
                             </div>
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary">Sửa</button>
@@ -277,12 +277,19 @@
                     }
                 },
                 error: function (xhr) {
-                    toastr.error(response.message, "Error");
-                    if (xhr.status === 400) {
-                        var response = xhr.responseJSON;
-                        toastr.error(response.message, "Error");
+                    if (xhr.status === 422) { // Lỗi validate
+                        let errors = xhr.responseJSON.errors;
+                        for (const [field, messages] of Object.entries(errors)) {
+                            // Hiển thị từng thông báo lỗi bằng toastr
+                            messages.forEach(message => {
+                                toastr.error(message, 'Lỗi');
+                            });
+
+                            // Tô viền đỏ input bị lỗi nếu cần
+                            $(`#Formthemgiangvien [name="${field}"]`).addClass('is-invalid');
+                        }
                     } else {
-                        toastr.error("An error occurred", "Error");
+                        toastr.error("Đã xảy ra lỗi, vui lòng thử lại", "Error");
                     }
                 }
             });
@@ -379,7 +386,20 @@
                     }
                 },
                 error: function (xhr) {
-                    toastr.error("Lỗi");
+                    if (xhr.status === 422) { // Lỗi validate
+                        let errors = xhr.responseJSON.errors;
+                        for (const [field, messages] of Object.entries(errors)) {
+                            // Hiển thị từng thông báo lỗi bằng toastr
+                            messages.forEach(message => {
+                                toastr.error(message, 'Lỗi');
+                            });
+
+                            // Tô viền đỏ input bị lỗi nếu cần
+                            $(`#Formthemgiangvien [name="${field}"]`).addClass('is-invalid');
+                        }
+                    } else {
+                        toastr.error("Đã xảy ra lỗi, vui lòng thử lại", "Error");
+                    }
                 }
             });
         });

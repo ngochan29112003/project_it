@@ -140,6 +140,13 @@ $nguoiDung = DB::table('nguoi_dung')
                 <span>Tài liệu cá nhân</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('view-cay-tien-trinh')}}">
+                <i class="bi bi-list"></i>
+                <span>Cây tiến trình các khoa</span>
+            </a>
+        </li>
     </ul>
 
 </aside>
