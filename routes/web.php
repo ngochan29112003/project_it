@@ -100,6 +100,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/cay-tien-trinh/edit/{id}', [QuanLyCayTienTrinhController::class, 'editCTT'])->name('edit-cay-tien-trinh');
         Route::post('/cay-tien-trinh/update/{id}', [QuanLyCayTienTrinhController::class, 'updateCTT'])->name('update-cay-tien-trinh');
 
+
         //QL Học phần
         Route::get('/hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('hoc-phan');
         Route::post('/hoc-phan/add',[QuanLyHocPhanController::class,'addHocPhan'])->name('add-hoc-phan');
