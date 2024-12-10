@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\sinh_vien;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
 use App\Models\BaiTapModel;
-use DB;
 use Illuminate\Http\Request;
-class NopBaiController extends Controller
+use Illuminate\Support\Facades\DB;
+
+class BaiTapController extends Controller
 {
-    public function getViewNopBai()
+    public function getViewBaitap()
     {
         $ttSinhVien = DB::table('nguoi_dung')
             ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
@@ -18,7 +17,7 @@ class NopBaiController extends Controller
 
         $nop_bai= new BaiTapModel();
         $list_nop_bai = $nop_bai->getBaiTap();
-        return view("sinh_vien.bai_tap.bai_tap", 
-        compact("ttSinhVien"));
+        return view("bai-tap",
+            compact("ttSinhVien", 'nop_bai','list_nop_bai'));
     }
 }

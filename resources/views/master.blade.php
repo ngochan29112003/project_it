@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
-
     <style>
         #sidebar {
             width: 250px;
@@ -156,7 +155,6 @@ $nguoiDung = DB::table('nguoi_dung')
 <main id="main" class="main">
     @yield('contents')
 </main>
-
 <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
@@ -169,7 +167,6 @@ $nguoiDung = DB::table('nguoi_dung')
 <script src="{{ asset('dist/js/toastr.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-
 
 </body>
 <footer id="footer" class="footer">

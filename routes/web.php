@@ -10,7 +10,12 @@ use App\Http\Controllers\admin\QuanLyKhoaController;
 use App\Http\Controllers\admin\QuanLyLopController;
 use App\Http\Controllers\admin\QuanLySinhVienController;
 use App\Http\Controllers\admin\QuanLyTaiKhoanController;
+
+use App\Http\Controllers\BaiGiangController;
+use App\Http\Controllers\BaiTapController;
+
 use App\Http\Controllers\admin\QuanLyCayTienTrinhController;
+
 use App\Http\Controllers\ChiTietLopHocPhanController;
 use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
@@ -88,12 +93,14 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/giang-vien/update/{id}', [QuanLyGiangVienController::class, 'updateGiangVien'])->name('update-giang-vien');
         Route::get('/giang-vien/export', [QuanLyGiangVienController::class, 'exportGiangVien'])->name('export-giang-vien');
 
+
         //QL cây tiến trình
         Route::get('/danh-sach-cay-tien-trinh',[QuanLyCayTienTrinhController::class,'getViewDsCTT'])->name('danh-sach-cay-tien-trinh');
         Route::post('/cay-tien-trinh/add',[QuanLyCayTienTrinhController::class,'addCTT'])->name('add-cay-tien-trinh');
         Route::delete('/cay-tien-trinh/delete/{id}',[QuanLyCayTienTrinhController::class,'deleteCTT'])->name('delete-cay-tien-trinh');
         Route::get('/cay-tien-trinh/edit/{id}', [QuanLyCayTienTrinhController::class, 'editCTT'])->name('edit-cay-tien-trinh');
         Route::post('/cay-tien-trinh/update/{id}', [QuanLyCayTienTrinhController::class, 'updateCTT'])->name('update-cay-tien-trinh');
+
 
         //QL Học phần
         Route::get('/hoc-phan',[QuanLyHocPhanController::class,'getViewDsHocPhan'])->name('hoc-phan');
@@ -131,9 +138,14 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/trang-chu',[TrangChuController::class,'viewTrangChu'])->name('trang-chu');
     Route::get('/tim-kiem-hoc-phan', [TrangChuController::class, 'viewTimKiem'])->name('tim-kiem-hoc-phan');
     Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
+
     Route::get('/chi-tiet-hoc-phan/{id}',[ChiTietLopHocPhanController::class,'getViewChiTietLopHocPhan'])->name('chi-tiet-lop-hoc-phan');
+    Route::post('/chi-tiet-hoc-phan/add', [ChiTietLopHocPhanController::class, 'addBaiGiang'])->name('add-bai-giang');
+
     Route::post('/tham-gia-lop', [TrangChuController::class, 'thamGiaLop'])->name('thamGiaLop');
     Route::post('/update-thong-tin-tai-khoan', [TrangChuController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
+
+    Route::get('/nop-bai',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
 
     //API
     Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');
