@@ -79,7 +79,7 @@ $nguoiDung = DB::table('nguoi_dung')
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{asset('assets/img_user/'.$nguoiDung->hinh_anh)}}" class="rounded-circle" style="height: 100px; object-fit: contain;">
+                    <img src="{{asset('assets/img_user/'.$nguoiDung->hinh_anh)}}" alt="Profile" class="rounded-circle object-fit-cover" width="36" height="36">
 
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{$nguoiDung->ten_nguoi_dung}}</span>
                 </a>
@@ -134,12 +134,6 @@ $nguoiDung = DB::table('nguoi_dung')
             </a>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="">
-                <i class="bi bi-archive"></i>
-                <span>Tài liệu cá nhân</span>
-            </a>
-        </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{route('view-cay-tien-trinh')}}">

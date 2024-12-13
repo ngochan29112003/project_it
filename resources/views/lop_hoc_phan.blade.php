@@ -61,7 +61,7 @@
                                 <!-- Link điểm danh -->
                                 <div class="mb-3">
                                     <label for="diem_danh" class="form-label">Điểm danh</label>
-                                    <input type="url" class="form-control" id="diem_danh" name="diem_danh" placeholder="Nhập link điểm danh (nếu có)">
+                                    <input type="datetime-local" class="form-control" id="diem_danh" name="diem_danh">
                                 </div>
 
                                 <!-- Tải lên file -->
@@ -137,8 +137,8 @@
 
                                 <!-- Link điểm danh -->
                                 <div class="mb-3">
-                                    <label for="edit_diem_danh" class="form-label">Điểm danh</label>
-                                    <input type="url" class="form-control" id="edit_diem_danh" name="diem_danh" placeholder="Nhập link điểm danh (nếu có)">
+                                    <label for="diem_danh" class="form-label">Điểm danh</label>
+                                    <input type="datetime-local" class="form-control" id="diem_danh" name="diem_danh">
                                 </div>
 
                                 <!-- Tải lên tệp tin mới -->
@@ -233,21 +233,22 @@
                                     </p>
 
                                     <!-- Link điểm danh -->
-                                    @if($baiGiang->diem_danh)
-                                        <div>
-                                            <h5 class="fw-bold mb-1 d-flex align-items-center">
-                                                <i class="bi bi-check-circle me-2" style="font-size: 1.2rem; color: #28a745;"></i>
-                                                Điểm danh:
-                                            </h5>
-                                            <p class="text-dark ms-4">
-                                                <a href="{{ $baiGiang->diem_danh }}" target="_blank" class="text-decoration-none">
-                                                    {{ $baiGiang->diem_danh }}
-                                                </a>
-                                            </p>
-                                        </div>
-                                    @endif
+                                        @if($baiGiang->diem_danh)
+                                            <div>
+                                                <h5 class="fw-bold mb-1 d-flex align-items-center">
+                                                    <i class="bi bi-check-circle me-2" style="font-size: 1.2rem; color: #28a745;"></i>
+                                                    Điểm danh:
+                                                </h5>
+                                                <p class="text-dark ms-4">
+                                                    <a href="{{ route('diem-danh', ['id' => $baiGiang->ma_bai_giang]) }}" class="text-decoration-none">
+                                                        Điểm danh  ngày:
+                                                        {{ \Carbon\Carbon::parse($baiGiang->diem_danh)->format('d/m/Y') }}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        @endif
 
-                                    <!-- Tài liệu -->
+                                        <!-- Tài liệu -->
                                     @if($baiGiang->files && $baiGiang->files->count() > 0)
                                         <div class="mb-3">
                                             <h5 class="fw-bold mb-1 d-flex align-items-center">
@@ -327,7 +328,7 @@
                                                 Bài kiểm tra:
                                             </h5>
                                             <p class="text-dark ms-4">
-                                                <a href="{{ route('bai-tap', ['id' => $baiGiang->ma_bai_giang]) }}" class="text-decoration-none">
+                                                <a href="{{ route('trac-nghiem', ['id' => $baiGiang->ma_bai_giang]) }}" class="text-decoration-none">
                                                     Xem bài kiểm tra
                                                 </a>
                                             </p>
@@ -340,9 +341,8 @@
                 </ul>
             </div>
         @endif
-    </div>
 
-    <!-- JavaScript -->
+        <!-- JavaScript -->
     <script>
         $(document).ready(function () {
             /**
@@ -636,6 +636,78 @@
                     }
                 });
             });
+        });
+    </script>
+
+    <script>
+        document.querySelector('.thamGiaLHP').addEventListener('click', function() {
+            // Hiển thị SweetAlert để xác nhận
+            Swal.fire({
+                title: 'Bạn có chắc muốn ghi danh vào lớp này?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, ghi danh!',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Gửi yêu cầu Ajax đến controller để ghi danh
+                    fetch('{{ route('thamGiaLop') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            ma_hoc_phan: {{ $chiTietLHP->id_lop_hoc_phan }}
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire(
+                                    'Thành công!',
+                                    data.message,
+                                    'success'
+                                ).then(() => {
+                                    // Reload lại trang sau khi ghi danh thành công
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Lỗi!',
+                                    'Có lỗi xảy ra, vui lòng thử lại.',
+                                    'error'
+                                );
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire(
+                                'Lỗi!',
+                                'Không thể kết nối đến server.',
+                                'error'
+                            );
+                        });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // JavaScript để tự động điền ngày giờ hiện tại vào trường "Điểm danh"
+        document.addEventListener('DOMContentLoaded', function () {
+            var today = new Date();
+            var day = ("0" + today.getDate()).slice(-2);
+            var month = ("0" + (today.getMonth() + 1)).slice(-2); // Tháng tính từ 0
+            var year = today.getFullYear();
+            var hours = ("0" + today.getHours()).slice(-2);
+            var minutes = ("0" + today.getMinutes()).slice(-2);
+
+            var currentDateTime = year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+
+            // Cập nhật giá trị của input điểm danh
+            document.getElementById('diem_danh').value = currentDateTime;
         });
     </script>
 @endsection

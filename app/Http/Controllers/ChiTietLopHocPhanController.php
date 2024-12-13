@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BaiGiangModel;
+use App\Models\DiemDanhmodel;
 use App\Models\FileBaiGiangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,7 @@ class ChiTietLopHocPhanController extends Controller
             ->with('files')
             ->get();
 
+
         return view('lop_hoc_phan', compact('chiTietLHP', 'daGhiDanh', 'dsBaiGiang'));
     }
 
@@ -61,7 +63,7 @@ class ChiTietLopHocPhanController extends Controller
             'link' => 'nullable|url',
             'kiem_tra' => 'nullable|string',
             'bai_tap' => 'nullable|string',
-            'diem_danh' => 'nullable|string',
+            'diem_danh' => 'nullable|date',
             'trang_thai' => 'required|integer'
         ]);
 
@@ -184,7 +186,7 @@ class ChiTietLopHocPhanController extends Controller
             'link' => 'nullable|url',
             'kiem_tra' => 'nullable|string',
             'bai_tap' => 'nullable|string',
-            'diem_danh' => 'nullable|string',
+            'diem_danh' => 'nullable|date',
             'trang_thai' => 'required|integer',
             'files_to_delete' => 'nullable|string',
         ]);
@@ -245,4 +247,7 @@ class ChiTietLopHocPhanController extends Controller
             'success' => true,
             'message' => 'Cập nhật bài giảng thành công.',
         ]);
-    }}
+    }
+
+
+}

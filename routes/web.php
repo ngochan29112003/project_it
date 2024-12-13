@@ -14,9 +14,11 @@ use App\Http\Controllers\BaiGiangController;
 use App\Http\Controllers\BaiTapController;
 use App\Http\Controllers\admin\QuanLyCayTienTrinhController;
 use App\Http\Controllers\ChiTietLopHocPhanController;
+use App\Http\Controllers\DiemDanhController;
 use App\Http\Controllers\giang_vien\DashBoardGVController;
 use App\Http\Controllers\giang_vien\GiangVienController;
 use App\Http\Controllers\giang_vien\TimKiemHPController;
+use App\Http\Controllers\KiemTraTracNghiemController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NhaCuaToiController;
 use App\Http\Controllers\NopBaiTapController;
@@ -34,6 +36,7 @@ use App\Http\Controllers\giang_vien\EnrollGVController;
 use App\Http\Controllers\giang_vien\ThongTinTaiKhoanGVController;
 
 use App\Http\Controllers\SuaThongTinController;
+use App\Http\Controllers\TracNghiemController;
 use App\Http\Controllers\TrangChuController;
 use App\Http\Controllers\CayTienTrinhController;
 use Illuminate\Support\Facades\Route;
@@ -147,7 +150,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::post('/chi-tiet-hoc-phan/update/{id}', [ChiTietLopHocPhanController::class, 'updateBaiGiang'])->name('update-bai-giang');
 
 
+    Route::get('/diem-danh',[DiemDanhController::class,'getViewDiemDanh'])->name('diem-danh');
+
     Route::post('/tham-gia-lop', [TrangChuController::class, 'thamGiaLop'])->name('thamGiaLop');
+
     Route::post('/update-thong-tin-tai-khoan', [TrangChuController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
 
     Route::get('/nha-cua-toi',[NhaCuaToiController::class,'GetViewNhaCuaToi'])->name('nha-cua-toi');
@@ -155,6 +161,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
     Route::get('/nop-bai',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
     Route::get('/nop-bai-tap',[NopBaiTapController::class,'getView'])->name('nop-bai-tap');
+
+    Route::get('/trac-nghiem',[TracNghiemController::class,'getViewTracNghiem'])->name('trac-nghiem');
+    Route::get('/kiem-tra-trac-nghiem',[KiemTraTracNghiemController::class,'getViewKiemTraTracNghiem'])->name('kiem-tra-trac-nghiem');
 
     //API
     Route::get('/hoc-ky/api',[QuanLyHocKyController::class,'getAPIHocKy'])->name('api-hoc-ky');

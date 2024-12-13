@@ -55,8 +55,6 @@ class NguoiDungModel extends Model
             ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
             ->join('khoa','khoa.ma_khoa','=','nguoi_dung.ma_khoa')
             ->where('nguoi_dung.ma_quyen','=',2)
-            ->select('nguoi_dung.ma_nguoi_dung','nguoi_dung.ten_nguoi_dung','quyen.ten_quyen','khoa.ten_khoa','nguoi_dung.email','nguoi_dung.ngay_sinh', 
-            'nguoi_dung.ma_khoa', 'nguoi_dung.gioi_tinh', 'nguoi_dung.ho_khau_thuong_tru', 'nguoi_dung.cccd', 'nguoi_dung.sdt')
             ->get();
     }
 

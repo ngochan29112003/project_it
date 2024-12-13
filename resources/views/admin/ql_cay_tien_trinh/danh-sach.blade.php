@@ -138,18 +138,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                            <div class="col-md-6 mb-3">
-    <label for="cay_tien_trinh" class="form-label">Hình cây tiến trình</label>
-    <input type="file" class="form-control" name="cay_tien_trinh" id="edit_cay_tien_trinh">
-    <p id="file-name" class="text-muted"></p> <!-- Hiển thị tên file -->
-</div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cay_tien_trinh" class="form-label">Hình cây tiến trình</label>
+                                    <input type="file" class="form-control" name="cay_tien_trinh" id="edit_cay_tien_trinh">
+                                    <p id="file-name" class="text-muted"></p> <!-- Hiển thị tên file -->
+                                </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="khoa_hoc" class="form-label">Khóa học</label>
                                     <input type="text" class="form-control" id="edit_khoa_hoc" name="khoa_hoc" required>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <button type="submit" class="btn btn-primary">Thêm</button>
+                                <button type="submit" class="btn btn-primary">Sửa</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                             </div>
                         </form>

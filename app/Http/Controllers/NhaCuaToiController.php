@@ -13,6 +13,10 @@ class NhaCuaToiController extends Controller
             ->join('quyen','nguoi_dung.ma_quyen','=','quyen.ma_quyen')
             ->where('ma_nguoi_dung','=',session('ma_nguoi_dung'))
             ->first();
-        return view('nha-cua-toi', compact('nguoidung'));
+
+        $hocphan = DB::table('hoc_phan')
+            ->where('ma_hoc_phan','=',session('ma_hoc_phan'))
+            ->first();
+        return view('nha-cua-toi', compact('nguoidung','hocphan'));
     }
 }

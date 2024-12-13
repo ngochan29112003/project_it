@@ -177,7 +177,7 @@ class QuanLyGiangVienController extends Controller
         foreach ($leave_report as $row) {
             $cell->setCellValue('A'.$num_row, $stt++);
             $cell->setCellValue('B'.$num_row, $row->ten_nguoi_dung);
-            
+
             // Lấy tên khoa từ mã khoa
             $tenKhoa = isset($khoaMap[$row->ma_khoa]) ? $khoaMap[$row->ma_khoa] : 'Không xác định';
             $cell->setCellValue('C'.$num_row, $tenKhoa);
@@ -203,7 +203,7 @@ class QuanLyGiangVienController extends Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         $filename = "danh-sach-giang-vien.xlsx";
         header('Content-Disposition: attachment;filename="' . $filename . '"');
-        
+
         ob_end_clean();
 
         $writer = IOFactory::createWriter($excel, 'Xlsx');
