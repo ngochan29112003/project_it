@@ -10,20 +10,22 @@ class BaiTapModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'nop_bai_tap';
-    protected $primaryKey = 'ma_nop_bai';
+    protected $table = 'bai_tap';
+    protected $primaryKey = 'ma_bai_tap';
 
-    // protected $fillable = [
-    //   'MaTK',
-    //   'MaSP',
-    //   'TenBD',
-    //   'AnhBD',
-    //   'NoiDungBD',
-    //   'NgayTaoBD',
-    //   'TrangThaiBD'
-    // ];
+     protected $fillable = [
+       'id_lop_hoc_phan',
+       'ten_bai_tap',
+       'noi_dung_bai_tap',
+       'han_nop',
+     ];
 
     public $timestamps = false;
+
+    public function getLopHocPhan()
+    {
+        return DB::table('lop_hoc_phan')->get();
+    }
     public function getBaiTap()
     {
         return DB::table('nop_bai_tap')

@@ -180,46 +180,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="container mt-4">
-            <h3 class="text-danger fw-bold mb-4">CÁC KHÓA HỌC CỦA TÔI</h3>
-
-            <div class="coursebox card mb-4" data-courseid="3870" data-type="1">
-                <div class="card-body">
-                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;">
-                        <a class="text-primary" href="#">TOÁN CAO CẤP A1-211_1CB1106_11</a>
-                    </h5>
-                    <p class="card-text text-muted">Giáo viên: Nguyễn Thanh Hoàng</p>
-                    <p class="card-text text-muted">Thời gian: Bắt đầu từ 01/11/2024</p>
-                    <p class="card-text"><small class="text-success">Bạn đã tham gia khóa học. Chúc bạn học tốt!</small></p>
-                </div>
-            </div>
-
-            <div class="coursebox card mb-4" data-courseid="3871" data-type="1">
-                <div class="card-body">
-                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;">
-                        <a class="text-primary" href="#">VẬT LÝ HỌC CƠ SỞ 1</a>
-                    </h5>
-                    <p class="card-text text-muted">Giáo viên: Phan Tấn Trung</p>
-                    <p class="card-text text-muted">Thời gian: Bắt đầu từ 01/11/2024</p>
-                    <p class="card-text"><small class="text-success">Bạn đã tham gia khóa học. Chúc bạn học tốt!</small></p>
-                </div>
-            </div>
-
-            <div class="coursebox card mb-4" data-courseid="3872" data-type="1">
-                <div class="card-body">
-                    <h5 class="card-title" style="font-family: 'Roboto', sans-serif;">
-                        <a class="text-primary" href="#">HÓA HỌC ỨNG DỤNG</a>
-                    </h5>
-                    <p class="card-text text-muted">Giáo viên: Nguyễn Thị Hồng Nhung</p>
-                    <p class="card-text text-muted">Thời gian: Bắt đầu từ 01/11/2024</p>
-                    <p class="card-text"><small class="text-success">Bạn đã tham gia khóa học. Chúc bạn học tốt!</small></p>
-                </div>
-            </div>
-
             <div class="container mt-4 text-center">
                 <div class="paging paging-morelink">
-                    <a href="#" class="btn btn-outline-primary px-4 py-2 fw-bold rounded-pill">
+                    <a href="{{route('nha-cua-toi')}}" class="btn btn-outline-primary px-4 py-2 fw-bold rounded-pill">
                         Các khóa học của tôi
                     </a>
                 </div>

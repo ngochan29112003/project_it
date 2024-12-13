@@ -240,7 +240,7 @@
                                                     Điểm danh:
                                                 </h5>
                                                 <p class="text-dark ms-4">
-                                                    <a href="{{ route('diem-danh', ['id' => $baiGiang->ma_bai_giang]) }}" class="text-decoration-none">
+                                                    <a href="{{ route('diem-danh', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}" class="text-decoration-none">
                                                         Điểm danh  ngày:
                                                         {{ \Carbon\Carbon::parse($baiGiang->diem_danh)->format('d/m/Y') }}
                                                     </a>
@@ -307,13 +307,13 @@
 
                                     <!-- Bài tập -->
                                     @if($baiGiang->bai_tap)
-                                        <div class="mb-3">
+                                        <div class="">
                                             <h5 class="fw-bold mb-1 d-flex align-items-center">
                                                 <i class="bi bi-pencil-square me-2" style="font-size: 1.2rem; color: #007bff;"></i>
                                                 Bài tập:
                                             </h5>
                                             <p class="text-dark ms-4">
-                                                <a href="{{ route('bai-tap', ['id' => $baiGiang->ma_bai_giang]) }}" class="text-decoration-none">
+                                                <a href="{{ route('bai-tap', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}" class="text-decoration-none">
                                                     Xem bài tập
                                                 </a>
                                             </p>
@@ -322,13 +322,13 @@
 
                                     <!-- Kiểm tra -->
                                     @if($baiGiang->kiem_tra)
-                                        <div class="mb-3">
+                                        <div class="">
                                             <h5 class="fw-bold mb-1 d-flex align-items-center">
                                                 <i class="bi bi-file-earmark-check-fill me-2" style="font-size: 1.2rem; color: #dc3545;"></i>
                                                 Bài kiểm tra:
                                             </h5>
                                             <p class="text-dark ms-4">
-                                                <a href="{{ route('trac-nghiem', ['id' => $baiGiang->ma_bai_giang]) }}" class="text-decoration-none">
+                                                <a href="{{ route('trac-nghiem', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}" class="text-decoration-none">
                                                     Xem bài kiểm tra
                                                 </a>
                                             </p>

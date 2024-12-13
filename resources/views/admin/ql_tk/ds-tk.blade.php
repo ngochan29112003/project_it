@@ -41,7 +41,6 @@
                         </select>
                         <label for="floatingSelect">Lựa chọn loại tài khoản hiển thị</label>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -160,6 +160,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
 
     Route::get('/nop-bai',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
+    Route::post('/them-bai-tap', [BaiTapController::class, 'createBaiTap'])->name('them-bai-tap');
+
     Route::get('/nop-bai-tap',[NopBaiTapController::class,'getView'])->name('nop-bai-tap');
 
     Route::get('/trac-nghiem',[TracNghiemController::class,'getViewTracNghiem'])->name('trac-nghiem');

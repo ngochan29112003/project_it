@@ -42,7 +42,6 @@
                                 <p class="text-muted mb-0">{{ $nguoidung->ten_quyen }} - Khoa Công Nghệ Thông Tin</p>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-secondary">Tài liệu của tôi</button>
                     </div>
                 </div>
             </div>
@@ -98,7 +97,7 @@
                     </div>
                 </div>
             </div>
-        
+
 
 
             <div class="col-12 mb-4">
