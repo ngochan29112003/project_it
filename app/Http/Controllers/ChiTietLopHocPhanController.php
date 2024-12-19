@@ -67,8 +67,8 @@ class ChiTietLopHocPhanController extends Controller
             'files.*' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx,ppt,pptx,txt,xlsx|max:10000',
             'video_path' => 'nullable|url',
             'link' => 'nullable|url',
-            'kiem_tra' => 'nullable|string',
-            'bai_tap' => 'nullable|string',
+            'kiem_tra' => 'nullable|int',
+            'bai_tap' => 'nullable|int',
             'trang_thai' => 'required|integer'
         ]);
 

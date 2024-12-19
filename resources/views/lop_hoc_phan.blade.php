@@ -29,23 +29,23 @@
         @else
             <div class="d-flex justify-content-between align-items-center mb-4">
                 @if(session('ma_nguoi_dung') == $chiTietLHP->giang_vien)
-                <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddBaiGiang">
-                        Thêm bài giảng
-                    </button>
-                    <a href="{{ route('export-danh-sach-sv-lhp', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}"
-                       class="btn btn-success btn-export">
-                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                        Danh sách sinh viên
-                    </a>
-                    <a type="button" class="btn btn-success "
-                       href="{{route('diem-danh',['ma_hoc_phan' => $chiTietLHP->id_lop_hoc_phan, 'ten_lop_hoc_phan' => $chiTietLHP->ten_lop_hoc_phan])}}">
-                        Điểm danh
-                    </a>
-                </div>
-
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddBaiGiang">
+                            Thêm bài giảng
+                        </button>
+                        <a href="{{ route('export-danh-sach-sv-lhp', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}"
+                           class="btn btn-success btn-export">
+                            <i class="bi bi-file-earmark-arrow-down pe-2"></i>
+                            Danh sách sinh viên
+                        </a>
+                        <a type="button" class="btn btn-success "
+                           href="{{route('diem-danh',['ma_hoc_phan' => $chiTietLHP->id_lop_hoc_phan, 'ten_lop_hoc_phan' => $chiTietLHP->ten_lop_hoc_phan])}}">
+                            Điểm danh
+                        </a>
+                    </div>
                 @endif
             </div>
+
             <!-- Modal thêm bài giảng -->
             <div class="modal fade" id="modalAddBaiGiang" tabindex="-1" aria-labelledby="modalAddBaiGiangLabel"
                  aria-hidden="true">
@@ -97,17 +97,17 @@
                                 </div>
 
                                 <!-- Kiểm tra -->
-                                <div class="mb-3">
-                                    <label for="kiem_tra" class="form-label">Kiểm tra</label>
-                                    <input type="text" class="form-control" id="kiem_tra" name="kiem_tra"
-                                           placeholder="Nhập link hoặc thông tin kiểm tra">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="kiem_tra">
+                                    <label for="kiem_tra" class="form-check-label">Kiểm tra</label>
+                                    <input type="hidden" id="kiem_tra_hidden" name="kiem_tra" value="0">
                                 </div>
 
                                 <!-- Bài tập -->
-                                <div class="mb-3">
-                                    <label for="bai_tap" class="form-label">Bài tập</label>
-                                    <input type="text" class="form-control" id="bai_tap" name="bai_tap"
-                                           placeholder="Nhập link hoặc thông tin bài tập">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="bai_tap">
+                                    <label for="bai_tap" class="form-check-label">Bài tập</label>
+                                    <input type="hidden" id="bai_tap_hidden" name="bai_tap" value="0">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary w-100">Thêm bài giảng</button>
@@ -184,17 +184,17 @@
                                 </div>
 
                                 <!-- Kiểm tra -->
-                                <div class="mb-3">
-                                    <label for="edit_kiem_tra" class="form-label">Kiểm tra</label>
-                                    <input type="text" class="form-control" id="edit_kiem_tra" name="kiem_tra"
-                                           placeholder="Nhập link hoặc thông tin kiểm tra">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="edit_kiem_tra">
+                                    <label for="edit_kiem_tra" class="form-check-label">Kiểm tra</label>
+                                    <input type="hidden" id="edit_kiem_tra_hidden" name="kiem_tra" value="0">
                                 </div>
 
                                 <!-- Bài tập -->
-                                <div class="mb-3">
-                                    <label for="edit_bai_tap" class="form-label">Bài tập</label>
-                                    <input type="text" class="form-control" id="edit_bai_tap" name="bai_tap"
-                                           placeholder="Nhập link hoặc thông tin bài tập">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="edit_bai_tap">
+                                    <label for="edit_bai_tap" class="form-check-label">Bài tập</label>
+                                    <input type="hidden" id="edit_bai_tap_hidden" name="bai_tap" value="0">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary w-100">Cập nhật bài giảng</button>
@@ -324,7 +324,7 @@
                                     @endif
 
                                     <!-- Bài tập -->
-                                    @if($baiGiang->bai_tap)
+                                    @if($baiGiang->bai_tap == 1)
                                         <div class="">
                                             <h5 class="fw-bold mb-1 d-flex align-items-center">
                                                 <i class="bi bi-pencil-square me-2"
@@ -341,7 +341,7 @@
                                     @endif
 
                                     <!-- Kiểm tra -->
-                                    @if($baiGiang->kiem_tra)
+                                    @if($baiGiang->kiem_tra == 1)
                                         <div class="">
                                             <h5 class="fw-bold mb-1 d-flex align-items-center">
                                                 <i class="bi bi-file-earmark-check-fill me-2"
@@ -423,7 +423,6 @@
                 /**
                  * Xử lý khi người dùng nhấn vào nút "Chỉnh sửa".
                  */
-
                 $('.editItem').on('click', function () {
                     var baiGiangId = $(this).data('id');
 
@@ -435,11 +434,26 @@
                             // Gán dữ liệu vào các trường trong modal
                             $('#edit_ten_bai_giang').val(response.baiGiang.ten_bai_giang);
                             $('#edit_noi_dung_bai_giang').val(response.baiGiang.noi_dung_bai_giang);
-                            $('#edit_diem_danh').val(response.baiGiang.diem_danh);
                             $('#edit_video_path').val(response.baiGiang.video_path);
                             $('#edit_link').val(response.baiGiang.link);
-                            $('#edit_kiem_tra').val(response.baiGiang.kiem_tra);
-                            $('#edit_bai_tap').val(response.baiGiang.bai_tap);
+
+                            // Thiết lập checkbox Kiểm tra
+                            if (response.baiGiang.kiem_tra == 1) {
+                                $('#edit_kiem_tra').prop('checked', true);
+                                $('#edit_kiem_tra_hidden').val(1);
+                            } else {
+                                $('#edit_kiem_tra').prop('checked', false);
+                                $('#edit_kiem_tra_hidden').val(0);
+                            }
+
+                            // Thiết lập checkbox Bài tập
+                            if (response.baiGiang.bai_tap == 1) {
+                                $('#edit_bai_tap').prop('checked', true);
+                                $('#edit_bai_tap_hidden').val(1);
+                            } else {
+                                $('#edit_bai_tap').prop('checked', false);
+                                $('#edit_bai_tap_hidden').val(0);
+                            }
 
                             // Gán ID bài giảng vào trường ẩn
                             $('#bai_giang_id').val(response.baiGiang.ma_bai_giang);
@@ -463,9 +477,7 @@
                                     // Thêm sự kiện khi nhấn nút Remove
                                     removeButton.on('click', function (e) {
                                         e.preventDefault();
-                                        // Loại bỏ tệp tin khỏi danh sách hiển thị
                                         $(this).parent().remove();
-                                        // Đánh dấu tệp tin cần xóa
                                         markFileForDeletion(file.id);
                                     });
 
@@ -490,6 +502,20 @@
                 $('#formAddBaiGiang').submit(function (e) {
                     e.preventDefault();
 
+                    // Kiểm tra checkbox "Kiểm tra"
+                    if ($('#kiem_tra').is(':checked')) {
+                        $('#kiem_tra_hidden').val(1);
+                    } else {
+                        $('#kiem_tra_hidden').val(0);
+                    }
+
+                    // Kiểm tra checkbox "Bài tập"
+                    if ($('#bai_tap').is(':checked')) {
+                        $('#bai_tap_hidden').val(1);
+                    } else {
+                        $('#bai_tap_hidden').val(0);
+                    }
+
                     var formData = new FormData(this);
 
                     $.ajax({
@@ -499,21 +525,17 @@
                         contentType: false,
                         processData: false,
                         success: function (response) {
-                            console.log('AJAX Success:', response);
                             if (response.success) {
-                                console.log('Message:', response.message);
                                 $('#modalAddBaiGiang').modal('hide');
                                 toastr.success(response.message, "Thành công");
                                 setTimeout(function () {
                                     location.reload();
                                 }, 500);
                             } else {
-                                console.log('Response is not successful:', response);
                                 toastr.error(response.message, "Lỗi");
                             }
                         },
                         error: function (xhr) {
-                            console.error('AJAX Error:', xhr);
                             if (xhr.status === 400 || xhr.status === 422) {
                                 var response = xhr.responseJSON;
                                 toastr.error(response.message || "Lỗi xác thực", "Lỗi");
@@ -531,12 +553,9 @@
                 const input = document.getElementById('file');
 
                 input.addEventListener('change', function (event) {
-                    const fileList = document.getElementById('fileList');
-
                     for (let i = 0; i < input.files.length; i++) {
                         fileArray.push(input.files[i]);
                     }
-
                     updateFileList();
                 });
 
@@ -549,8 +568,7 @@
                     fileList.innerHTML = '';
                     fileArray.forEach((file, index) => {
                         const li = document.createElement('li');
-                        li.className =
-                            'mb-3 d-flex justify-content-between align-items-center text-truncate file-list-item';
+                        li.className = 'mb-3 d-flex justify-content-between align-items-center text-truncate file-list-item';
                         let displayName = file.name;
                         const extension = displayName.split('.').pop();
                         const baseName = displayName.substring(0, displayName.lastIndexOf('.'));
@@ -615,8 +633,21 @@
                 $('#formEditBaiGiang').submit(function (e) {
                     e.preventDefault();
 
-                    var baiGiangId = $('#bai_giang_id').val(); // Lấy ID bài giảng từ trường ẩn
+                    // Kiểm tra checkbox "Kiểm tra"
+                    if ($('#edit_kiem_tra').is(':checked')) {
+                        $('#edit_kiem_tra_hidden').val(1);
+                    } else {
+                        $('#edit_kiem_tra_hidden').val(0);
+                    }
 
+                    // Kiểm tra checkbox "Bài tập"
+                    if ($('#edit_bai_tap').is(':checked')) {
+                        $('#edit_bai_tap_hidden').val(1);
+                    } else {
+                        $('#edit_bai_tap_hidden').val(0);
+                    }
+
+                    var baiGiangId = $('#bai_giang_id').val(); // Lấy ID bài giảng từ trường ẩn
                     var formData = new FormData(this);
 
                     // Thêm các tệp tin mới từ EditfileArray vào FormData
@@ -625,7 +656,7 @@
                     });
 
                     $.ajax({
-                        url: '/chi-tiet-hoc-phan/update/' + baiGiangId, // Đường dẫn route để cập nhật
+                        url: '/chi-tiet-hoc-phan/update/' + baiGiangId,
                         method: 'POST',
                         data: formData,
                         contentType: false,
@@ -658,61 +689,58 @@
                         }
                     });
                 });
-            });
-        </script>
 
-        <script>
-            document.querySelector('.thamGiaLHP').addEventListener('click', function () {
-                // Hiển thị SweetAlert để xác nhận
-                Swal.fire({
-                    title: 'Bạn có chắc muốn ghi danh vào lớp này?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Có, ghi danh!',
-                    cancelButtonText: 'Hủy'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Gửi yêu cầu Ajax đến controller để ghi danh
-                        fetch('{{ route('thamGiaLop') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({
-                                ma_hoc_phan: {{ $chiTietLHP->id_lop_hoc_phan }}
+                // Xử lý ghi danh vào lớp
+                document.querySelector('.thamGiaLHP')?.addEventListener('click', function () {
+                    Swal.fire({
+                        title: 'Bạn có chắc muốn ghi danh vào lớp này?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Có, ghi danh!',
+                        cancelButtonText: 'Hủy'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch('{{ route('thamGiaLop') }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify({
+                                    ma_hoc_phan: {{ $chiTietLHP->id_lop_hoc_phan }}
+                                })
                             })
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire(
-                                        'Thành công!',
-                                        data.message,
-                                        'success'
-                                    ).then(() => {
-                                        // Reload lại trang sau khi ghi danh thành công
-                                        location.reload();
-                                    });
-                                } else {
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire(
+                                            'Thành công!',
+                                            data.message,
+                                            'success'
+                                        ).then(() => {
+                                            location.reload();
+                                        });
+                                    } else {
+                                        Swal.fire(
+                                            'Lỗi!',
+                                            'Có lỗi xảy ra, vui lòng thử lại.',
+                                            'error'
+                                        );
+                                    }
+                                })
+                                .catch(error => {
                                     Swal.fire(
                                         'Lỗi!',
-                                        'Có lỗi xảy ra, vui lòng thử lại.',
+                                        'Không thể kết nối đến server.',
                                         'error'
                                     );
-                                }
-                            })
-                            .catch(error => {
-                                Swal.fire(
-                                    'Lỗi!',
-                                    'Không thể kết nối đến server.',
-                                    'error'
-                                );
-                            });
-                    }
+                                });
+                        }
+                    });
                 });
             });
         </script>
+
 @endsection
