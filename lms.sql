@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 19, 2024 at 05:51 PM
+-- Generation Time: Dec 19, 2024 at 06:05 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -36,17 +36,16 @@ CREATE TABLE `bai_giang` (
   `id_lop_hoc_phan` int(11) DEFAULT NULL,
   `kiem_tra` text,
   `bai_tap` text,
-  `trang_thai` int(11) NOT NULL,
-  `diem_danh` date DEFAULT NULL
+  `trang_thai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `bai_giang`
 --
 
-INSERT INTO `bai_giang` (`ma_bai_giang`, `ten_bai_giang`, `video_path`, `link`, `noi_dung_bai_giang`, `id_lop_hoc_phan`, `kiem_tra`, `bai_tap`, `trang_thai`, `diem_danh`) VALUES
-(25, 'Đồ án', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://ems.vlute.edu.vn/vTKBGiangVien', 'Chúc các em học tốt', 23, 'Kiểm tra 15 phút', 'Bài tập về nhà', 0, NULL),
-(41, 'Helo', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', '123', 23, 'kiểm tra', 'kiểm tra', 0, '2024-12-14');
+INSERT INTO `bai_giang` (`ma_bai_giang`, `ten_bai_giang`, `video_path`, `link`, `noi_dung_bai_giang`, `id_lop_hoc_phan`, `kiem_tra`, `bai_tap`, `trang_thai`) VALUES
+(25, 'Đồ án', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://ems.vlute.edu.vn/vTKBGiangVien', 'Chúc các em học tốt', 23, 'Kiểm tra 15 phút', 'Bài tập về nhà', 0),
+(41, 'Helo', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'abc', 23, 'kiểm tra', 'kiểm tra', 0);
 
 -- --------------------------------------------------------
 
@@ -687,7 +686,7 @@ INSERT INTO `nguoi_dung` (`ma_nguoi_dung`, `ten_nguoi_dung`, `ma_khoa`, `ma_lop`
 (4, 'Huyền Trân', 1, NULL, NULL, NULL, 'Nữ', '1980-03-10', 'Cần Thơ', 'Cần Thơ', '012345678904', '0908123456', 'huyentran@admin.com.vlute', 3),
 (5, 'Nguyễn Văn A', 1, NULL, NULL, NULL, 'Nam', '1995-04-05', 'TPHCM', 'TPHCM', '012345678905', '0909123456', 'nguyenvana@vlute.vn', 2),
 (7, 'Trần Văn B', 1, NULL, NULL, NULL, 'Nam', '1994-12-15', 'Hà Nội', 'Hà Nội', '012345678907', '0911123456', 'tranvanb@vlute.vn', 2),
-(8, 'Giảng Viên', 1, NULL, NULL, '1733854428_310066267_184130727510201_3026934422886984661_n.jpg', 'Nữ', '1996-01-11', 'Vĩnh Long', 'Vĩnh Long', '012345678908', '0912123456', 'giangvien@vlute.vn', 2),
+(8, 'Giảng Viên aaaa', 1, NULL, NULL, '1733854428_310066267_184130727510201_3026934422886984661_n.jpg', 'Nữ', '1996-01-11', 'Vĩnh Long', 'Vĩnh Long', '012345678908', '0912123456', 'giangvien@vlute.vn', 2),
 (9, 'Sinh viên', 1, NULL, NULL, NULL, 'Nữ', '2006-06-25', 'Vĩnh Long', 'Phường 2, Vĩnh Long', '012345678909', '0913123456', 'sinhvien@gmail.com', 3),
 (10, 'Admin', 1, NULL, NULL, NULL, 'Nữ', '1987-11-08', 'TPHCM', 'Quận 1, TPHCM', '012345678910', '0914123456', 'admin@admin.com.vlute', 1),
 (11, 'Lê Hoàng An', 1, NULL, NULL, NULL, 'Nam', '1983-04-03', 'Hà Nội', 'Hà Đông, Hà Nội', '012345678911', '0915123456', 'lehoangan@admin.com.vlute', 2),
