@@ -689,56 +689,57 @@
                         }
                     });
                 });
-
-                // Xử lý ghi danh vào lớp
-                document.querySelector('.thamGiaLHP')?.addEventListener('click', function () {
-                    Swal.fire({
-                        title: 'Bạn có chắc muốn ghi danh vào lớp này?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Có, ghi danh!',
-                        cancelButtonText: 'Hủy'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch('{{ route('thamGiaLop') }}', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify({
-                                    ma_hoc_phan: {{ $chiTietLHP->id_lop_hoc_phan }}
-                                })
+            });
+        </script>
+        <script>
+            // Xử lý ghi danh vào lớp
+            document.querySelector('.thamGiaLHP')?.addEventListener('click', function () {
+                Swal.fire({
+                    title: 'Bạn có chắc muốn ghi danh vào lớp này?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Có, ghi danh!',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('{{ route('thamGiaLop') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                ma_hoc_phan: {{ $chiTietLHP->id_lop_hoc_phan }}
                             })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        Swal.fire(
-                                            'Thành công!',
-                                            data.message,
-                                            'success'
-                                        ).then(() => {
-                                            location.reload();
-                                        });
-                                    } else {
-                                        Swal.fire(
-                                            'Lỗi!',
-                                            'Có lỗi xảy ra, vui lòng thử lại.',
-                                            'error'
-                                        );
-                                    }
-                                })
-                                .catch(error => {
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire(
+                                        'Thành công!',
+                                        data.message,
+                                        'success'
+                                    ).then(() => {
+                                        location.reload();
+                                    });
+                                } else {
                                     Swal.fire(
                                         'Lỗi!',
-                                        'Không thể kết nối đến server.',
+                                        'Có lỗi xảy ra, vui lòng thử lại.',
                                         'error'
                                     );
-                                });
-                        }
-                    });
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire(
+                                    'Lỗi!',
+                                    'Không thể kết nối đến server.',
+                                    'error'
+                                );
+                            });
+                    }
                 });
             });
         </script>

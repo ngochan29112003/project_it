@@ -40,9 +40,9 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" aria-selected="false" tabindex="-1" role="tab">Chỉnh Sửa Hồ Sơ</button>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" aria-selected="false" tabindex="-1" role="tab">Đổi Mật Khẩu</button>
-                            </li>
+{{--                            <li class="nav-item" role="presentation">--}}
+{{--                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" aria-selected="false" tabindex="-1" role="tab">Đổi Mật Khẩu</button>--}}
+{{--                            </li>--}}
                         </ul>
                         <div class="tab-content pt-2">
                             <div class="tab-pane fade show active profile-overview" id="profile-overview" role="tabpanel">
@@ -164,39 +164,39 @@
                                 </form>
                             </div>
 
-                            <div class="tab-pane fade profile-change-password pt-3" id="profile-change-password" role="tabpanel">
-                                <h5 class="card-title" style="font-family: 'Arial', sans-serif;"><b>Đổi Mật Khẩu</b></h5>
-                                <!-- Change Password Form -->
-                                <form method="POST" action="{{ route('user-changePassword') }}">
-                                    @csrf
-                                    <div class="row mb-3">
-                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mật Khẩu Cũ</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
-                                        </div>
-                                    </div>
+{{--                            <div class="tab-pane fade profile-change-password pt-3" id="profile-change-password" role="tabpanel">--}}
+{{--                                <h5 class="card-title" style="font-family: 'Arial', sans-serif;"><b>Đổi Mật Khẩu</b></h5>--}}
+{{--                                <!-- Change Password Form -->--}}
+{{--                                <form method="POST" action="{{ route('user-changePassword') }}">--}}
+{{--                                    @csrf--}}
+{{--                                    <div class="row mb-3">--}}
+{{--                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mật Khẩu Cũ</label>--}}
+{{--                                        <div class="col-md-8 col-lg-9">--}}
+{{--                                            <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="row mb-3">
-                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Mật Khẩu Mới</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="newPassword" type="password" class="form-control" id="newPassword" required>
-                                        </div>
-                                    </div>
+{{--                                    <div class="row mb-3">--}}
+{{--                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Mật Khẩu Mới</label>--}}
+{{--                                        <div class="col-md-8 col-lg-9">--}}
+{{--                                            <input name="newPassword" type="password" class="form-control" id="newPassword" required>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="row mb-3">
-                                        <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Xác Nhận Mật Khẩu Mới</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="confirmPassword" type="password" class="form-control" id="confirmPassword" required>
-                                        </div>
-                                    </div>
+{{--                                    <div class="row mb-3">--}}
+{{--                                        <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Xác Nhận Mật Khẩu Mới</label>--}}
+{{--                                        <div class="col-md-8 col-lg-9">--}}
+{{--                                            <input name="confirmPassword" type="password" class="form-control" id="confirmPassword" required>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="row mb-3">
-                                        <div class="col-md-8 col-lg-9 offset-md-4 offset-lg-3">
-                                            <button type="submit" class="btn btn-primary">Cập Nhật Mật Khẩu</button>
-                                        </div>
-                                    </div>
-                                </form><!-- End Change Password Form -->
-                            </div>
+{{--                                    <div class="row mb-3">--}}
+{{--                                        <div class="col-md-8 col-lg-9 offset-md-4 offset-lg-3">--}}
+{{--                                            <button type="submit" class="btn btn-primary">Cập Nhật Mật Khẩu</button>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </form><!-- End Change Password Form -->--}}
+{{--                            </div>--}}
 
 
                         </div><!-- End Bordered Tabs -->
