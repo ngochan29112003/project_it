@@ -69,7 +69,6 @@ class ChiTietLopHocPhanController extends Controller
             'link' => 'nullable|url',
             'kiem_tra' => 'nullable|string',
             'bai_tap' => 'nullable|string',
-            'diem_danh' => 'nullable|date',
             'trang_thai' => 'required|integer'
         ]);
 
@@ -82,7 +81,6 @@ class ChiTietLopHocPhanController extends Controller
             'link' => $validated['link'],
             'kiem_tra' => $validated['kiem_tra'],
             'bai_tap' => $validated['bai_tap'],
-            'diem_danh' => $validated['diem_danh'],
             'trang_thai' => $validated['trang_thai'],
         ]);
 
@@ -192,7 +190,6 @@ class ChiTietLopHocPhanController extends Controller
             'link' => 'nullable|url',
             'kiem_tra' => 'nullable|string',
             'bai_tap' => 'nullable|string',
-            'diem_danh' => 'nullable|date',
             'trang_thai' => 'required|integer',
             'files_to_delete' => 'nullable|string',
         ]);
@@ -220,7 +217,6 @@ class ChiTietLopHocPhanController extends Controller
         // Cập nhật các trường thông tin khác
         $baiGiang->ten_bai_giang = $validated['ten_bai_giang'];
         $baiGiang->noi_dung_bai_giang = $validated['noi_dung_bai_giang'];
-        $baiGiang->diem_danh = $validated['diem_danh'];
         $baiGiang->video_path = $validated['video_path'];
         $baiGiang->link = $validated['link'];
         $baiGiang->kiem_tra = $validated['kiem_tra'];

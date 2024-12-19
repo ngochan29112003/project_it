@@ -28,19 +28,20 @@
                     class="text-danger">{{ $chiTietLHP->ten_lop_hoc_phan }}</span></p>
         @else
             <div class="d-flex justify-content-between align-items-center mb-4">
-                @if(session('ma_nguoi_dung') == $chiTietLHP->giang_vien) <!-- Kiểm tra quyền của người dùng -->
+                @if(session('ma_nguoi_dung') == $chiTietLHP->giang_vien)
                 <div class="d-flex gap-2">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddBaiGiang">
                         Thêm bài giảng
                     </button>
-                    <a href="{{ route('export-danh-sach-sv-lhp', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}" class="btn btn-success d-flex align-items-center text-white btn-export">
+                    <a href="{{ route('export-danh-sach-sv-lhp', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}"
+                       class="btn btn-success btn-export">
                         <i class="bi bi-file-earmark-arrow-down pe-2"></i>
                         Danh sách sinh viên
                     </a>
-                    <a type="button" class="btn btn-success mx-2"
+                    <a type="button" class="btn btn-success "
                        href="{{route('diem-danh',['ma_hoc_phan' => $chiTietLHP->id_lop_hoc_phan, 'ten_lop_hoc_phan' => $chiTietLHP->ten_lop_hoc_phan])}}">
                         Điểm danh
-                    </a>    
+                    </a>
                 </div>
 
                 @endif
@@ -73,12 +74,6 @@
                                     <textarea class="form-control" id="noi_dung_bai_giang" name="noi_dung_bai_giang"
                                               rows="3" placeholder="Nhập nội dung bài giảng"></textarea>
                                 </div>
-
-                                <!-- Link điểm danh -->
-{{--                                <div class="mb-3">--}}
-{{--                                    <label for="diem_danh" class="form-label">Điểm danh</label>--}}
-{{--                                    <input type="datetime-local" class="form-control" id="diem_danh" name="diem_danh">--}}
-{{--                                </div>--}}
 
                                 <!-- Tải lên file -->
                                 <div class="mb-3">
@@ -158,12 +153,6 @@
                                               name="noi_dung_bai_giang" rows="3"
                                               placeholder="Nhập nội dung bài giảng"></textarea>
                                 </div>
-
-                                <!-- Link điểm danh -->
-{{--                                <div class="mb-3">--}}
-{{--                                    <label for="diem_danh" class="form-label">Điểm danh</label>--}}
-{{--                                    <input type="datetime-local" class="form-control" id="diem_danh" name="diem_danh">--}}
-{{--                                </div>--}}
 
                                 <!-- Tải lên tệp tin mới -->
                                 <div class="mb-3">
@@ -724,23 +713,6 @@
                             });
                     }
                 });
-            });
-        </script>
-
-        <script>
-            // JavaScript để tự động điền ngày giờ hiện tại vào trường "Điểm danh"
-            document.addEventListener('DOMContentLoaded', function () {
-                var today = new Date();
-                var day = ("0" + today.getDate()).slice(-2);
-                var month = ("0" + (today.getMonth() + 1)).slice(-2); // Tháng tính từ 0
-                var year = today.getFullYear();
-                var hours = ("0" + today.getHours()).slice(-2);
-                var minutes = ("0" + today.getMinutes()).slice(-2);
-
-                var currentDateTime = year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
-
-                // Cập nhật giá trị của input điểm danh
-                document.getElementById('diem_danh').value = currentDateTime;
             });
         </script>
 @endsection
