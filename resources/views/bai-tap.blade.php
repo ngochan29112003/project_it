@@ -75,7 +75,7 @@
                 </div>
                 <form id="formTaoBaiTap" action="{{ route('them-bai-tap') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="id_lop_hoc_phan" value="{{ $id }}">
+                    <input type="hidden" name="id_lop_hoc_phan" >
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="tieuDeBaiTap" class="form-label fw-bold">Tiêu đề bài tập:</label>
