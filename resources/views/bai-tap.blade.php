@@ -7,7 +7,7 @@
                 @if($ttSinhVien->ma_quyen == 2)
                     <div class="btn-group me-2" role="group" aria-label="First group">
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalThemBaiNop">
-                            <i class="bi bi-plus-circle"></i> Thêm bài tập
+                            <i class="bi bi-plus-circle"></i> Tạo bài tập
                         </button>
                     </div>
                     <div class="btn-group" role="group" aria-label="Second group">
@@ -75,7 +75,7 @@
                 </div>
                 <form id="formTaoBaiTap" action="{{ route('them-bai-tap') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="id_lop_hoc_phan" value="{{ $list_lop_hp->id_lop_hoc_phan }}">
+                    <input type="hidden" name="id_lop_hoc_phan" value="{{ $id }}">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="tieuDeBaiTap" class="form-label fw-bold">Tiêu đề bài tập:</label>

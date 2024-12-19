@@ -70,6 +70,8 @@ class NguoiDungModel extends Model
             ->get();
     }
 
+
+
     public function getLop()
     {
         return DB::table('lop')->get();

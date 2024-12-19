@@ -259,5 +259,44 @@
                 }
             });
         });
+
+        $('#tableLop').on('click', '.delete-btn', function () {
+            var ma_lop = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: 'Bạn có chắc chắn?',
+                text: "Bạn có muốn xóa lớp này không ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Vâng,xóa nó!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete-lop', ':id') }}'.replace(':id', ma_lop),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                toastr.success(response.message, "Đã xóa thành công");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Không thể xóa.",
+                                    "Thất bại");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("Đã xãy ra lỗi.", "Thất bại");
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection

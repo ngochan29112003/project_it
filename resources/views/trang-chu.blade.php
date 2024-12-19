@@ -126,59 +126,83 @@
                 @endforeach
         </div>
 
-        <div class="container mt-5">
-            <h3 class="text-danger fw-bold">TIN TỨC CHUNG</h3>
+            <div class="container mt-5">
+                <h3 class="text-danger fw-bold">TIN TỨC CHUNG</h3>
 
-            <div class="bg-white p-4 rounded shadow mb-4">
-                <div class="forumpost clearfix firstpost starter mb-3">
-                    <h4 class="text-primary">HƯỚNG DẪN KHÔI PHỤC MẬT KHẨU DÀNH CHO SINH VIÊN</h4>
-                </div>
-                <div class="content mb-4">
-                    <h5>Nội dung:</h5>
-                    <ul class="list-unstyled">
-                        <li>🔑 Hướng dẫn khôi phục mật khẩu Elearning.</li>
-                        <li>🔑 Hướng dẫn khôi phục mật khẩu Gmail.</li>
-                    </ul>
-                </div>
-                <div class="attachments mb-4">
-                    <h5>Tài liệu đính kèm:</h5>
-                    <a href="#" class="btn btn-outline-primary">
-                        HƯỚNG DẪN XIN CẤP LẠI MẬT KHẨU MAIL VÀ ELARNING.pdf
-                    </a>
-                </div>
-                <div class="footer mt-3">
-                    <div class="permalink mb-2">
-                        <a class="text-muted" rel="bookmark" href="#">Permalink</a>
+                <!-- Hướng dẫn khôi phục mật khẩu -->
+                <div class="bg-white p-4 rounded shadow mb-4">
+                    <div class="forumpost clearfix firstpost starter mb-3">
+                        <h4 class="text-primary">HƯỚNG DẪN KHÔI PHỤC MẬT KHẨU DÀNH CHO SINH VIÊN</h4>
                     </div>
-                    <div class="discussion-link">
-                        <a class="text-muted" href="#">Xem thảo luận</a> (0 phản hồi)
+                    <div class="content mb-4">
+                        <h5>Nội dung:</h5>
+                        <ul class="list-unstyled">
+                            <li>🔑 Nếu bạn gặp khó khăn trong việc khôi phục mật khẩu, vui lòng liên hệ qua email để được hỗ trợ cấp lại mật khẩu.</li>
+                            <li>📧 Email liên hệ: 21004092@st.vlute.edu.vn hoặc 21004093@st.vlute.edu.vn.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quy định chung khi sử dụng hệ thống -->
+                <div class="bg-white p-4 rounded shadow mb-4">
+                    <div class="forumpost clearfix firstpost starter mb-3">
+                        <h4 class="text-primary">QUY ĐỊNH CHUNG KHI SỬ DỤNG HỆ THỐNG</h4>
+                    </div>
+                    <div class="content mb-4">
+                        <h5>Nội dung:</h5>
+                        <ul class="list-unstyled">
+                            <li>🛡️ Người dùng phải bảo vệ tài khoản của mình, phải chịu trách nhiệm nếu cố tình để tài khoản của mình cho người khác lợi dụng sử dụng trái phép hoặc với mục đích xấu (phải đặt mật khẩu an toàn và không cung cấp cho bất kỳ ai).</li>
+                            <li>📚 Chỉ sử dụng với mục đích học tập, không đưa nội dung không liên quan đến môn học lên website này.</li>
+                            <li>💬 Khi thảo luận trên các diễn đàn phải sử dụng lời lẽ lịch sự, tôn trọng Thầy Cô và bạn bè, không tuyên truyền nội dung xấu, vi phạm quy định nhà nước.</li>
+                            <li>🆔 Khai báo thông tin cá nhân phải chính xác, không dùng bí danh, họ tên tiếng Anh (trừ các bạn nước ngoài).</li>
+                            <li>✅ Thực hiện đúng, đầy đủ các qui định do Giáo viên đưa ra đối với từng môn học.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Thông báo về thời gian nghỉ học -->
+                <div class="bg-white p-4 rounded shadow mb-4">
+                    <div class="forumpost clearfix firstpost starter mb-3">
+                        <h4 class="text-primary">THÔNG BÁO VỀ THỜI GIAN NGHỈ HỌC</h4>
+                    </div>
+                    <div class="content mb-4">
+                        <h5>Nội dung:</h5>
+                        <ul class="list-unstyled">
+                            <li>📅 Kỳ nghỉ Tết Nguyên Đán sẽ bắt đầu từ ngày 25 tháng 1 và kết thúc vào ngày 10 tháng 2. Sinh viên vui lòng lưu ý để điều chỉnh lịch học và bài tập của mình.</li>
+                            <li>🏫 Trong thời gian nghỉ, các lớp học trực tuyến vẫn tiếp tục diễn ra theo lịch trình đã thông báo. Hãy đảm bảo tham gia đầy đủ.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Thông báo về tài liệu học -->
+                <div class="bg-white p-4 rounded shadow mb-4">
+                    <div class="forumpost clearfix firstpost starter mb-3">
+                        <h4 class="text-primary">TÀI LIỆU HỌC TẬP MỚI NHẤT</h4>
+                    </div>
+                    <div class="content mb-4">
+                        <h5>Nội dung:</h5>
+                        <ul class="list-unstyled">
+                            <li>📘 Các tài liệu học tập cho học kỳ này đã được cập nhật trên hệ thống Elearning. Sinh viên vui lòng đăng nhập để tải về các tài liệu cần thiết cho từng môn học.</li>
+                            <li>📚 Các bài giảng và bài tập cũng đã được cập nhật đầy đủ. Hãy kiểm tra thường xuyên để không bỏ lỡ bất kỳ thông tin quan trọng nào.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Thông báo về buổi tư vấn học tập -->
+                <div class="bg-white p-4 rounded shadow mb-4">
+                    <div class="forumpost clearfix firstpost starter mb-3">
+                        <h4 class="text-primary">BUỔI TƯ VẤN HỌC TẬP DÀNH CHO SINH VIÊN</h4>
+                    </div>
+                    <div class="content mb-4">
+                        <h5>Nội dung:</h5>
+                        <ul class="list-unstyled">
+                            <li>🗓️ Buổi tư vấn học tập sẽ được tổ chức vào ngày 15 tháng 12. Sinh viên có thể đăng ký tham gia để nhận được sự hướng dẫn về phương pháp học tập hiệu quả.</li>
+                            <li>💬 Buổi tư vấn sẽ diễn ra trực tuyến qua Zoom. Link tham gia sẽ được gửi qua email cho sinh viên đã đăng ký.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white p-4 rounded shadow mb-4">
-                <div class="forumpost clearfix firstpost starter mb-3">
-                    <h4 class="text-primary">QUY ĐỊNH CHUNG KHI SỬ DỤNG HỆ THỐNG</h4>
-                </div>
-                <div class="content mb-4">
-                    <h5>Nội dung:</h5>
-                    <ul class="list-unstyled">
-                        <li>🛡️ Người dùng phải bảo vệ tài khoản của mình, phải chịu trách nhiệm nếu cố tình để tài khoản của mình cho người khác lợi dụng sử dụng trái phép hoặc với mục đích xấu (phải đặt mật khẩu an toàn và không cung cấp cho bất kỳ ai).</li>
-                        <li>📚 Chỉ sử dụng với mục đích học tập, không đưa nội dung không liên quan đến môn học lên website này.</li>
-                        <li>💬 Khi thảo luận trên các diễn đàn phải sử dụng lời lẽ lịch sự, tôn trọng Thầy Cô và bạn bè, không tuyên truyền nội dung xấu, vi phạm quy định nhà nước.</li>
-                        <li>🆔 Khai báo thông tin cá nhân phải chính xác, không dùng bí danh, họ tên tiếng Anh (trừ các bạn nước ngoài).</li>
-                        <li>✅ Thực hiện đúng, đầy đủ các qui định do Giáo viên đưa ra đối với từng môn học.</li>
-                    </ul>
-                </div>
-                <div class="footer mt-3">
-                    <div class="permalink mb-2">
-                        <a class="text-muted" rel="bookmark" href="#">Permalink</a>
-                    </div>
-                    <div class="discussion-link">
-                        <a class="text-muted" href="#">Xem thảo luận</a> (0 phản hồi)
-                    </div>
-                </div>
-            </div>
         </div>
             <div class="container mt-4 text-center">
                 <div class="paging paging-morelink">

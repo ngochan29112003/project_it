@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\NguoiDungModel;
+use App\Models\TaiKhoanModel;
 use App\Models\TimKiemMoDel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class TrangChuController extends Controller
@@ -18,18 +21,30 @@ class TrangChuController extends Controller
     public function viewTimKiem(Request $request)
     {
         $keyword = $request->input('query');
+
+        // Khởi tạo truy vấn cơ sở
+        $query = DB::table('lop_hoc_phan')
+            ->join('hoc_phan', 'hoc_phan.id_hoc_phan', '=', 'lop_hoc_phan.id_hoc_phan')
+            ->join('nguoi_dung', 'nguoi_dung.ma_nguoi_dung', '=', 'lop_hoc_phan.giang_vien')
+            ->join('hoc_ky', 'hoc_ky.ma_hoc_ky', '=', 'lop_hoc_phan.hoc_ki');
+
+        // Nếu có từ khóa tìm kiếm
         if ($keyword) {
-            $lop_hoc_phan = DB::table('lop_hoc_phan')
-                ->join('hoc_phan', 'hoc_phan.id_hoc_phan', '=', 'lop_hoc_phan.id_hoc_phan')
-                ->join('nguoi_dung', 'nguoi_dung.ma_nguoi_dung', '=', 'lop_hoc_phan.giang_vien')
-                ->join('hoc_ky', 'hoc_ky.ma_hoc_ky', '=', 'lop_hoc_phan.hoc_ki')
-                ->where('lop_hoc_phan.ten_lop_hoc_phan', 'LIKE', "%{$keyword}%")
-                ->orderBy('ten_lop_hoc_phan', 'ASC') // Sắp xếp theo tên lớp học phần
-                ->get();
+            $query->where(function($q) use ($keyword) {
+                $q->where('lop_hoc_phan.ten_lop_hoc_phan', 'LIKE', "%{$keyword}%")
+                    ->orWhere('hoc_phan.ten_hoc_phan', 'LIKE', "%{$keyword}%")
+                    ->orWhere('lop_hoc_phan.id_lop_hoc_phan', 'LIKE', "%{$keyword}%")
+                    ->orWhere('hoc_phan.id_hoc_phan', 'LIKE', "%{$keyword}%");
+            });
         }
+
+        // Lấy kết quả và sắp xếp theo tên lớp học phần
+        $lop_hoc_phan = $query->orderBy('lop_hoc_phan.ten_lop_hoc_phan', 'ASC')->get();
+
         // Trả kết quả về view với thông tin giảng viên và kết quả tìm kiếm
         return view('tim-kiem', compact('lop_hoc_phan'));
     }
+
 
     public function ViewTTTK()
     {
@@ -109,5 +124,35 @@ class TrangChuController extends Controller
         ]);
     }
 
+    public function changePassword(Request $request)
+    {
+        // Validate the input data
+        $request->validate([
+            'currentPassword' => 'required|string',
+            'newPassword' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Lấy thông tin tài khoản người dùng
+        $user = TaiKhoanModel::where('ma_tai_khoan', Auth::user()->ma_tai_khoan)->first();
+
+        // Kiểm tra mật khẩu cũ
+        if (!Hash::check($request->currentPassword, $user->mat_khau)) {
+            return back()->withErrors(['currentPassword' => 'Mật khẩu cũ không đúng.']);
+        }
+
+        // Cập nhật mật khẩu mới, mã hóa mật khẩu trước khi lưu
+        $user->update([
+            'mat_khau' => Hash::make($request->newPassword),
+        ]);
+
+        // Đăng xuất người dùng sau khi cập nhật mật khẩu
+        Auth::logout();
+
+        // Xóa tất cả session để đảm bảo không còn phiên làm việc cũ
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return back()->with('success', 'Mật khẩu đã được cập nhật thành công! Vui lòng đăng nhập lại.');
+    }
 
 }

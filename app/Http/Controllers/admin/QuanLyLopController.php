@@ -61,6 +61,18 @@ class QuanLyLopController extends Controller
             'lop' => $lop,
         ]);
     }
+
+    function deleteLop($id)
+    {
+        $khoa = LopModel::findOrFail($id);
+
+        $khoa->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
+    }
     public function exportLop()
     {
         $inputFileName = public_path('excel/banglop.xlsx');
