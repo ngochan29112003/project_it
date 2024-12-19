@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 19, 2024 at 06:05 PM
+-- Generation Time: Dec 19, 2024 at 07:07 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -34,8 +34,8 @@ CREATE TABLE `bai_giang` (
   `link` text,
   `noi_dung_bai_giang` text,
   `id_lop_hoc_phan` int(11) DEFAULT NULL,
-  `kiem_tra` text,
-  `bai_tap` text,
+  `kiem_tra` int(11) DEFAULT NULL,
+  `bai_tap` int(11) DEFAULT NULL,
   `trang_thai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -44,8 +44,9 @@ CREATE TABLE `bai_giang` (
 --
 
 INSERT INTO `bai_giang` (`ma_bai_giang`, `ten_bai_giang`, `video_path`, `link`, `noi_dung_bai_giang`, `id_lop_hoc_phan`, `kiem_tra`, `bai_tap`, `trang_thai`) VALUES
-(25, 'Đồ án', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://ems.vlute.edu.vn/vTKBGiangVien', 'Chúc các em học tốt', 23, 'Kiểm tra 15 phút', 'Bài tập về nhà', 0),
-(41, 'Helo', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'abc', 23, 'kiểm tra', 'kiểm tra', 0);
+(25, 'Đồ án', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://ems.vlute.edu.vn/vTKBGiangVien', 'Chúc các em học tốt', 23, 0, 0, 0),
+(41, 'Helo', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'https://www.youtube.com/watch?v=tkPel6zcw8Q', 'abc', 23, 0, 0, 0),
+(43, 'con cac', 'https://tabler.io/docs/components/tinymce', 'https://tabler.io/docs/components/tinymce', 'con cac', 23, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -912,7 +913,7 @@ ALTER TABLE `tai_khoan`
 -- AUTO_INCREMENT for table `bai_giang`
 --
 ALTER TABLE `bai_giang`
-  MODIFY `ma_bai_giang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ma_bai_giang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `bai_giang_files`
