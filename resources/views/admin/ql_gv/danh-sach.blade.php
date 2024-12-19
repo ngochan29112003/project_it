@@ -27,7 +27,6 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
-
                 <div class="col-12">
                     <div class="card">
                         <div class="table-responsive p-2">

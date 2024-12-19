@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\LopHocPhanModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,10 +22,105 @@ class QuanLyLopHocPhanController extends Controller
             ->join('nguoi_dung','lop_hoc_phan.giang_vien','=','nguoi_dung.ma_nguoi_dung')
             ->where('id_hoc_phan','=',$id)
             ->get();
+
+
+//        dd($list_lhp);
         return
             view('admin.ql_lop_hoc_phan.danh-sach',
                 compact('ttHocPhan', 'hocKy', 'giangVien','list_lhp'));
     }
+
+    function delete($id)
+    {
+        $lophocphan = LopHocPhanModel::findOrFail($id);
+
+        $lophocphan->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $lopHocPhan = LopHocPhanModel::findOrFail($id);
+        $hocKy = DB::table('hoc_ky')->orderByDesc('ma_hoc_ky')->get();
+        $giangVien = DB::table('nguoi_dung')
+            ->where('ma_quyen','=',2)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'lopHocPhan' => $lopHocPhan,
+            'hocKy' => $hocKy,
+            'giangVien' => $giangVien
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'hoc_ki' => 'required|string',
+            'giang_vien' => 'required|integer',
+            'dot' => 'required|integer',
+            'loai_lop' => 'required|string',
+            'so_luong_sinh_vien' => 'required|integer',
+        ]);
+
+        // Lấy lớp học phần cần update
+        $lopHocPhan = LopHocPhanModel::findOrFail($id);
+
+        // Lưu lại tên cũ
+        $oldName = $lopHocPhan->ten_lop_hoc_phan;
+
+        // Cập nhật các trường cơ bản (trừ tên)
+        $lopHocPhan->fill($validated)->save();
+
+        // Lấy mã học phần từ bảng hoc_phan
+        $hocPhan = DB::table('hoc_phan')->where('id_hoc_phan', $lopHocPhan->id_hoc_phan)->first();
+        if(!$hocPhan) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy học phần tương ứng!'
+            ], 404);
+        }
+        $ma_hoc_phan = $hocPhan->ma_hoc_phan;
+
+        // Trích xuất số thứ tự lớp từ tên lớp cũ
+        preg_match('/_(\d{2})_tructiep$/', $oldName, $matches);
+        $classNumber = isset($matches[1]) ? $matches[1] : '01';
+
+        $maHK = $validated['hoc_ki'];
+        $dot = $validated['dot'];
+        $loai_lop = $validated['loai_lop'];
+
+        // Tạo tên lớp học phần mới như lúc thêm
+        if ($loai_lop === 'LT') {
+            $ten_lop_hoc_phan = "{$maHK}_{$dot}{$ma_hoc_phan}_KS2A_{$classNumber}_tructiep";
+        } elseif ($loai_lop === 'BT') {
+            $ten_lop_hoc_phan = "{$maHK}_{$dot}{$ma_hoc_phan}_(BT)_KS2A_{$classNumber}_tructiep";
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Loại lớp không hợp lệ!'
+            ], 422);
+        }
+
+        // Cập nhật lại tên lớp học phần
+        $lopHocPhan->ten_lop_hoc_phan = $ten_lop_hoc_phan;
+        $lopHocPhan->save();
+
+        return response()->json([
+            'success' => true,
+            'status' => 200,
+            'message' => 'Cập nhật thành công!',
+            'lopHocPhan' => $lopHocPhan
+        ]);
+    }
+
+
 
     public function addLopHocPhan(Request $request)
     {
@@ -37,6 +133,7 @@ class QuanLyLopHocPhanController extends Controller
             'dot' => 'required|integer',
             'loai_lop' => 'required|string',
             'soluonglop' => 'nullable|integer',
+            'so_luong_sinh_vien' => 'nullable|integer',
         ]);
 
         $maHK = $request->maHK;
@@ -47,6 +144,7 @@ class QuanLyLopHocPhanController extends Controller
         $giang_vien = $request->giang_vien;
         $soluonglop = $request->soluonglop ?? 1; // Nếu không có `soluonglop` thì mặc định là 1
         $hoc_ki = $request->maHK;
+        $slsv = $request->so_luong_sinh_vien;
 
         // Lấy số thứ tự lớn nhất của lớp có cùng `maHK`, `dot`, `ma_hoc_phan` từ DB
         $lastClass = DB::table('lop_hoc_phan')
@@ -82,7 +180,7 @@ class QuanLyLopHocPhanController extends Controller
             // Lưu thông tin lớp học phần vào cơ sở dữ liệu
             DB::table('lop_hoc_phan')->insert([
                 'ten_lop_hoc_phan' => $ten_lop_hoc_phan,
-                'so_luong_sinh_vien' => 0, // Giá trị mặc định, bạn có thể cập nhật sau nếu cần
+                'so_luong_sinh_vien' => $slsv, // Giá trị mặc định, bạn có thể cập nhật sau nếu cần
                 'giang_vien' => $giang_vien,
                 'id_hoc_phan' => $id_hoc_phan,
                 'dot' => $dot,

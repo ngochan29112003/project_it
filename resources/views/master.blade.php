@@ -5,38 +5,25 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>LMS - Vlute</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="shortcut icon" href="{{asset('assets/img/icon.png')}}">
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{asset('dist/css/toastr.css')}}" rel="stylesheet"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- ======= CSS thì dán vào đây ======= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
+    <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-
-    <style>
-        #sidebar {
-            width: 250px;
-            transition: width 0.3s;
-        }
-
-        #main {
-            flex-grow: 1;
-            transition: margin-left 0.3s;
-        }
-
-
-        .sidebar.active + #main {
-            margin-left: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 
 </head>
 
@@ -148,19 +135,22 @@ $nguoiDung = DB::table('nguoi_dung')
 <main id="main" class="main">
     @yield('contents')
 </main>
-<script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
-<script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/quill/quill.js') }}"></script>
-<script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
-<script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
-<script src="{{ asset('dist/js/toastr.min.js')}}"></script>
+<!-- ======= JS thì dán vào đây ======= -->
+<script src="{{asset('assets/js/main.js')}}"></script>
+<script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/vendor/chart.js/chart.umd.js')}}"></script>
+<script src="{{asset('assets/vendor/echarts/echarts.min.js')}}"></script>
+<script src="{{asset('assets/vendor/quill/quill.js')}}"></script>
+<script src="{{asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
+<script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
+<script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
+<script src="{{asset('assets/js/toastr.min.js')}}"></script>
+<script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-
+@yield('scripts')
 </body>
 <footer id="footer" class="footer">
     <div class="copyright">
@@ -201,7 +191,6 @@ $nguoiDung = DB::table('nguoi_dung')
                     <p><i class="fas fa-envelope me-2"></i><a href="mailto:21004091@st.vlute.edu.vn">Bảng tiến trình</a></p>
                 </div>
             </div>
-
         </div>
     </div>
 </footer>
