@@ -34,7 +34,7 @@
                                                     </h3>
                                                     <div class="text-muted mb-2">{{$lop->ten_hoc_ky}}
                                                     </div>
-                                                    <a class="btn btn-success" href="">Đăng ký vào lớp học</a>
+                                                    <a href="{{route('chi-tiet-lop-hoc-phan',['id'=>$lop->id_lop_hoc_phan])}}" class="btn btn-danger">Xem Chi Tiết</a>
                                                 </div>
                                             </div>
                                         @endforeach

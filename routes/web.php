@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\MasterContoller;
 use App\Http\Controllers\admin\QuanLyLopHocPhanController;
 use App\Http\Controllers\admin\QuanLyDeXuatController;
 use App\Http\Controllers\admin\QuanLyGiangVienController;
@@ -74,6 +75,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         //Trang chủ
         Route::get('/trang-chu',[AdminController::class,'getViewTrangChu'])->name('trang-chu-admin');
 
+        Route::get('/Master',[MasterContoller::class,'getViewMaster'])->name('master');
+
         //QL Tài Khoản
         Route::get('/tai-khoan',[QuanLyTaiKhoanController::class,'getViewDsTaiKhoan'])->name('tai-khoan');
         Route::post('/tai-khoan/add',[QuanLyTaiKhoanController::class,'addTaiKhoan'])->name('add-tai-khoan');
@@ -140,6 +143,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/trang-chu',[TrangChuController::class,'viewTrangChu'])->name('trang-chu');
     Route::get('/tim-kiem-hoc-phan', [TrangChuController::class, 'viewTimKiem'])->name('tim-kiem-hoc-phan');
     Route::get('/thong-tin-tai-khoan',[TrangChuController::class,'ViewTTTK'])->name('thong-tin-tai-khoan');
+    Route::post('/change-password', [TrangChuController::class, 'changePassword'])->name('user-changePassword');
 
     Route::get('/chi-tiet-hoc-phan/{id}', [ChiTietLopHocPhanController::class, 'getViewChiTietLopHocPhan'])->name('chi-tiet-lop-hoc-phan');
     Route::post('/chi-tiet-hoc-phan/add', [ChiTietLopHocPhanController::class, 'addBaiGiang'])->name('add-bai-giang');
@@ -148,6 +152,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::delete('/chi-tiet-hoc-phan/delete/{id}', [ChiTietLopHocPhanController::class, 'deleteBaiGiang'])->name('delete-bai-giang');
     Route::get('/chi-tiet-hoc-phan/edit/{id}', [ChiTietLopHocPhanController::class, 'editBaiGiang'])->name('edit-bai-giang');
     Route::post('/chi-tiet-hoc-phan/update/{id}', [ChiTietLopHocPhanController::class, 'updateBaiGiang'])->name('update-bai-giang');
+    Route::get('/export-danh-sach-sv/{id}', [ChiTietLopHocPhanController::class, 'exportDanhSachSVLHP'])->name('export-danh-sach-sv-lhp');
+
+
 
 
     Route::get('/diem-danh',[DiemDanhController::class,'getViewDiemDanh'])->name('diem-danh');
@@ -157,9 +164,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::post('/update-thong-tin-tai-khoan', [TrangChuController::class, 'updateTTTK'])->name('update-thong-tin-tai-khoan');
 
     Route::get('/nha-cua-toi',[NhaCuaToiController::class,'GetViewNhaCuaToi'])->name('nha-cua-toi');
+    Route::delete('nha-cua-toi/delete/{id}', [NhaCuaToiController::class, 'deleteHocPhan'])->name('delete-ghi-danh');
 
 
-    Route::get('/nop-bai',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
+
+    Route::get('chi-tiet-hoc-phan/nop-bai/{id}',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
     Route::post('/them-bai-tap', [BaiTapController::class, 'createBaiTap'])->name('them-bai-tap');
 
     Route::get('/nop-bai-tap',[NopBaiTapController::class,'getView'])->name('nop-bai-tap');

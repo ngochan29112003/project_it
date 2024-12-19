@@ -8,8 +8,8 @@
                     {{ $chiTietLHP->ten_lop_hoc_phan }} - {{ $chiTietLHP->ten_hoc_phan }} ({{ $chiTietLHP->so_chi_ly_thuyet }}.{{ $chiTietLHP->so_chi_thuc_hanh }}) - GV: {{ $chiTietLHP->ten_nguoi_dung }}
                 </h2>
                 <nav class="breadcrumb p-0 mb-0 mt-2">
-                    <a href="" class="breadcrumb-item">Nhà của tôi</a>
-                    <a href="#" class="breadcrumb-item">Khóa học</a>
+                    <a href="{{route('nha-cua-toi')}}" class="breadcrumb-item">Nhà của tôi</a>
+                    <a href="{{route('trang-chu')}}" class="breadcrumb-item">Khóa học</a>
                     <span class="breadcrumb-item active">{{ $chiTietLHP->ten_hoc_ky }}</span>
                     <span class="breadcrumb-item active">{{ $chiTietLHP->ten_lop_hoc_phan }}</span>
                 </nav>
@@ -25,10 +25,16 @@
             <p>Bạn cần ghi danh để xem thông tin của lớp <span class="text-danger">{{ $chiTietLHP->ten_lop_hoc_phan }}</span></p>
         @else
             <div class="d-flex justify-content-between align-items-center mb-4">
-                @if(session('ma_quyen') == 2) <!-- Kiểm tra quyền của người dùng -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddBaiGiang">
-                    Thêm bài giảng
-                </button>
+                @if(session('ma_nguoi_dung') == $chiTietLHP->giang_vien) <!-- Kiểm tra quyền của người dùng -->
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddBaiGiang">
+                        Thêm bài giảng
+                    </button>
+                    <a href="{{ route('export-danh-sach-sv-lhp', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}" class="btn btn-success d-flex align-items-center text-white btn-export">
+                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
+                        Danh sách sinh viên
+                    </a>
+                </div>
                 @endif
             </div>
 
@@ -202,7 +208,7 @@
                                 style="border: 1px solid #ddd; border-radius: 0; margin-bottom: 0; background: {{ $baiGiang->trang_thai == 1 && session('ma_quyen') == 2 ? '#f5f5f5' : '#fff' }};">
 
                                 <div class="d-flex flex-column position-relative">
-                                    @if(session('ma_quyen') == 2)
+                                    @if(session('ma_nguoi_dung') == $chiTietLHP->giang_vien)
                                         <!-- Dropdown menu -->
                                         <div class="dropdown ms-auto position-absolute top-0 end-0" style="z-index: 10;">
                                             <button class="btn btn-link text-dark dropdown-toggle" type="button" id="dropdownMenuButton{{ $baiGiang->ma_bai_giang }}" data-bs-toggle="dropdown" aria-expanded="false"></button>

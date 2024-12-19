@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                       QUẢN LÝ GIẢNG VIÊN
+                       QUẢN LÝ CÂY TIẾN TRÌNH
                     </h2>
                 </div>
             </div>
@@ -213,7 +213,7 @@
 
             Swal.fire({
                 title: 'Bạn có chắc chắn?',
-                text: "Bạn có muốn xóa giảng viên này không?",
+                text: "Bạn có muốn xóa cây tiến trình này không?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

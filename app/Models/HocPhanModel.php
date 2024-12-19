@@ -25,11 +25,11 @@ class HocPhanModel extends Model
         return DB::table('hoc_phan')
             ->get();
     }
-    public function getLopHocPhan()
-    {
-        return DB::table('lop_hoc_phan')
-            ->get();
-    }
+//    public function getLopHocPhan()
+//    {
+//        return DB::table('lop_hoc_phan')
+//            ->get();
+//    }
 
 
 }

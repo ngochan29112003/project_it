@@ -10,7 +10,7 @@ class FileBaiGiangModel extends Model
     use HasFactory;
 
     protected $table = 'bai_giang_files';
-    protected $primaryKey = 'id'; // Giả sử primary key là 'id'
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,11 +18,8 @@ class FileBaiGiangModel extends Model
         'file',
     ];
 
-    /**
-     * Một file thuộc về một bài giảng.
-     */
-    public function baiGiang()
-    {
-        return $this->belongsTo(BaiGiangModel::class, 'ma_bai_giang', 'ma_bai_giang');
-    }
+//    public function baiGiang()
+//    {
+//        return $this->belongsTo(BaiGiangModel::class, 'ma_bai_giang', 'ma_bai_giang');
+//    }
 }

@@ -17,8 +17,14 @@ class LopHocPhanModel extends Model
     ];
 
     public $timestamps = false;
-    public function getLopHP()
+    public function getLopHP($id)
     {
-        return DB::table('lop_hoc_phan')->get();
+        return DB::table('ghi_danh')
+            ->join('nguoi_dung', 'nguoi_dung.ma_nguoi_dung', '=', 'ghi_danh.ma_nguoi_dung')
+            ->join('lop_hoc_phan', 'lop_hoc_phan.id_lop_hoc_phan', '=', 'ghi_danh.ma_hoc_phan')
+            ->where('lop_hoc_phan.id_lop_hoc_phan', '=', $id)
+            ->where('nguoi_dung.ma_quyen', '=', 3) // Lọc theo sinh viên (ma_quyen = 3)
+            ->select('nguoi_dung.ten_nguoi_dung', 'nguoi_dung.email')
+            ->get();
     }
 }

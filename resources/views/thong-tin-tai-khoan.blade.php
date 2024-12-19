@@ -167,25 +167,26 @@
                             <div class="tab-pane fade profile-change-password pt-3" id="profile-change-password" role="tabpanel">
                                 <h5 class="card-title" style="font-family: 'Arial', sans-serif;"><b>Đổi Mật Khẩu</b></h5>
                                 <!-- Change Password Form -->
-                                <form>
+                                <form method="POST" action="{{ route('user-changePassword') }}">
+                                    @csrf
                                     <div class="row mb-3">
                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mật Khẩu Cũ</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="currentPassword" type="password" class="form-control" id="currentPassword">
+                                            <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Mật Khẩu Mới</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="newPassword" type="password" class="form-control" id="newPassword">
+                                            <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Xác Nhận Mật Khẩu Mới</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="confirmPassword" type="password" class="form-control" id="confirmPassword">
+                                            <input name="confirmPassword" type="password" class="form-control" id="confirmPassword" required>
                                         </div>
                                     </div>
 
@@ -196,6 +197,8 @@
                                     </div>
                                 </form><!-- End Change Password Form -->
                             </div>
+
+
                         </div><!-- End Bordered Tabs -->
                     </div>
                 </div>

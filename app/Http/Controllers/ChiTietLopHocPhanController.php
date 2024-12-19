@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\BaiGiangModel;
 use App\Models\DiemDanhmodel;
 use App\Models\FileBaiGiangModel;
+use App\Models\LopHocPhanModel;
+use App\Models\NguoiDungModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class ChiTietLopHocPhanController extends Controller
 {
@@ -16,12 +21,13 @@ class ChiTietLopHocPhanController extends Controller
      */
     public function getViewChiTietLopHocPhan($id)
     {
-        $chiTietLHP  = DB::table('lop_hoc_phan')
+        $chiTietLHP = DB::table('lop_hoc_phan')
             ->join('hoc_phan', 'hoc_phan.id_hoc_phan', '=', 'lop_hoc_phan.id_hoc_phan')
             ->join('nguoi_dung', 'nguoi_dung.ma_nguoi_dung', '=', 'lop_hoc_phan.giang_vien')
             ->join('hoc_ky', 'hoc_ky.ma_hoc_ky', '=', 'lop_hoc_phan.hoc_ki')
             ->where('lop_hoc_phan.id_lop_hoc_phan', '=', $id)
             ->first();
+
 
         // Lấy ID người dùng từ session
         $maNguoiDung = session('ma_nguoi_dung');
@@ -249,5 +255,64 @@ class ChiTietLopHocPhanController extends Controller
         ]);
     }
 
+    public function exportDanhSachSVLHP($id)
+    {
+        // Đường dẫn tới file mẫu Excel
+        $inputFileName = public_path('excel/dssvlophocphan.xlsx');
 
+        // Kiểm tra nếu tệp không tồn tại
+        if (!file_exists($inputFileName)) {
+            return response()->json(['error' => 'File mẫu không tồn tại.'], 404);
+        }
+
+        $inputFileType = IOFactory::identify($inputFileName);
+
+        // Đọc file mẫu
+        $objReader = IOFactory::createReader($inputFileType);
+
+        $excel = $objReader->load($inputFileName);
+
+        $excel->setActiveSheetIndex(0);
+        $excel->getDefaultStyle()->getFont()->setName('Times New Roman');
+
+        $stt = 1;
+        $cell = $excel->getActiveSheet();
+
+        $model = new LopHocPhanModel();
+        $lophp = $model->getLopHP($id);
+        $num_row = 3;
+
+        foreach ($lophp as $row) {
+            $cell->setCellValue('A' . $num_row, $stt++); // STT
+            $cell->setCellValue('B' . $num_row, $row->ten_nguoi_dung); // Tên sinh viên
+            $cell->setCellValue('C' . $num_row, $row->email); // Email
+
+            // Thêm viền cho các ô
+            $cell->getStyle('A' . $num_row . ':C' . $num_row)->getBorders()
+                ->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+
+            // Căn chỉnh văn bản
+            $cell->getStyle('A' . $num_row . ':C' . $num_row)->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+            $num_row++;
+        }
+
+        // Tự động điều chỉnh kích thước cột
+        foreach (range('A', 'C') as $columnID) {
+            $cell->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        // Xuất file Excel
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $filename = "danh-sach-sv-lhp" . $id . '.xlsx';
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        // Xóa tất cả buffer trước khi xuất dữ liệu
+        ob_end_clean();
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        $writer->save('php://output');
+    }
 }
