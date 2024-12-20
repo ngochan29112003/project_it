@@ -105,8 +105,8 @@
                                 <label for="gioi_tinh" class="form-label">Giới tính</label>
                                 <select class="form-select" name="gioi_tinh" id="gioi_tinh">
                                     <option value="" disabled selected>Chọn giới tính</option>
-                                    <option value="1"> Nam</option>
-                                    <option value="2">nữ</option>
+                                    <option value="Nam"> Nam</option>
+                                    <option value="Nữ">Nữ</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -179,8 +179,8 @@
                                     <label for="gioi_tinh" class="form-label">Giới tính</label>
                                     <select class="form-select" name="gioi_tinh" id="gioi_tinh_edit">
                                         <option value="" disabled selected>Chọn giới tính</option>
-                                        <option value="1"> Nam</option>
-                                        <option value="2">nữ</option>
+                                        <option value="Nam"> Nam</option>
+                                        <option value="Nữ">Nữ</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">

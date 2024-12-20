@@ -154,6 +154,46 @@
                 }
             });
         });
+
+        $(document).ready(function () {
+            // Xóa bài tập
+            $('body').on('click', '.deleteItem', function () {
+                var ma_bai_tap = $(this).data('id'); // Lấy ID bài tập
+                var item = $(this).closest('li'); // Xác định dòng danh sách cần xóa
+
+                Swal.fire({
+                    title: 'Bạn có chắc chắn?',
+                    text: "Bạn có muốn xóa bài tập này không?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Vâng, xóa nó'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '{{ route('delete-bai-tap', ':id') }}'.replace(':id', ma_bai_tap),
+                            method: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    toastr.success(response.message, "Đã xóa thành công");
+                                    item.remove(); // Xóa dòng khỏi giao diện
+                                    location.reload();
+                                } else {
+                                    toastr.error("Không thể xóa.", "Thất bại");
+                                }
+                            },
+                            error: function (xhr) {
+                                toastr.error("Đã xảy ra lỗi.", "Thất bại");
+                            }
+                        });
+                    }
+                });
+            });
+        });
     </script>
 
 @endsection

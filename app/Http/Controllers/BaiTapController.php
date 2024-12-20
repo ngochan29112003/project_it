@@ -203,4 +203,16 @@ class BaiTapController extends Controller
 
         return response()->json(['status' => 'success', 'data' => $list]);
     }
+
+    function deleteBaiTap($id)
+    {
+        $xoabt = BaiTapModel::findOrFail($id);
+
+        $xoabt->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Xóa thành công'
+        ]);
+    }
 }

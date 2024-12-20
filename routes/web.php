@@ -144,6 +144,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //Bài tập
     Route::get('chi-tiet-hoc-phan/bai-tap/{id}/{ma_bai_giang}',[BaiTapController::class,'getView'])->name('bai-tap');
     Route::post('/chi-tiet-hoc-phan/bai-tap/add', [BaiTapController::class, 'add'])->name('add-bai-tap');
+    Route::delete('/chi-tiet-hoc-phan/bai-tap/delete/{id}', [BaiTapController::class, 'deleteBaiTap'])->name('delete-bai-tap');
     //Chi tiết bài tập
     Route::get('chi-tiet-hoc-phan/chi-tiet-bai-tap/{id}',[BaiTapController::class,'getViewChiTietBaiTap'])->name('bai-tap-chi-tiet');
     Route::get('chi-tiet-hoc-phan/chi-tiet-bai-tap/edit/{id}', [BaiTapController::class, 'edit'])->name('bai-tap.edit');
