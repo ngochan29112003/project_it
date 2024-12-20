@@ -141,7 +141,18 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::post('/chi-tiet-hoc-phan/update/{id}', [ChiTietLopHocPhanController::class, 'updateBaiGiang'])->name('update-bai-giang');
     Route::get('/export-danh-sach-sv/{id}', [ChiTietLopHocPhanController::class, 'exportDanhSachSVLHP'])->name('export-danh-sach-sv-lhp');
 
+    //Bài tập
+    Route::get('chi-tiet-hoc-phan/bai-tap/{id}/{ma_bai_giang}',[BaiTapController::class,'getView'])->name('bai-tap');
+    Route::post('/chi-tiet-hoc-phan/bai-tap/add', [BaiTapController::class, 'add'])->name('add-bai-tap');
+    //Chi tiết bài tập
+    Route::get('chi-tiet-hoc-phan/chi-tiet-bai-tap/{id}',[BaiTapController::class,'getViewChiTietBaiTap'])->name('bai-tap-chi-tiet');
+    Route::get('chi-tiet-hoc-phan/chi-tiet-bai-tap/edit/{id}', [BaiTapController::class, 'edit'])->name('bai-tap.edit');
+    Route::post('chi-tiet-hoc-phan/chi-tiet-bai-tap/{id}', [BaiTapController::class, 'update'])->name('bai-tap.update');
+    Route::post('chi-tiet-hoc-phan/chi-tiet-bai-tap/{id}/upload-file', [BaiTapController::class, 'uploadFile'])->name('bai-tap.upload-file');
+    Route::delete('chi-tiet-hoc-phan/chi-tiet-bai-tap/file/{id}/delete', [BaiTapController::class, 'deleteFile'])->name('bai-tap.delete-file');
 
+    // Route mới để lấy danh sách sinh viên đã nộp bài
+    Route::get('chi-tiet-hoc-phan/chi-tiet-bai-tap/{ma_bai_tap}/list-nop-bt', [BaiTapController::class, 'showListNopBT'])->name('bai-tap.list-nop-bt');
 
 
 
@@ -154,12 +165,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::delete('nha-cua-toi/delete/{id}', [NhaCuaToiController::class, 'deleteHocPhan'])->name('delete-ghi-danh');
 
 
-    Route::get('chi-tiet-hoc-phan/nop-bai/{id}',[BaiTapController::class,'getViewBaitap'])->name('bai-tap');
-
-    Route::post('/them-bai-tap', [BaiTapController::class, 'createBaiTap'])->name('them-bai-tap');
-
-    Route::get('/nop-bai-tap', [NopBaiTapController::class, 'getView'])->name('nop-bai-tap');
-
+    //Trac nghiem
     Route::get('/trac-nghiem/{id}/{ma_bai_giang}', [TracNghiemController::class, 'getViewTracNghiem'])->name('trac-nghiem');
     Route::get('/bat-dau-kiem-tra/{id}', [TracNghiemController::class, 'batDauKiemTra'])->name('bat-dau-kiem-tra');
 

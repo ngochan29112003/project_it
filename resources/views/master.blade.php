@@ -21,6 +21,7 @@
     <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('dist/libs/dropzone/dist/dropzone.css?1692870487') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
@@ -146,10 +147,12 @@ $nguoiDung = DB::table('nguoi_dung')
 <script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
 <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
 <script src="{{asset('assets/js/toastr.min.js')}}"></script>
+<script src="{{asset('dist/libs/dropzone/dist/dropzone-min.js?1692870487')}}" defer></script>
 <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
 @yield('scripts')
 </body>
 <footer id="footer" class="footer">

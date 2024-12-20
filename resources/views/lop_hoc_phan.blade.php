@@ -332,7 +332,7 @@
                                                 Bài tập:
                                             </h5>
                                             <p class="text-dark ms-4">
-                                                <a href="{{ route('bai-tap', ['id' => $chiTietLHP->id_lop_hoc_phan]) }}"
+                                                <a href="{{ route('bai-tap', ['id' => $chiTietLHP->id_lop_hoc_phan, 'ma_bai_giang' => $baiGiang->ma_bai_giang]) }}"
                                                    class="text-decoration-none">
                                                     Xem bài tập
                                                 </a>

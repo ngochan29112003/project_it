@@ -1,155 +1,160 @@
 @extends('master')
-@section("contents")
+
+@section('contents')
     <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="submission-title text-danger fw-bold">Nộp bài tập</h2>
-            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                @if($ttSinhVien->ma_quyen == 2)
-                    <div class="btn-group me-2" role="group" aria-label="First group">
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalThemBaiNop">
-                            <i class="bi bi-plus-circle"></i> Tạo bài tập
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Second group">
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalSuaBaiNop">
-                            <i class="bi bi-pencil-square"></i> Sửa bài tập
-                        </button>
-                    </div>
-                @endif
-            </div>
-        </div>
-
         <div class="card-body pt-xl-4">
-            <p class="mb-4">Nộp bài tập tại đây !!!</p>
+            @if(session('ma_quyen') == 2)
+                <div class="row">
+                    <div class="col-md-9 d-flex align-items-center gap-2 justify-content-start">
+                        <button
+                            class="btn btn-success d-flex align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#Model">
+                            <i class="bi bi-file-earmark-text-fill pe-2"></i>
+                            Tạo bài tập
+                        </button>
+                    </div>
+                </div>
+            @endif
 
-            <div class="submission-status mb-4">
-                <h4 class="text-primary">Tình trạng nộp bài</h4>
-                <table class="table table-bordered">
-                    <tbody>
-                    <tr>
-                        <td class="fw-bold">Tình trạng nộp bài:</td>
-                        <td><span class="badge bg-success">Đã nộp</span></td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Hạn chót:</td>
-                        <td>{{ \Carbon\Carbon::now()->format('d/m/Y, h:i A') }}</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Thời gian còn lại:</td>
-                        <td><span class="text-success">Bài nộp đã được gửi sớm 10 giờ 7 phút</span></td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Lần chỉnh sửa cuối:</td>
-                        <td>{{ \Carbon\Carbon::now()->format('d/m/Y, h:i A') }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="file-submissions mb-4">
-                <h4 class="text-primary">Tài liệu nộp</h4>
+            <div class="row mt-3">
                 <ul class="list-unstyled">
-                    <li><a href="#">IMG20210831104116.jpg</a> <span class="text-muted">{{ \Carbon\Carbon::now()->format('d/m/Y, h:i A') }}</span></li>
-                    <li><a href="#">IMG20210831104126.jpg</a> <span class="text-muted">{{ \Carbon\Carbon::now()->format('d/m/Y, h:i A') }}</span></li>
-                    <li><a href="#">IMG20210831104137.jpg</a> <span class="text-muted">{{ \Carbon\Carbon::now()->format('d/m/Y, h:i A') }}</span></li>
-                    <li><a href="#">IMG20210831104143.jpg</a> <span class="text-muted">{{ \Carbon\Carbon::now()->format('d/m/Y, h:i A') }}</span></li>
-                    <li><a href="#">received_20660054833142.jpeg</a> <span class="text-muted">{{ \Carbon\Carbon::now()->format('d/m/Y, h:i A') }}</span></li>
+                    @forelse($baiTaps as $baiTap)
+                        <li class="mb-3 d-flex justify-content-between align-items-center fs-5">
+                            <a href="{{ route('bai-tap-chi-tiet', ['id' => $baiTap->ma_bai_tap]) }}" class="d-flex align-items-center text-decoration-none">
+                                <i class="bi bi-pencil-square me-2 text-primary"></i>
+                                {{ $baiTap->tieu_de }}
+                            </a>
+                            @if(session('ma_quyen') == 2)
+                                <div class="dropdown">
+                                    <a href="" class="text-muted" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-gear-fill"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <button class="dropdown-item editItem" data-id="{{ $baiTap->ma_bai_tap }}" data-bs-toggle="modal" data-bs-target="#editModal">Chỉnh sửa</button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item deleteItem" data-id="{{ $baiTap->ma_bai_tap }}">Xóa</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+                        </li>
+                    @empty
+                        <li class="text-muted">Hiện chưa có bài tập nào.</li>
+                    @endforelse
                 </ul>
             </div>
-
-            <div class="d-flex justify-content-center">
-                <a href="{{route('nop-bai-tap')}}" class="btn btn-primary">
-                    <i class="bi bi-upload"></i> Thêm bài nộp
-                </a>
-            </div>
         </div>
-    </div>
+        <!-- Hiển thị danh sách bài tập -->
 
-    <!--Modal thêm -->
-    <div class="modal fade" id="modalThemBaiNop" tabindex="-1" aria-labelledby="modalThemBaiNopLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalThemBaiNopLabel">Thêm bài tập</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        @if(session('ma_quyen') == 2)
+            <!-- Modal thêm bài kiểm tra -->
+            <div class="modal fade" id="Model">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Tạo bài tập</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formThem" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="id_lop_hoc_phan" value="{{$id}}">
+                                <input type="hidden" name="ma_bai_giang" value="{{$ma_bai_giang}}">
+                                <div class="mb-3">
+                                    <label for="tieu_de" class="form-label">Tiêu đề bài tập</label>
+                                    <input class="form-control" id="tieu_de" name="tieu_de"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="noi_dung_bai_tap" class="form-label">Nội dung bài tập</label>
+                                    <textarea id="tinymce-default" class="form-control"
+                                              name="noi_dung_bai_tap"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="han_nop" class="form-label">Hạn nộp</label>
+                                    <input type="datetime-local" class="form-control" id="han_nop" name="han_nop"
+                                           required>
+
+                                </div>
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <form id="formTaoBaiTap" action="{{ route('them-bai-tap') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="id_lop_hoc_phan" >
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="tieuDeBaiTap" class="form-label fw-bold">Tiêu đề bài tập:</label>
-                            <input type="text" id="tieuDeBaiTap" name="tieu_de" class="form-control" placeholder="Nhập tiêu đề bài tập" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="moTaBaiTap" class="form-label fw-bold">Mô tả:</label>
-                            <textarea id="moTaBaiTap" name="mo_ta" class="form-control" rows="4" placeholder="Nhập mô tả bài tập"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="hanChot" class="form-label fw-bold">Hạn chót:</label>
-                            <input type="datetime-local" id="han_chot" name="han_chot" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Tạo bài tập</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    </div>
-                </form>
             </div>
-        </div>
+        @endif
+    </div>
     </div>
 
-    <!--Modal thêm -->
-    <div class="modal fade" id="modalSuaBaiNop" tabindex="-1" aria-labelledby="modalSuaBaiNopLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalSuaBaiNopLabel">Thêm bài tập</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="formTaoBaiTap" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <!-- Nội dung form thêm bài tập như bạn đã viết -->
-                        <div class="mb-3">
-                            <label for="tieuDeBaiTap" class="form-label fw-bold">Tiêu đề bài tập:</label>
-                            <input type="text" id="tieuDeBaiTap" name="tieu_de" class="form-control" placeholder="Nhập tiêu đề bài tập" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="moTaBaiTap" class="form-label fw-bold">Mô tả:</label>
-                            <textarea id="moTaBaiTap" name="mo_ta" class="form-control" rows="4" placeholder="Nhập mô tả bài tập"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="hanChot" class="form-label fw-bold">Hạn chót:</label>
-                            <input type="datetime-local" id="hanChot" name="han_chot" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Sửa bài tập</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/libs/tinymce/tinymce.min.js"
+            defer></script>
     <script>
-        $('#formTaoBaiTap').on('submit', function(e) {
+        document.addEventListener("DOMContentLoaded", function () {
+            let options = {
+                selector: '#tinymce-default',
+                height: 600,
+                menubar: false,
+                statusbar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat',
+                content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
+            }
+            if (localStorage.getItem("tablerTheme") === 'dark') {
+                options.skin = 'oxide-dark';
+                options.content_css = 'dark';
+            }
+            tinyMCE.init(options);
+        })
+    </script>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#formThem').on('submit', function (e) {
             e.preventDefault();
 
+            // Đồng bộ TinyMCE với textarea
+            tinyMCE.triggerSave();
+
             var formData = new FormData(this);
+
             $.ajax({
-                url: $(this).attr('action'),
-                method: 'POST', // Đảm bảo phương thức là POST
+                url: "{{ route('add-bai-tap') }}",
+                type: 'POST',
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(response) {
-                    // Xử lý sau khi thành công
+                success: function (res) {
+                    if (res.status === 'success') {
+                        $('#Model').modal('hide');
+                        $('#formThem')[0].reset();
+                        toastr.success(res.message);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    }
                 },
-                error: function() {
-                    alert('Có lỗi xảy ra!');
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                    toastr.error('Có lỗi xảy ra. Vui lòng thử lại.');
                 }
             });
         });
     </script>
+
 @endsection
+
