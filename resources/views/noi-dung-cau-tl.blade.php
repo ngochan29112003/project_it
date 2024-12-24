@@ -1,11 +1,12 @@
 @extends('master')
+
 @section('contents')
     <div class="container-fluid">
         <div class="card">
             <div class="d-flex justify-content-between p-3 position-relative pt-3">
                 <div class="d-flex flex-column">
                     <h2 class="text-danger fw-bold mb-0 me-3">
-                        DANH SÁCH ĐIỂM CỦA SINH VIÊN / <span class="text-primary">{{$ten_bai_kiem_tra}}</span>
+                        NỘI DUNG CÂU TRẢ LỜI SINH VIÊN / <span class="text-primary">{{$ten_nguoi_lam_bai->ten_nguoi_dung}} - Điểm: {{$ten_nguoi_lam_bai->diem}}</span>
                     </h2>
                 </div>
             </div>
@@ -17,24 +18,23 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center w-auto">STT</th>
-                                    <th class="text-center w-auto">Tên sinh viên</th>
-                                    <th class="text-center w-auto">Số câu đúng</th>
-                                    <th class="text-center w-auto">Điểm</th>
-                                    <th class="text-center w-auto">Thao tác</th>
+                                    <th class="text-center w-auto">Câu hỏi</th>
+                                    <th class="text-center w-auto">Câu trả lời</th>
+                                    <th class="text-center w-auto">Kết quả</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($dsDiemSV as $index => $i)
+                                @foreach($ndcautl as $index => $i)
                                     <tr>
                                         <td class="text-center w-auto">{{ $index + 1 }}</td>
-                                        <td class="text-center w-auto">{{ $i->ten_nguoi_dung }}</td>
-                                        <td class="text-center w-auto">{{ $i->so_cau_dung }}</td>
-                                        <td class="text-center w-auto">{{ $i->diem }}</td>
+                                        <td class="text-center w-auto">{{ $i->cau_hoi }}</td>
+                                        <td class="text-center w-auto">{{ $i->cau_tra_loi }}</td>
                                         <td class="text-center w-auto">
-                                            <a href="{{ route('noi-dung-cau-tra-loi', ['id_diem' => $i->id]) }}"
-                                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none info-btn">
-                                                <i class="bi bi-eye text-green"></i>
-                                            </a>
+                                            @if(trim($i->cau_tra_loi) == trim($i->dap_an_dung))
+                                                <span class="text-success">Đúng</span>
+                                            @else
+                                                <span class="text-danger">Sai</span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -64,4 +64,3 @@
         });
     </script>
 @endsection
-

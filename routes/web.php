@@ -23,6 +23,7 @@ use App\Http\Controllers\TracNghiemController;
 use App\Http\Controllers\TrangChuController;
 use App\Http\Controllers\CayTienTrinhController;
 use App\Http\Controllers\DanhSachDiemController;
+use App\Http\Controllers\NoiDungCauTLController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -190,6 +191,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
     //Danh sách diem
     Route::get('/danh-sach-diem/{id_bai_kiem_tra}', [DanhSachDiemController::class, 'getView'])->name('danh-sach-diem');
+
+    //Nội dung câu trả lời
+    Route::get('/noi-dung-cau-tra-loi/{id_diem}', [NoiDungCauTLController::class, 'getView'])->name('noi-dung-cau-tra-loi');
 
     //Điểm danh
     Route::get('/diem-danh/{ma_hoc_phan}/{ten_lop_hoc_phan}', [DiemDanhController::class, 'getViewDiemDanh'])->name('diem-danh');

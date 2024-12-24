@@ -17,9 +17,11 @@ class DanhSachDiemController extends Controller
 
         $dsDiemSV = DB::table('ket_qua_kiem_tra')
             ->join('nguoi_dung','nguoi_dung.ma_nguoi_dung','=','ket_qua_kiem_tra.ma_nguoi_dung')
-            ->select('nguoi_dung.ten_nguoi_dung', 'ket_qua_kiem_tra.diem', 'ket_qua_kiem_tra.so_cau_dung')
+            ->select('nguoi_dung.ten_nguoi_dung', 'ket_qua_kiem_tra.diem', 'ket_qua_kiem_tra.so_cau_dung', 'ket_qua_kiem_tra.id')
             ->where('bai_kiem_tra',$id_bai_kiem_tra)
             ->get();
+
+        
 //        dd($dsDiemSV->toArray());
         return view('danh-sach-diem', ['ten_bai_kiem_tra' => $ten_bai_kiem_tra, 'dsDiemSV' => $dsDiemSV]);
     }
